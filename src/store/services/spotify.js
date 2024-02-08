@@ -8,7 +8,7 @@ import {
   LIBRARY_ARTIST_IDS,
   LOCALE,
   ENDPOINTS,
-} from "../../constants";
+} from "../../constants.ts";
 import transform from "../../utils/transformApiResults";
 
 export const token = createApi({

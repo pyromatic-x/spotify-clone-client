@@ -78,9 +78,7 @@ function Player() {
 
     document.addEventListener("keydown", onKeyDownHandler);
 
-    return () => {
-      document.removeEventListener("keydown", onKeyDownHandler);
-    };
+    return () => document.removeEventListener("keydown", onKeyDownHandler);
   }, [volume, playing]);
 
   const handlers = {
@@ -139,7 +137,12 @@ function Player() {
     <Grid container justifyContent="center" justifySelf="center" width={"34vw"}>
       <Controllers handlers={handlers} />
       <SeekSlider handlers={handlers} />
-      <Audio ref={ref} src={audio} onTimeUpdate={onTimeUpdate} autoPlay />
+      <Audio
+        ref={ref}
+        src={audio}
+        onTimeUpdate={onTimeUpdate}
+        autoPlay={false}
+      />
     </Grid>
   );
 }

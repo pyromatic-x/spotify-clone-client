@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import QueueList from "../components/queue/QueueList";
+import QueueList from "../components/queue/List";
 
 function Queue() {
   document.title = "Spotify - Queue";

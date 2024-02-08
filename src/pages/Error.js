@@ -28,8 +28,6 @@ export default function Error() {
   const navigate = useNavigate();
   const error = useRouteError();
 
-  console.error(error);
-
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down("md"));
 
