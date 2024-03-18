@@ -1,18 +1,14 @@
-export function capitalizeFirstLetter(string) {
+export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function hexToRgbA(hex, opacity = 1) {
+export function hexToRgbA(hex: any, opacity = 1) {
   let c = hex.substring(1).split("");
   if (c.length === 3) {
     c = [c[0], c[0], c[1], c[1], c[2], c[2]];
   }
   c = "0x" + c.join("");
-  return (
-    "rgba(" +
-    [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") +
-    `,${opacity})`
-  );
+  return "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + `,${opacity})`;
 }
 
 export function randomColor() {
@@ -26,7 +22,7 @@ export function randomColor() {
   return result;
 }
 
-export function checkIsColorTooBright(hex) {
+export function checkIsColorTooBright(hex: string) {
   if (!hex) return false;
 
   const str = hex.substring(1);
@@ -41,7 +37,7 @@ export function checkIsColorTooBright(hex) {
   return luma > 127.5;
 }
 
-export function formatDuration(value) {
+export function formatDuration(value: number) {
   const minute = Math.floor(value / 60);
   const secondLeft = Math.floor(value - minute * 60);
   return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;

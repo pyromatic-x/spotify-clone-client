@@ -1,4 +1,4 @@
-export function shuffle(array, firstIndex = null) {
+export function shuffle(array: Array<any>, firstIndex = null) {
   let result = JSON.parse(JSON.stringify(array));
   let first = null;
 

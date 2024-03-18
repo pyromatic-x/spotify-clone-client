@@ -30,12 +30,7 @@ function Home() {
 
   return (
     <Grid position="relative" container direction="column" gap={3.5}>
-      <Typography
-        variant="h4"
-        component="h4"
-        fontWeight="bold"
-        letterSpacing="-0.095rem"
-      >
+      <Typography variant="h4" component="h4" fontWeight="bold" letterSpacing="-0.095rem">
         Good {time}
       </Typography>
       <DailyMixes />

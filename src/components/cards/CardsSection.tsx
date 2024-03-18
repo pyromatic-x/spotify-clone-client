@@ -14,16 +14,16 @@ const itemsCountByWidth = {
 type IProps = {
   title: string;
   items: Array<any>;
-  imageType: "square" | "circle";
-  imageStyle: "circle" | "waves";
+  imageType?: "square" | "circle";
+  imageStyle?: "circle" | "waves";
   showAll?: boolean;
 };
 
 function CardsSection({
   title,
   items = [],
-  imageType,
-  imageStyle,
+  imageType = "square",
+  imageStyle = "circle",
   showAll = true,
 }: IProps) {
   const [count, setCount] = useState(2);
@@ -57,12 +57,7 @@ function CardsSection({
           </Typography>
         )}
         {showAll && (
-          <Link
-            color="secondary"
-            fontSize="small"
-            fontWeight="bold"
-            underline="hover"
-          >
+          <Link color="secondary" fontSize="small" fontWeight="bold" underline="hover">
             Show all
           </Link>
         )}
@@ -76,11 +71,7 @@ function CardsSection({
             xs={6}
             key={"home-section-item_" + (item.id || item.title)}
           >
-            <RectangularCard
-              {...item}
-              imageType={imageType}
-              imageStyle={imageStyle}
-            />
+            <RectangularCard {...item} imageType={imageType} imageStyle={imageStyle} />
           </Grid>
         ))}
       </Grid>

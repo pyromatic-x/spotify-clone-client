@@ -1,20 +1,11 @@
-import {
-  HomeOutlined,
-  Home,
-  SearchOutlined,
-  YoutubeSearchedFor,
-} from "@mui/icons-material";
-import { List } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { memo } from "react";
 import MainContainer from "../../MainContainer";
-import Item from "./listItem";
+import { Item } from "./styled";
+import { items } from "./constants";
 
 const Navigation = memo(function Navigation() {
-  const leftMenuCollapsed = useSelector(
-    (state: any) => state.application.leftMenuCollapsed
-  );
   const { pathname } = useLocation();
 
   return (
@@ -24,32 +15,21 @@ const Navigation = memo(function Navigation() {
         justifyContent: "start",
       }}
     >
-      <List
-        disablePadding
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          marginLeft: "7px",
-        }}
-      >
-        <Item
-          Icon={HomeOutlined}
-          IconActive={Home}
-          isActive={pathname === "/"}
-          text="Home"
-          path="/"
-          isCollapsed={leftMenuCollapsed}
-        />
-        <Item
-          Icon={SearchOutlined}
-          IconActive={YoutubeSearchedFor}
-          isActive={pathname === "/search"}
-          text="Search"
-          path="/search"
-          isCollapsed={leftMenuCollapsed}
-        />
-      </List>
+      <Grid container flexDirection="column" gap="10px" paddingLeft="7px">
+        {items.map((i) => {
+          const active = pathname === i.path;
+          const Icon = active ? i.IconActive : i.Icon;
+
+          return (
+            <Item to={i.path} active={active}>
+              <Icon />
+              <Typography fontWeight="bold" ml="10px">
+                {i.title}
+              </Typography>
+            </Item>
+          );
+        })}
+      </Grid>
     </MainContainer>
   );
 });

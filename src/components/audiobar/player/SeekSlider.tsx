@@ -46,7 +46,7 @@ Time.defaultProps = {
   color: "secondary",
 };
 
-const SeekSlider = memo(function SeekSlider({ handlers }) {
+const SeekSlider = memo(function SeekSlider({ handlers }: any) {
   const dispatch = useDispatch();
   const { playingPosition } = useSelector((state) => state.player);
 
@@ -56,9 +56,8 @@ const SeekSlider = memo(function SeekSlider({ handlers }) {
   const selectSongs = (state) => state.player.playlist;
   const selectCurrentSongId = (state) => state.player.current;
 
-  const selectCurrentSong = createSelector(
-    [selectSongs, selectCurrentSongId],
-    (songs, currentId) => songs.find((song) => song.id === currentId)
+  const selectCurrentSong = createSelector([selectSongs, selectCurrentSongId], (songs, currentId) =>
+    songs.find((song) => song.id === currentId)
   );
   const { duration } = useSelector(selectCurrentSong);
 
@@ -66,13 +65,13 @@ const SeekSlider = memo(function SeekSlider({ handlers }) {
     if (!isClicked) setValue(playingPosition);
   }, [playingPosition, isClicked]);
 
-  function formatDuration(value) {
+  function formatDuration(value: number) {
     const minute = Math.floor(value / 60);
     const secondLeft = Math.floor(value - minute * 60);
     return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
   }
 
-  function handleOnChange(value) {
+  function handleOnChange(value: number) {
     setIsClicked(true);
     setValue(value);
   }

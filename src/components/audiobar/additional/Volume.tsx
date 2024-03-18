@@ -47,16 +47,9 @@ function Volume() {
   return (
     <Grid container alignItems="center" columnGap={0.8} flexWrap="nowrap">
       {volume > 0 ? (
-        <AdditionalIcon
-          tooltip="Mute"
-          Icon={VolumeDown}
-          onClick={() => dispatch(onChangeVolume(0))}
-        />
+        <AdditionalIcon tooltip="Mute" Icon={VolumeDown} onClick={() => dispatch(onChangeVolume(0))} />
       ) : (
-        <AdditionalIcon
-          Icon={VolumeOff}
-          onClick={() => dispatch(onChangeVolume(100))}
-        />
+        <AdditionalIcon Icon={VolumeOff} onClick={() => dispatch(onChangeVolume(100))} />
       )}
       <Slider
         sx={sliderSX}

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Typography,
-  styled,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Grid, Typography, styled, useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate, useRouteError } from "react-router-dom";
 
 import vinylImage from "../assets/images/vinyl.png";
@@ -44,11 +36,10 @@ export default function Error() {
     >
       <Grid item container alignItems="center" direction="column" lg={6}>
         <Typography variant="h6" fontWeight="bold" textAlign="center">
-          {(error.status || "error") + "s "} and heartbreaks
+          {(error.status ?? "error") + "s "} and heartbreaks
         </Typography>
         <Typography textAlign="center" mb={4}>
-          Oops! Looks like something went wrong on our end. <br /> Maybe our FAQ
-          or Community can help?
+          Oops! Looks like something went wrong on our end. <br /> Maybe our FAQ or Community can help?
         </Typography>
         <StyledButton disableRipple onClick={() => navigate(-1)}>
           GO BACK
@@ -58,12 +49,12 @@ export default function Error() {
         <Box
           component="img"
           src={vinylImage}
-          alrt={"Error Page Image"}
+          alt={"Error Page Image"}
           mb={md ? 4 : 0}
           width={md ? 200 : "100%"}
           height={md ? 200 : "100%"}
           maxWidth="550px"
-        ></Box>
+        />
       </Grid>
     </Grid>
   );

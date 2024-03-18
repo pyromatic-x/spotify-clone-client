@@ -25,9 +25,8 @@ function Player() {
 
   const selectSongs = (state) => state.player.playlist;
   const selectCurrentSongId = (state) => state.player.current;
-  const selectCurrentSong = createSelector(
-    [selectSongs, selectCurrentSongId],
-    (songs, currentId) => songs.find((song) => song.id === currentId)
+  const selectCurrentSong = createSelector([selectSongs, selectCurrentSongId], (songs, currentId) =>
+    songs.find((song) => song.id === currentId)
   );
   const { audio, duration } = useSelector(selectCurrentSong);
 
@@ -137,12 +136,7 @@ function Player() {
     <Grid container justifyContent="center" justifySelf="center" width={"34vw"}>
       <Controllers handlers={handlers} />
       <SeekSlider handlers={handlers} />
-      <Audio
-        ref={ref}
-        src={audio}
-        onTimeUpdate={onTimeUpdate}
-        autoPlay={false}
-      />
+      <Audio ref={ref} src={audio} onTimeUpdate={onTimeUpdate} autoPlay={false} />
     </Grid>
   );
 }

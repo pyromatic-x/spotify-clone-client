@@ -1,7 +1,6 @@
 import { Cancel, Search as SearchIcon } from "@mui/icons-material";
 import { FormControl, InputAdornment, styled, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { api } from "../../store/services/spotify";
 import useDebounce from "../../hooks/useDebounce";
 import { useDispatch } from "react-redux";
 import { resetSearch, toggleLoading } from "../../store/reducers/browseSlice";
@@ -23,17 +22,6 @@ function Search() {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState("");
-  const debouncedValue = useDebounce(value, 500);
-
-  const [trigger] = api.endpoints.browse.useLazyQuery();
-
-  useEffect(() => {
-    if (debouncedValue) {
-      trigger(debouncedValue);
-    } else {
-      dispatch(resetSearch());
-    }
-  }, [debouncedValue, trigger, dispatch]);
 
   function onChangeHandler(value: string) {
     dispatch(toggleLoading(!!value));
@@ -55,11 +43,7 @@ function Search() {
             </InputAdornment>
           ),
           endAdornment: value && (
-            <InputAdornment
-              position="end"
-              onClick={() => onChangeHandler("")}
-              sx={{ cursor: "pointer" }}
-            >
+            <InputAdornment position="end" onClick={() => onChangeHandler("")} sx={{ cursor: "pointer" }}>
               <Cancel />
             </InputAdornment>
           ),

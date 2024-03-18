@@ -1,6 +1,6 @@
-export default function debounce(func, timeout) {
-  let timer;
-  return (...args) => {
+export default function debounce(func: Function, timeout: number) {
+  let timer: string | number | NodeJS.Timeout | undefined;
+  return (...args: any) => {
     if (!timer) {
       func.apply(this, args);
     }
