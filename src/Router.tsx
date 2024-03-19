@@ -1,13 +1,9 @@
-import {
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from "react-router-dom";
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import Root from "./components/root";
-import Browse from "./pages/Browse.js";
-import Home from "./pages/Home.js";
-import Queue from "./pages/Queue.js";
-import Error from "./pages/Error.js";
+import Browse from "./pages/Browse";
+import Home from "./pages/Home";
+import Queue from "./pages/Queue";
+import Error from "./pages/Error";
 
 export default createBrowserRouter(
   createRoutesFromElements(

@@ -20,6 +20,8 @@ export default createTheme({
       card: "#100f0f",
       cardHover: "#181818",
       purple: "#381861",
+      popover: "#282828",
+      popoverHighlight: "#3E3E3E",
     },
     text: {
       primary: common.white,
@@ -76,6 +78,12 @@ export default createTheme({
         ::-webkit-scrollbar {
           display: none;
         }
+
+        * {
+          -webkit-user-select: none; /* Safari */
+          -ms-user-select: none; /* IE 10 and IE 11 */
+          user-select: none; /* Standard syntax */
+        }
       `,
     },
     MuiTooltip: {
@@ -114,6 +122,8 @@ declare module "@mui/material/styles" {
     card: string;
     cardHover: string;
     purple: string;
+    popover: string;
+    popoverHighlight: string;
   }
   export interface PaletteColor {
     light2: string;

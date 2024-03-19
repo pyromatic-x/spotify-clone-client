@@ -1,12 +1,12 @@
 import { useMediaQuery, useTheme } from "@mui/material";
 import AudioBar from "../audiobar/AudioBar";
 import { Outlet, useLocation } from "react-router-dom";
-import MainContainer from "../MainContainer";
+import MainContainer from "../common/MainContainer";
 import Header from "../header/Header";
 import { PropsWithChildren, useState } from "react";
 import NoMobileModal from "../../NoMobileMiddleware";
 import { RootContainer, StyledOutletContainer } from "./styles";
-import LeftSideMenu from "../leftSideMenu";
+import Sidebar from "../sidebar";
 
 export default function Root({ children }: PropsWithChildren) {
   const location = useLocation();
@@ -34,12 +34,10 @@ export default function Root({ children }: PropsWithChildren) {
 
   return (
     <RootContainer>
-      <LeftSideMenu />
+      <Sidebar />
       <MainContainer sx={{ padding: "18px", gridRow: "span 2" }}>
         <Header addBackground={homePageScrolled} />
-        <StyledOutletContainer onScroll={handleScroll}>
-          {children ?? <Outlet />}
-        </StyledOutletContainer>
+        <StyledOutletContainer onScroll={handleScroll}>{children ?? <Outlet />}</StyledOutletContainer>
       </MainContainer>
       {sm ? <NoMobileModal /> : <AudioBar />}
     </RootContainer>

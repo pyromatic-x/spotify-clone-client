@@ -1,9 +1,8 @@
 import { Cancel, Search as SearchIcon } from "@mui/icons-material";
 import { FormControl, InputAdornment, styled, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
-import useDebounce from "../../hooks/useDebounce";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { resetSearch, toggleLoading } from "../../store/reducers/browseSlice";
+import { toggleLoading } from "../../store/reducers/browseSlice";
 
 const StyledTextField = styled(TextField)({
   "& .MuiInputBase-root": {

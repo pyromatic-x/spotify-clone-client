@@ -4,8 +4,7 @@ export const RootContainer = styled(Box)(({ theme }) => ({
   display: "grid",
   gridTemplateColumns: "auto 1fr",
   gridTemplateRows: "102px 1fr 92px",
-  columnGap: "8px",
-  padding: "14px 14px 0 14px",
+  padding: "8px 8px 0 8px",
   height: "100vh",
 
   [theme.breakpoints.down("sm")]: {
