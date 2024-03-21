@@ -1,13 +1,13 @@
 export enum Categories {
-  "albums",
-  "playlists",
-  "artists",
+  'albums',
+  'playlists',
+  'artists',
 }
 export enum Sortings {
-  "Recents",
-  "Recently added",
-  "Alphabetical",
-  "Creator",
+  'Recents',
+  'Recently added',
+  'Alphabetical',
+  'Creator',
 }
 
 export type ItemType = {

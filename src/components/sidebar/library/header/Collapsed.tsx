@@ -1,7 +1,7 @@
-import { Tooltip } from "@mui/material";
-import { LibraryButton, LibraryIcon } from "./styled";
-import { changeMenuWidth } from "../../effect";
-import { menuConfig } from "../../constants";
+import { Tooltip } from '@mui/material';
+import { LibraryButton, LibraryIcon } from './styled';
+import { changeMenuWidth } from '../../effect';
+import { menuConfig } from '../../constants';
 
 const Collapsed = () => (
   <Tooltip title="Expand Your Library">

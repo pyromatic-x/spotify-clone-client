@@ -1,10 +1,10 @@
-import { Cancel, Search as SearchIcon } from "@mui/icons-material";
-import { ClickAwayListener, InputAdornment } from "@mui/material";
-import { useRef, useState } from "react";
-import { SearchContainer, StyledSearchButton, StyledSearchInput, Wrapper } from "./styled";
-import { capitalizeFirstLetter } from "../../../../utils/strings";
-import { useUnit } from "effector-react";
-import { $category, $search, search } from "../../effect";
+import { Cancel, Search as SearchIcon } from '@mui/icons-material';
+import { ClickAwayListener, InputAdornment } from '@mui/material';
+import { useRef, useState } from 'react';
+import { SearchContainer, StyledSearchButton, StyledSearchInput, Wrapper } from './styled';
+import { capitalizeFirstLetter } from '../../../../utils/strings';
+import { useUnit } from 'effector-react';
+import { $category, $search, search } from '../../effect';
 
 function Search({ reverse = false }: { reverse?: boolean }) {
   const category = useUnit($category);
@@ -17,13 +17,14 @@ function Search({ reverse = false }: { reverse?: boolean }) {
   const handleClickOutside = (event: MouseEvent | TouchEvent) => {
     if (
       searchRef.current &&
-      //@ts-ignore
+      // @ts-expect-error err
       !searchRef.current.contains(event.target) &&
+      !searchValue &&
       !searchValue &&
       searchOpened
     ) {
       setSeachOpened(false);
-      search("");
+      search('');
     }
   };
 
@@ -36,7 +37,7 @@ function Search({ reverse = false }: { reverse?: boolean }) {
   const handleOnOpen = () => {
     setSeachOpened(true);
 
-    // @ts-ignore
+    // @ts-expect-error err
     searchRef.current.firstChild.children[1].focus();
   };
 
@@ -52,10 +53,10 @@ function Search({ reverse = false }: { reverse?: boolean }) {
             size="small"
             variant="outlined"
             type="text"
-            value={searchValue ?? ""}
+            value={searchValue ?? ''}
             onChange={handleOnChange}
             inputProps={{ maxLength: 30 }}
-            placeholder={`Search in ${category ? capitalizeFirstLetter(category) : "Library"}`}
+            placeholder={`Search in ${category ? capitalizeFirstLetter(category) : 'Library'}`}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -63,7 +64,7 @@ function Search({ reverse = false }: { reverse?: boolean }) {
                 </InputAdornment>
               ),
               endAdornment: searchValue && (
-                <InputAdornment position="end" onClick={() => search("")}>
+                <InputAdornment position="end" onClick={() => search('')}>
                   <Cancel />
                 </InputAdornment>
               ),

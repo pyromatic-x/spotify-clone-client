@@ -1,4 +1,4 @@
-import { StyledLoader, StyledLoaderContainer } from "./styled";
+import { StyledLoader, StyledLoaderContainer } from './styled';
 const Loader = () => (
   <StyledLoaderContainer>
     <StyledLoader />

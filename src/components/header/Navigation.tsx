@@ -1,9 +1,7 @@
-import { Grid } from "@mui/material";
-import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material/";
-import { useLocation, useNavigate } from "react-router-dom";
-import Search from "./Search";
-import QueueCategories from "./QueueCategories";
-import { NavigationButton } from "./styles";
+import { Grid } from '@mui/material';
+import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material/';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { NavigationButton } from './styled';
 
 function Navigation() {
   const navigate = useNavigate();
@@ -16,18 +14,15 @@ function Navigation() {
       flexWrap="nowrap"
       width="max-content"
       alignItems="center"
+      gridArea="navigation"
+      mr={2}
     >
-      <NavigationButton
-        onClick={() => navigate(-1)}
-        disabled={location.key === "default"}
-      >
+      <NavigationButton onClick={() => navigate(-1)} disabled={location.key === 'default'}>
         <ArrowBackIosNew />
       </NavigationButton>
       <NavigationButton onClick={() => navigate(1)}>
         <ArrowForwardIos />
       </NavigationButton>
-      {location.pathname === "/search" && <Search />}
-      {location.pathname === "/queue" && <QueueCategories />}
     </Grid>
   );
 }

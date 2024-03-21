@@ -1,15 +1,15 @@
-import { Grid, Tooltip } from "@mui/material";
-import { LibraryButton, LibraryIcon } from "../styled";
-import { ArrowForward as ArrowForwardIcon, ArrowBack as ArrowBackIcon } from "@mui/icons-material";
-import ButtonWithTooltip from "../../../../buttons/ButtonWithTooltip";
-import { $expanded, changeMenuWidth } from "../../../effect";
-import { menuConfig } from "../../../constants";
-import Categories from "../categories";
-import { useUnit } from "effector-react";
-import Filters from "../../sort";
-import Search from "../../search";
-import ExpandedRow from "../../expandedRow";
-import NewButton from "./NewButton";
+import { Grid, Tooltip } from '@mui/material';
+import { LibraryButton, LibraryIcon } from '../styled';
+import { ArrowForward as ArrowForwardIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material';
+import ButtonWithTooltip from '../../../../common/buttons/ButtonWithTooltip';
+import { $expanded, changeMenuWidth } from '../../../effect';
+import { menuConfig } from '../../../constants';
+import Categories from '../categories';
+import { useUnit } from 'effector-react';
+import Filters from '../../sort';
+import Search from '../../search';
+import ExpandedRow from '../../expandedRow';
+import NewButton from './NewButton';
 
 const Full = () => {
   const expanded = useUnit($expanded);

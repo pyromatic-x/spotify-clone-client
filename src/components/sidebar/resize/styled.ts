@@ -1,17 +1,17 @@
-import { Box, styled } from "@mui/material";
+import { Box, styled } from '@mui/material';
 
 export const StyledResize = styled(Box)(({ theme }) => ({
-  height: "100%",
-  backgroundColor: "transparent",
-  cursor: "col-resize",
-  padding: "0 4px",
-  position: "relative",
+  height: '100%',
+  backgroundColor: 'transparent',
+  cursor: 'col-resize',
+  padding: '0 4px',
+  position: 'relative',
 
-  "&:hover&::before": {
+  '&:hover&::before': {
     content: "''",
-    position: "absolute",
-    width: "1px",
-    height: "100%",
+    position: 'absolute',
+    width: '1px',
+    height: '100%',
     backgroundColor: theme.palette.grey[700],
   },
 }));

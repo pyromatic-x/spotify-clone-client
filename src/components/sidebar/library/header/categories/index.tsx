@@ -1,11 +1,11 @@
-import { Stack } from "@mui/material";
-import { useUnit } from "effector-react";
-import { $category, setCategory } from "../../../effect";
-import { ClearIconButton } from "../styled";
-import { capitalizeFirstLetter } from "../../../../../utils/strings";
-import { ChipStyled } from "./styled";
-import { Clear as ClearIcon } from "@mui/icons-material";
-import { Categories as CategoriesEnum } from "../../../types";
+import { Stack } from '@mui/material';
+import { useUnit } from 'effector-react';
+import { $category, setCategory } from '../../../effect';
+import { ClearIconButton } from '../styled';
+import { capitalizeFirstLetter } from '../../../../../utils/strings';
+import { ChipStyled } from './styled';
+import { Clear as ClearIcon } from '@mui/icons-material';
+import { Categories as CategoriesEnum } from '../../../types';
 
 const Categories = () => {
   const category = useUnit($category);
@@ -25,7 +25,7 @@ const Categories = () => {
         />
       ) : (
         Object.values(CategoriesEnum)
-          .filter((t) => typeof t === "string")
+          .filter((t) => typeof t === 'string')
           .map((t: any) => (
             <ChipStyled key={t} label={capitalizeFirstLetter(t)} onClick={() => setCategory(t)} />
           ))

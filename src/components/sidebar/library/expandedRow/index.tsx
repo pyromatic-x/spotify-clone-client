@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
-import { Container } from "./styled";
+import { Typography } from '@mui/material';
+import { Container } from './styled';
 
 const ExpandedRow = () => (
   <Container>

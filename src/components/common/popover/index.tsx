@@ -1,12 +1,12 @@
-import { List, Popover as PopoverMUI, SxProps } from "@mui/material";
-import { ReactElement, cloneElement, useState } from "react";
-import { PopoverContent } from "./styled";
+import { List, Popover as PopoverMUI, SxProps } from '@mui/material';
+import { ReactElement, cloneElement, useState } from 'react';
+import { PopoverContent } from './styled';
 
 interface IProps {
   content: string | JSX.Element | JSX.Element[] | ReactElement;
   toggler: ReactElement;
-  horizontal: number | "center" | "left" | "right";
-  vertical: number | "center" | "bottom" | "top";
+  horizontal: number | 'center' | 'left' | 'right';
+  vertical: number | 'center' | 'bottom' | 'top';
   sx?: SxProps;
 }
 
@@ -30,13 +30,13 @@ const Popover = ({ content, toggler, horizontal, vertical, sx }: IProps) => {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: vertical || "bottom",
-          horizontal: horizontal || "left",
+          vertical: vertical || 'bottom',
+          horizontal: horizontal || 'left',
         }}
         sx={{ ...sx }}
       >
         <PopoverContent>
-          <List disablePadding sx={{ minWidth: "180px" }}>
+          <List disablePadding sx={{ minWidth: '180px' }}>
             {content}
           </List>
         </PopoverContent>

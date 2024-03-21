@@ -1,16 +1,16 @@
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip } from '@mui/material';
 
 const IconButtonSX = {
-  width: "22px",
-  height: "36px",
-  padding: "0px",
-  "& svg": {
-    fontSize: "18px",
+  width: '22px',
+  height: '36px',
+  padding: '0px',
+  '& svg': {
+    fontSize: '18px',
   },
-  "&:hover": {
-    backgroundColor: "transparent",
-    "& svg": {
-      fill: "white",
+  '&:hover': {
+    backgroundColor: 'transparent',
+    '& svg': {
+      fill: 'white',
     },
   },
 };

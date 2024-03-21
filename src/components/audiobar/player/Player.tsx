@@ -1,20 +1,20 @@
-import { Grid, styled } from "@mui/material";
-import Controllers from "./Controllers";
-import SeekSlider from "./SeekSlider";
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Grid, styled } from '@mui/material';
+import Controllers from './Controllers';
+import SeekSlider from './SeekSlider';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   onChangePosition,
   onChangeTrack,
   onChangeVolume,
   onPause,
   onPlay,
-} from "../../../store/reducers/playerSlice";
-import { createSelector } from "@reduxjs/toolkit";
+} from '../../../store/reducers/playerSlice';
+import { createSelector } from '@reduxjs/toolkit';
 
-const Audio = styled("audio")({
-  display: "none",
-  visibility: "hidden",
+const Audio = styled('audio')({
+  display: 'none',
+  visibility: 'hidden',
 });
 
 function Player() {
@@ -26,20 +26,20 @@ function Player() {
   const selectSongs = (state) => state.player.playlist;
   const selectCurrentSongId = (state) => state.player.current;
   const selectCurrentSong = createSelector([selectSongs, selectCurrentSongId], (songs, currentId) =>
-    songs.find((song) => song.id === currentId)
+    songs.find((song) => song.id === currentId),
   );
   const { audio, duration } = useSelector(selectCurrentSong);
 
   function onKeyDownHandler(event) {
     if (event.keyCode === 39 && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
-      dispatch(onChangeTrack("next"));
+      dispatch(onChangeTrack('next'));
       handlers.play();
     }
     if (event.keyCode === 37 && (event.ctrlKey || event.metaKey)) {
       event.preventDefault();
       handlers.stop();
-      dispatch(onChangeTrack("prev"));
+      dispatch(onChangeTrack('prev'));
       queueMicrotask(() => handlers.play());
     }
 
@@ -58,7 +58,7 @@ function Player() {
       dispatch(onChangeVolume(nextVolume));
     }
 
-    if (event.target.nodeName !== "INPUT" && event.code === "Space") {
+    if (event.target.nodeName !== 'INPUT' && event.code === 'Space') {
       event.preventDefault();
 
       if (playing) handlers.pause();
@@ -75,9 +75,9 @@ function Player() {
       handlers.pause();
     }
 
-    document.addEventListener("keydown", onKeyDownHandler);
+    document.addEventListener('keydown', onKeyDownHandler);
 
-    return () => document.removeEventListener("keydown", onKeyDownHandler);
+    return () => document.removeEventListener('keydown', onKeyDownHandler);
   }, [volume, playing]);
 
   const handlers = {
@@ -92,7 +92,7 @@ function Player() {
             .catch((e) => {
               try {
                 this.stop();
-                dispatch(onChangeTrack("next"));
+                dispatch(onChangeTrack('next'));
                 queueMicrotask(this.play);
               } catch {}
             });
@@ -100,7 +100,7 @@ function Player() {
       } catch {}
     },
     stop() {
-      ref.current.src = "";
+      ref.current.src = '';
       ref.current.src = audio;
       this.changePosition(0);
     },
@@ -126,14 +126,14 @@ function Player() {
         handlers.changePosition(0);
         handlers.play();
       } else {
-        dispatch(onChangeTrack("next"));
+        dispatch(onChangeTrack('next'));
         queueMicrotask(handlers.play);
       }
     }
   }
 
   return (
-    <Grid container justifyContent="center" justifySelf="center" width={"34vw"}>
+    <Grid container justifyContent="center" justifySelf="center" width={'34vw'}>
       <Controllers handlers={handlers} />
       <SeekSlider handlers={handlers} />
       <Audio ref={ref} src={audio} onTimeUpdate={onTimeUpdate} autoPlay={false} />

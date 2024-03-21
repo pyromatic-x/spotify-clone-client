@@ -1,6 +1,6 @@
-import { createEvent, createStore, sample } from "effector";
-import { items as defaultItems, menuConfig } from "./constants";
-import { Categories, ItemType, Sortings } from "./types";
+import { createEvent, createStore, sample } from 'effector';
+import { items as defaultItems, menuConfig } from './constants';
+import { Categories, ItemType, Sortings } from './types';
 
 export const reset = createEvent();
 
@@ -65,9 +65,9 @@ sample({
 
     if (!searchValue) return items;
 
-    const regex = new RegExp(`${searchValue}`, "gi");
+    const regex = new RegExp(`${searchValue}`, 'gi');
     return items.filter(
-      (t) => regex.test(t.title) || regex.test(t.subTitle) || regex.test(t.author as string)
+      (t) => regex.test(t.title) || regex.test(t.subTitle) || regex.test(t.author as string),
     );
   },
   target: $items,

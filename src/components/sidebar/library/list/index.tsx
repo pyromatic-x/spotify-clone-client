@@ -1,11 +1,11 @@
-import { useUnit } from "effector-react";
-import { ListWrapper, StyledList } from "./styled";
-import NoResults from "../NoResults";
-import { $collapsed, $expanded, $items, setShadow } from "../../effect";
-import LibraryListItem from "./Item";
-import { Grid } from "@mui/material";
-import Search from "../search";
-import Filters from "../sort";
+import { useUnit } from 'effector-react';
+import { ListWrapper, StyledList } from './styled';
+import NoResults from '../NoResults';
+import { $collapsed, $expanded, $items, setShadow } from '../../effect';
+import LibraryListItem from './Item';
+import { Grid } from '@mui/material';
+import Search from '../search';
+import Filters from '../sort';
 
 const LibraryList = () => {
   const items = useUnit($items);
@@ -17,7 +17,7 @@ const LibraryList = () => {
   };
 
   return (
-    <ListWrapper onScroll={handleScroll} padding={`${expanded ? "12px" : "0"} 6px 6px 6px`}>
+    <ListWrapper onScroll={handleScroll} padding={`${expanded ? '12px' : '0'} 6px 6px 6px`}>
       {!expanded && !collapsed && (
         <Grid
           padding="0 10px"

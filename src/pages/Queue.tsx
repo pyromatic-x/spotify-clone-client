@@ -1,8 +1,8 @@
-import { Grid, Typography } from "@mui/material";
-import QueueList from "../components/queue/List";
+import { Grid, Typography } from '@mui/material';
+import QueueList from '../components/queue/List';
 
 function Queue() {
-  document.title = "Spotify - Queue";
+  document.title = 'Spotify - Queue';
 
   return (
     <Grid position="relative" container direction="column" gap={3.5}>

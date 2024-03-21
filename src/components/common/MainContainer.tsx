@@ -1,19 +1,15 @@
-import { Box, SxProps } from "@mui/material";
-import { ReactNode } from "react";
+import { Box, BoxProps } from '@mui/material';
 
-type IProps = {
-  children: ReactNode;
-  sx: SxProps;
-};
-
-const MainContainer = ({ children, sx = {} }: IProps) => (
+const MainContainer = ({ children, sx = {}, ...rest }: BoxProps) => (
   <Box
     sx={{
-      borderRadius: "8px",
-      backgroundColor: "background.section",
-      padding: "14px",
+      borderRadius: '8px',
+      backgroundColor: 'background.section',
+      padding: '14px',
+      position: 'relative',
       ...sx,
     }}
+    {...rest}
   >
     {children}
   </Box>

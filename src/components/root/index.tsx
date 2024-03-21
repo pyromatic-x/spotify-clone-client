@@ -1,43 +1,54 @@
-import { useMediaQuery, useTheme } from "@mui/material";
-import AudioBar from "../audiobar/AudioBar";
-import { Outlet, useLocation } from "react-router-dom";
-import MainContainer from "../common/MainContainer";
-import Header from "../header/Header";
-import { PropsWithChildren, useState } from "react";
-import NoMobileModal from "../../NoMobileMiddleware";
-import { RootContainer, StyledOutletContainer } from "./styles";
-import Sidebar from "../sidebar";
+import { useMediaQuery, useTheme } from '@mui/material';
+import AudioBar from '../audiobar/AudioBar';
+import { Outlet, useLocation } from 'react-router-dom';
+import MainContainer from '../common/MainContainer';
+import Header from '../header';
+import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
+import NoMobileModal from '../../NoMobileMiddleware';
+import { RootContainer, StyledOutletContainer } from './styles';
+import Sidebar from '../sidebar';
+import { setOutletWidth } from './effect';
+import { IRoute, ROUTES } from '../../router/constants';
+import { useUnit } from 'effector-react';
+import { $headerHeight } from '../header/effect';
 
 export default function Root({ children }: PropsWithChildren) {
+  const headerHeight = useUnit($headerHeight);
+
+  const containerRef = useRef(null);
+
   const location = useLocation();
-
-  const [homePageScrolled, setHomePageScrolled] = useState(false);
-
   const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleScroll = (event: React.UIEvent<HTMLElement>): void => {
-    event.preventDefault();
+  const routes = useMemo(() => Object.keys(ROUTES).map((key) => ROUTES[key]) as Array<IRoute>, []);
 
-    if (location.pathname !== "/") {
-      setHomePageScrolled(false);
-      return;
-    }
-    const top = event.currentTarget.scrollTop;
-    if (top < 90) {
-      setHomePageScrolled(false);
-    }
-    if (top > 90) {
-      setHomePageScrolled(true);
-    }
-  };
+  const sm = useMediaQuery(theme.breakpoints.down('sm'));
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const resizeObserver = new ResizeObserver(([container]) => {
+      setOutletWidth(container.contentRect.width);
+    });
+    resizeObserver.observe(containerRef.current);
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.title = routes.find((t) => t.PATH === location.pathname)?.PAGE_TITLE || 'Spotify';
+  }, [location, routes]);
 
   return (
     <RootContainer>
       <Sidebar />
-      <MainContainer sx={{ padding: "18px", gridRow: "span 2" }}>
-        <Header addBackground={homePageScrolled} />
-        <StyledOutletContainer onScroll={handleScroll}>{children ?? <Outlet />}</StyledOutletContainer>
+      <MainContainer sx={{ padding: '0' }} gridRow="span 2">
+        <Header containerRef={containerRef} />
+        <StyledOutletContainer
+          ref={containerRef}
+          id="OutletContainer"
+          padding={`${headerHeight + 'px'} 14px 20px 14px`}
+        >
+          {children ?? <Outlet />}
+        </StyledOutletContainer>
       </MainContainer>
       {sm ? <NoMobileModal /> : <AudioBar />}
     </RootContainer>

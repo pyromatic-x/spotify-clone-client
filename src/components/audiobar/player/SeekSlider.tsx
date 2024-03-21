@@ -1,49 +1,49 @@
-import { Grid, Slider, Typography, styled } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { onChangePosition } from "../../../store/reducers/playerSlice";
-import { createSelector } from "@reduxjs/toolkit";
-import { memo, useLayoutEffect, useState } from "react";
+import { Grid, Slider, Typography, styled } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { onChangePosition } from '../../../store/reducers/playerSlice';
+import { createSelector } from '@reduxjs/toolkit';
+import { memo, useLayoutEffect, useState } from 'react';
 
 const sliderSX = {
-  color: "white",
+  color: 'white',
   height: 4,
-  "&:hover .MuiSlider-thumb": {
+  '&:hover .MuiSlider-thumb': {
     opacity: 1,
   },
-  "&:hover .MuiSlider-track": {
-    backgroundColor: "green.main",
-    transition: "none",
+  '&:hover .MuiSlider-track': {
+    backgroundColor: 'green.main',
+    transition: 'none',
   },
-  "& .MuiSlider-rail": {
+  '& .MuiSlider-rail': {
     opacity: 1,
-    backgroundColor: "secondary.light2",
+    backgroundColor: 'secondary.light2',
   },
-  "& .MuiSlider-track": {
-    backgroundColor: "white",
-    border: "none",
+  '& .MuiSlider-track': {
+    backgroundColor: 'white',
+    border: 'none',
   },
-  "& .MuiSlider-thumb": {
+  '& .MuiSlider-thumb': {
     opacity: 0,
     width: 12,
     height: 12,
-    transition: "none",
-    "&:hover, &.Mui-focusVisible": {
-      backgroundColor: "white",
-      boxShadow: "none",
+    transition: 'none',
+    '&:hover, &.Mui-focusVisible': {
+      backgroundColor: 'white',
+      boxShadow: 'none',
     },
-    "&::after": {
-      width: "26px",
-      height: "26px",
+    '&::after': {
+      width: '26px',
+      height: '26px',
     },
   },
 };
 
 const Time = styled(Typography)({
-  fontSize: "12px",
+  fontSize: '12px',
 });
 
 Time.defaultProps = {
-  color: "secondary",
+  color: 'secondary',
 };
 
 const SeekSlider = memo(function SeekSlider({ handlers }: any) {
@@ -57,7 +57,7 @@ const SeekSlider = memo(function SeekSlider({ handlers }: any) {
   const selectCurrentSongId = (state) => state.player.current;
 
   const selectCurrentSong = createSelector([selectSongs, selectCurrentSongId], (songs, currentId) =>
-    songs.find((song) => song.id === currentId)
+    songs.find((song) => song.id === currentId),
   );
   const { duration } = useSelector(selectCurrentSong);
 

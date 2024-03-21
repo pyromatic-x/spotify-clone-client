@@ -1,9 +1,9 @@
-import { Grid, ListItemAvatar, ListItemText, Typography } from "@mui/material";
-import { capitalizeFirstLetter } from "../../../../utils/strings";
-import { ItemType } from "../../types";
-import { useUnit } from "effector-react";
-import { $category, $collapsed, $expanded, $search } from "../../effect";
-import { CollapsedItem, Item, StyledAvatar } from "./styled";
+import { Grid, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { capitalizeFirstLetter } from '../../../../utils/strings';
+import { ItemType } from '../../types';
+import { useUnit } from 'effector-react';
+import { $category, $collapsed, $expanded, $search } from '../../effect';
+import { CollapsedItem, Item, StyledAvatar } from './styled';
 
 const LibraryListItem = ({ author, title, subTitle, image, type }: ItemType) => {
   const collapsed = useUnit($collapsed);
@@ -20,7 +20,7 @@ const LibraryListItem = ({ author, title, subTitle, image, type }: ItemType) => 
           alt={author}
           src={image}
           sx={{ width: 48, height: 48 }}
-          type={type === "artists" ? "circle" : "square"}
+          type={type === 'artists' ? 'circle' : 'square'}
         />
       </CollapsedItem>
     );
@@ -28,15 +28,19 @@ const LibraryListItem = ({ author, title, subTitle, image, type }: ItemType) => 
   return (
     <Item expanded={expanded}>
       <Grid container width="auto">
-        <ListItemAvatar sx={{ minWidth: "auto" }}>
+        <ListItemAvatar sx={{ minWidth: 'auto' }}>
           <StyledAvatar
             alt={author || subTitle}
             src={image}
             sx={{ width: 48, height: 48 }}
-            type={type === "artists" ? "circle" : "square"}
+            type={type === 'artists' ? 'circle' : 'square'}
           />
         </ListItemAvatar>
-        <ListItemText primary={title} secondary={secondaryText} sx={{ marginLeft: "12px" }} />
+        <ListItemText
+          sx={{ alignSelf: 'center', margin: '0 0 0 12px' }}
+          primary={title}
+          secondary={secondaryText}
+        />
       </Grid>
       {expanded && (
         <>

@@ -1,6 +1,6 @@
-import { Grid, Typography } from "@mui/material";
-import { useUnit } from "effector-react";
-import { $search } from "../effect";
+import { Grid, Typography } from '@mui/material';
+import { useUnit } from 'effector-react';
+import { $search } from '../effect';
 
 const NoResults = () => {
   const searchValue = useUnit($search);
@@ -14,18 +14,18 @@ const NoResults = () => {
         textAlign="center"
         noWrap
         sx={{
-          display: "inline-flex",
-          justifyContent: "center",
+          display: 'inline-flex',
+          justifyContent: 'center',
         }}
       >
         <Typography component="span">Couldn't find "</Typography>
         <Typography
           component="span"
           sx={{
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            maxWidth: "140px",
-            display: "inline-block",
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            maxWidth: '140px',
+            display: 'inline-block',
           }}
         >
           {searchValue}

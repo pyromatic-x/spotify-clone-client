@@ -1,41 +1,41 @@
-import { VolumeDown, VolumeOff } from "@mui/icons-material";
-import { Grid, Slider } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { onChangeVolume } from "../../../store/reducers/playerSlice";
-import AdditionalIcon from "./AdditionalIcon";
+import { VolumeDown, VolumeOff } from '@mui/icons-material';
+import { Grid, Slider } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { onChangeVolume } from '../../../store/reducers/playerSlice';
+import AdditionalIcon from './AdditionalIcon';
 
 const sliderSX = {
-  color: "white",
+  color: 'white',
   height: 4,
-  width: "80px",
-  "&:hover .MuiSlider-thumb": {
+  width: '80px',
+  '&:hover .MuiSlider-thumb': {
     opacity: 1,
   },
-  "&:hover .MuiSlider-track": {
-    backgroundColor: "green.main",
-    transition: "none",
+  '&:hover .MuiSlider-track': {
+    backgroundColor: 'green.main',
+    transition: 'none',
   },
-  "& .MuiSlider-rail": {
+  '& .MuiSlider-rail': {
     opacity: 1,
-    backgroundColor: "secondary.light2",
+    backgroundColor: 'secondary.light2',
   },
-  "& .MuiSlider-track": {
-    backgroundColor: "white",
-    border: "none",
-    transition: "none",
+  '& .MuiSlider-track': {
+    backgroundColor: 'white',
+    border: 'none',
+    transition: 'none',
   },
-  "& .MuiSlider-thumb": {
+  '& .MuiSlider-thumb': {
     opacity: 0,
     width: 12,
     height: 12,
-    transition: "none",
-    "&:hover, &.Mui-focusVisible": {
-      backgroundColor: "white",
-      boxShadow: "none",
+    transition: 'none',
+    '&:hover, &.Mui-focusVisible': {
+      backgroundColor: 'white',
+      boxShadow: 'none',
     },
-    "&::after": {
-      width: "18px",
-      height: "18px",
+    '&::after': {
+      width: '18px',
+      height: '18px',
     },
   },
 };

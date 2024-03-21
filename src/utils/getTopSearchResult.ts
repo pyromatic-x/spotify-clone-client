@@ -1,7 +1,7 @@
 export default function getTopSearchResult(results: Array<any>) {
-  let items = [];
+  const items = [];
 
-  for (let key in results) {
+  for (const key in results) {
     if (results[key]) {
       items.push(
         ...results[key].map((t: any) => {
@@ -9,7 +9,7 @@ export default function getTopSearchResult(results: Array<any>) {
             ...t,
             type: t.type || key,
           };
-        })
+        }),
       );
     }
   }

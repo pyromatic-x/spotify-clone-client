@@ -1,7 +1,7 @@
-import { List } from "@mui/material";
-import { createSelector } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import QueueListItem from "./item";
+import { List } from '@mui/material';
+import { createSelector } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
+import QueueListItem from './item';
 
 function QueueList() {
   const selectPlaylist = (state: any) => state.player.playlist;
@@ -12,7 +12,7 @@ function QueueList() {
     [selectPlaylist, selectPlaying, selectCurrent],
     (playlist, playing, current) => {
       return { playlist, playing, current };
-    }
+    },
   );
 
   const { playlist, playing, current } = useSelector(selector);
