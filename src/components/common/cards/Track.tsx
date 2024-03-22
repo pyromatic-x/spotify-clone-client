@@ -39,7 +39,7 @@ const Track = memo(function Track({ track }: any) {
         </Grid>
       </Grid>
       <Box sx={{ opacity: track.liked || hovering ? 1 : 0 }}>
-        <LikeButton id={track.id} />
+        <LikeButton />
       </Box>
       <Typography color="secondary" textAlign="center">
         {formatDuration(track.duration)}

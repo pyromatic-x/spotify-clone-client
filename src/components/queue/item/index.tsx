@@ -1,8 +1,6 @@
 import { MoreHoriz } from '@mui/icons-material';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { changeTrackById, onPause, onPlay } from '../../../store/reducers/playerSlice';
 import LikeButton from '../../common/buttons/LikeButton';
 import { memo } from 'react';
 import { AlbumLink, ListItemContainer } from './styled';
@@ -18,13 +16,7 @@ type IProps = {
 };
 
 const QueueListItem = memo(function QueueListItem({ track, active, index, playing }: IProps) {
-  const dispatch = useDispatch();
-
   const [hovering, setHovering] = useState(false);
-
-  const changeTrack = () => dispatch(changeTrackById(track.id));
-  const playTrack = () => dispatch(onPlay());
-  const pauseTrack = () => dispatch(onPause());
 
   return (
     <ListItemContainer onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
@@ -34,14 +26,14 @@ const QueueListItem = memo(function QueueListItem({ track, active, index, playin
         active={active}
         playing={playing}
         hovering={hovering}
-        actions={{ play: playTrack, pause: pauseTrack, change: changeTrack }}
+        actions={{ play: () => {}, pause: () => {}, change: () => {} }}
       />
       <Track cover={track.cover} name={track.name} authors={track.authors} active={active} />
       <AlbumLink underline="hover" color="secondary" className="queue-item-album">
         {track.album}
       </AlbumLink>
       <Box sx={{ opacity: track.liked || hovering ? 1 : 0 }}>
-        <LikeButton id={track.id} />
+        <LikeButton />
       </Box>
       <Typography color="secondary" textAlign="center">
         {formatDuration(track.duration)}
