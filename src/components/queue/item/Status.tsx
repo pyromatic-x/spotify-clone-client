@@ -1,7 +1,7 @@
-import { IconButton, Typography } from "@mui/material";
-import PlayingAnimation from "../PlayingAnimation";
-import { Pause, PlayArrow } from "@mui/icons-material";
-import { StatusContainer } from "./styled";
+import { IconButton, Typography } from '@mui/material';
+import PlayingAnimation from '../PlayingAnimation';
+import { Pause, PlayArrow } from '@mui/icons-material';
+import { StatusContainer } from './styled';
 
 type IProps = {
   id: string;
@@ -18,11 +18,7 @@ type IProps = {
 
 function Status({ id, index, active, playing, hovering, actions }: IProps) {
   const NotHoveringNotPlaying = () => (
-    <Typography
-      color={active ? "green.main" : "white"}
-      className="index-number"
-      textAlign="center"
-    >
+    <Typography color={active ? 'green.main' : 'white'} className="index-number" textAlign="center">
       {index}
     </Typography>
   );
@@ -48,11 +44,7 @@ function Status({ id, index, active, playing, hovering, actions }: IProps) {
 
   const HoveringPlaying = () =>
     active ? (
-      <IconButton
-        disableRipple
-        sx={{ padding: 0 }}
-        onClick={() => actions.pause()}
-      >
+      <IconButton disableRipple sx={{ padding: 0 }} onClick={() => actions.pause()}>
         <Pause />
       </IconButton>
     ) : (

@@ -1,12 +1,12 @@
-import { CircularProgress, Grid, Link, Typography } from "@mui/material";
+import { CircularProgress, Grid, Link, Typography } from '@mui/material';
 
-import Logo from "../../assets/icons/Logo";
-import { useState } from "react";
-import Availabilities from "./Availabilities";
-import { Background, Content, StyledButton } from "./styled";
-import Shortcuts from "./Shortcuts";
-import Modal from "../modal";
-import { Circle } from "../modal/styled";
+import Logo from '../../assets/icons/Logo';
+import { useState } from 'react';
+import Availabilities from './Availabilities';
+import { Background, Content, StyledButton } from './styled';
+import Shortcuts from './Shortcuts';
+import Modal from '../common/modal';
+import { Circle } from '../common/modal/styled';
 
 export default function Greeting({ loading }: { loading: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,13 +23,8 @@ export default function Greeting({ loading }: { loading: boolean }) {
           Spotify Clone
         </Typography>
         <Typography marginBottom={2}>
-          A demo of our lovely Spotify made by{" "}
-          <Link
-            href="https://pyromatic.me/"
-            target="_blank"
-            color="black"
-            fontWeight="bold"
-          >
+          A demo of our lovely Spotify made by{' '}
+          <Link href="https://pyromatic.me/" target="_blank" color="black" fontWeight="bold">
             @pyromatic
           </Link>
         </Typography>
@@ -43,21 +38,14 @@ export default function Greeting({ loading }: { loading: boolean }) {
           <Shortcuts />
         </Grid>
 
-        <Logo size="1.6em" sx={{ display: "block", marginBottom: 3 }} />
+        <Logo size="1.6em" sx={{ display: 'block', marginBottom: 3 }} />
 
-        <StyledButton
-          disableRipple
-          onClick={() => onCloseHandler()}
-          disabled={loading}
-        >
+        <StyledButton disableRipple onClick={() => onCloseHandler()} disabled={loading}>
           <Typography mr={1.5} fontWeight="bold" fontSize="0.9rem">
             Okay, got it!
           </Typography>
           {loading && (
-            <CircularProgress
-              sx={{ color: "black", position: "absolute", right: "13px" }}
-              size={20}
-            />
+            <CircularProgress sx={{ color: 'black', position: 'absolute', right: '13px' }} size={20} />
           )}
         </StyledButton>
       </Content>

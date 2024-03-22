@@ -1,5 +1,5 @@
 export function shuffle(array: Array<any>, firstIndex = null) {
-  let result = JSON.parse(JSON.stringify(array));
+  const result = JSON.parse(JSON.stringify(array));
   let first = null;
 
   if (firstIndex !== null) first = result.splice(firstIndex, 1)[0];

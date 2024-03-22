@@ -1,47 +1,49 @@
-import { common } from "@mui/material/colors";
-import { createTheme } from "@mui/material/styles";
+import { common } from '@mui/material/colors';
+import { createTheme } from '@mui/material/styles';
 
-import GothamTTF from "../fonts/Gotham-Black.otf";
-import GothamBoldTTF from "../fonts/Gotham-Bold.otf";
+import GothamTTF from '../fonts/Gotham-Black.otf';
+import GothamBoldTTF from '../fonts/Gotham-Bold.otf';
 
 export default createTheme({
   typography: {
-    fontFamily: "Gotham, sans-serif",
+    fontFamily: 'Gotham, sans-serif',
     button: {
-      textTransform: "none",
+      textTransform: 'none',
     },
   },
   palette: {
-    mode: "dark",
+    mode: 'dark',
     background: {
       default: common.black,
       paper: common.black,
-      section: "#121212",
-      card: "#100f0f",
-      cardHover: "#181818",
-      purple: "#381861",
+      section: '#121212',
+      card: '#100f0f',
+      cardHover: '#181818',
+      purple: '#381861',
+      popover: '#282828',
+      popoverHighlight: '#3E3E3E',
     },
     text: {
       primary: common.white,
-      secondary: "#b3b3b3",
-      gray: "#3d3b40",
+      secondary: '#b3b3b3',
+      gray: '#3d3b40',
     },
     secondary: {
-      main: "#b3b3b3",
-      dark: "#100f0f",
-      light: "#242424",
-      light2: "#4d4c4c",
+      main: '#b3b3b3',
+      dark: '#100f0f',
+      light: '#242424',
+      light2: '#4d4c4c',
     },
     container: {
-      main: "#121212",
+      main: '#121212',
     },
-    section: "#121212",
+    section: '#121212',
     green: {
-      main: "#1cd760",
+      main: '#1cd760',
     },
-    grandis: "#FFCC66",
-    white: "#ffffff",
-    black: "#000000",
+    grandis: '#FFCC66',
+    white: '#ffffff',
+    black: '#000000',
   },
   breakpoints: {
     values: {
@@ -76,15 +78,25 @@ export default createTheme({
         ::-webkit-scrollbar {
           display: none;
         }
+
+        * {
+          -webkit-user-select: none; /* Safari */
+          -ms-user-select: none; /* IE 10 and IE 11 */
+          user-select: none; /* Standard syntax */
+        }
+
+        .MuiTooltip-tooltip {
+          background: #282828 !important;
+        }
       `,
     },
     MuiTooltip: {
       defaultProps: {
-        placement: "top",
+        placement: 'top',
         PopperProps: {
           modifiers: [
             {
-              name: "offset",
+              name: 'offset',
               options: {
                 offset: [0, -10],
               },
@@ -98,13 +110,13 @@ export default createTheme({
     },
     MuiLink: {
       defaultProps: {
-        sx: { cursor: "pointer" },
+        sx: { cursor: 'pointer' },
       },
     },
   },
 });
 
-declare module "@mui/material/styles" {
+declare module '@mui/material/styles' {
   export interface BreakpointOverrides {
     xxl: true;
   }
@@ -114,6 +126,8 @@ declare module "@mui/material/styles" {
     card: string;
     cardHover: string;
     purple: string;
+    popover: string;
+    popoverHighlight: string;
   }
   export interface PaletteColor {
     light2: string;
@@ -158,7 +172,7 @@ declare module "@mui/material/styles" {
   }
 }
 
-declare module "@mui/material/SvgIcon" {
+declare module '@mui/material/SvgIcon' {
   interface SvgIconPropsColorOverrides {
     black: true;
     green: true;
