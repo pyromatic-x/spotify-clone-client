@@ -1,7 +1,7 @@
 import { Box, styled } from '@mui/material';
 
 export const Container = styled(Box)({
-  gridColumn: 'span 2',
+  gridArea: 'audiobar',
   display: 'grid',
   gridTemplateColumns: '25% 1fr 25%',
   justifyContent: 'space-between',
