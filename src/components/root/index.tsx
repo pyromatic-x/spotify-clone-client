@@ -11,6 +11,7 @@ import { useUnit } from 'effector-react';
 import { $headerHeight } from '../header/effect';
 import Leftbar from '../leftbar';
 import AudioBar from '../audiobar';
+import Rightbar from '../rightbar';
 
 export default function Root({ children }: PropsWithChildren) {
   const headerHeight = useUnit($headerHeight);
@@ -40,7 +41,7 @@ export default function Root({ children }: PropsWithChildren) {
   return (
     <RootContainer>
       <Leftbar />
-      <MainContainer sx={{ padding: '0' }} gridRow="span 2">
+      <MainContainer sx={{ padding: '0' }} gridArea="main">
         <Header containerRef={containerRef} />
         <StyledOutletContainer
           ref={containerRef}
@@ -50,6 +51,7 @@ export default function Root({ children }: PropsWithChildren) {
           {children ?? <Outlet />}
         </StyledOutletContainer>
       </MainContainer>
+      <Rightbar />
       {sm ? <NoMobileModal /> : <AudioBar />}
     </RootContainer>
   );

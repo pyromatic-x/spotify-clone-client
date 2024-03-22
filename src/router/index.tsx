@@ -14,7 +14,7 @@ export default createBrowserRouter(
         </Root>
       }
     >
-      {Object.keys(ROUTES).map((key: any) => (
+      {Object.keys(ROUTES).map((key) => (
         <Route path={ROUTES[key].PATH} element={ROUTES[key].ELEMENT} key={ROUTES[key].PAGE_TITLE} />
       ))}
     </Route>,
