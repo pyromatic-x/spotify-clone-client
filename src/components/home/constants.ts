@@ -10,7 +10,7 @@ export const playerPlaylist = [
     liked: true,
     album: 'Homesick',
     audio:
-      'https://cdn.drivemusic.me/dl/online/o-F_b9dMJ715WEwe8ekAPg/1699323798/download_music/2023/05/fred-v-feat.-lottie-jones-homesick.mp3',
+      'https://cdn2.drivemusic.me/dl/online/o-F_b9dMJ715WEwe8ekAPg/1699323798/download_music/2023/05/fred-v-feat.-lottie-jones-homesick.mp3',
     cover: 'https://i1.sndcdn.com/artworks-a4INM0ETkGOzBsB4-0wwU7w-t500x500.jpg',
   },
   {
@@ -22,7 +22,7 @@ export const playerPlaylist = [
     liked: false,
     album: 'Wounded Rhymes',
     audio:
-      'https://cdn.drivemusic.me/dl/online/BYRFgToxfJueUpcxYpWsKg/1699325615/download_music/2013/10/lykke-li-i-follow-rivers-the-magician-remix-ost-studija-17.mp3',
+      'https://cdn2.drivemusic.me/dl/online/BYRFgToxfJueUpcxYpWsKg/1699325615/download_music/2013/10/lykke-li-i-follow-rivers-the-magician-remix-ost-studija-17.mp3',
     cover: 'https://i1.sndcdn.com/artworks-000004841926-yxktof-t500x500.jpg',
   },
   {
@@ -34,7 +34,7 @@ export const playerPlaylist = [
     liked: false,
     album: 'Fingerprints',
     audio:
-      'https://cdn.drivemusic.me/dl/online/cvK6Dsrkjr3ANC5h_aK8TA/1699323993/download_music/2023/02/hybrid-minds-feat.-grace-grundy-fingerprints.mp3',
+      'https://cdn2.drivemusic.me/dl/online/cvK6Dsrkjr3ANC5h_aK8TA/1699323993/download_music/2023/02/hybrid-minds-feat.-grace-grundy-fingerprints.mp3',
     cover:
       'https://geo-media.beatsource.com/image_size/1400x1400/3/5/a/35a32b4b-0076-4097-9d76-fd43ae961289.jpg',
   },
@@ -47,7 +47,7 @@ export const playerPlaylist = [
     liked: true,
     album: "That's the Spirit",
     audio:
-      'https://cdn.drivemusic.me/dl/online/khzDNmh30NGCVCWo76MnPw/1699322995/download_music/2018/03/bring-me-the-horizon-throne.mp3',
+      'https://cdn2.drivemusic.me/dl/online/khzDNmh30NGCVCWo76MnPw/1699322995/download_music/2018/03/bring-me-the-horizon-throne.mp3',
     cover: 'https://i1.sndcdn.com/artworks-000137618466-e9hluk-t500x500.jpg',
   },
   {
@@ -59,7 +59,7 @@ export const playerPlaylist = [
     liked: true,
     album: 'Yamakasi',
     audio:
-      'https://cdn.drivemusic.me/dl/online/PIQofnsd_aJzeKDhkD9LKg/1699325186/download_music/2020/07/miyagi-andy-panda-tam-reveli-gory.mp3',
+      'https://cdn2.drivemusic.me/dl/online/PIQofnsd_aJzeKDhkD9LKg/1699325186/download_music/2020/07/miyagi-andy-panda-tam-reveli-gory.mp3',
     cover: 'https://images.genius.com/a352a0c6e86b9d22129161b29c60479e.1000x1000x1.jpg',
   },
   {
@@ -71,7 +71,7 @@ export const playerPlaylist = [
     liked: false,
     album: 'Shameless $uicide',
     audio:
-      'https://cdn.drivemusic.me/dl/online/CKszEzAhy4vk60RjDQ_bVg/1699324798/download_music/2023/02/suicideboys-feat.-shakewell-big-shot-cream-soda.mp3',
+      'https://cdn2.drivemusic.me/dl/online/CKszEzAhy4vk60RjDQ_bVg/1699324798/download_music/2023/02/suicideboys-feat.-shakewell-big-shot-cream-soda.mp3',
     cover: 'https://i1.sndcdn.com/artworks-7vk7wPMOWXWJxDCB-726nQQ-t500x500.jpg',
   },
   {
@@ -83,7 +83,7 @@ export const playerPlaylist = [
     liked: false,
     album: 'All Killer No Filler',
     audio:
-      'https://cdn.drivemusic.me/dl/online/ODRyXU9xioxjATJCuprGfw/1699324681/download_music/2020/10/sum-41-fat-lip.mp3',
+      'https://cdn2.drivemusic.me/dl/online/ODRyXU9xioxjATJCuprGfw/1699324681/download_music/2020/10/sum-41-fat-lip.mp3',
     cover: 'https://upload.wikimedia.org/wikipedia/en/6/6e/Sum41fatlip.jpg',
   },
   {
@@ -95,7 +95,7 @@ export const playerPlaylist = [
     liked: true,
     album: 'Sempiternal',
     audio:
-      'https://cdn.drivemusic.me/dl/online/DHZEubGhF37MVG3F5tuUzw/1699322995/download_music/2016/02/bring-me-the-horizon-sleepwalking.mp3',
+      'https://cdn2.drivemusic.me/dl/online/DHZEubGhF37MVG3F5tuUzw/1699322995/download_music/2016/02/bring-me-the-horizon-sleepwalking.mp3',
     cover: 'https://i.scdn.co/image/ab67616d0000b273d972f5e1a91d9f5b9d3fa28d',
   },
   {
@@ -118,7 +118,7 @@ export const playerPlaylist = [
     liked: false,
     album: 'Yamakasi',
     audio:
-      'https://cdn.drivemusic.me/dl/online/IEPHaoFw--W2QkHsdxJZxw/1699325186/download_music/2020/07/miyagi-andy-panda-minor.mp3',
+      'https://cdn2.drivemusic.me/dl/online/IEPHaoFw--W2QkHsdxJZxw/1699325186/download_music/2020/07/miyagi-andy-panda-minor.mp3',
     cover: 'https://i.ytimg.com/vi/kr2Pv4DSFVQ/maxresdefault.jpg',
   },
   {
@@ -130,7 +130,7 @@ export const playerPlaylist = [
     liked: false,
     album: 'Evolve',
     audio:
-      'https://cdn.drivemusic.me/dl/online/VUdsevaXF-4SDE2WnXltpg/1699323993/download_music/2023/02/sub-focus-feat.-ar-co-vibration-one-more-time.mp3',
+      'https://cdn2.drivemusic.me/dl/online/VUdsevaXF-4SDE2WnXltpg/1699323993/download_music/2023/02/sub-focus-feat.-ar-co-vibration-one-more-time.mp3',
     cover: 'https://i1.sndcdn.com/artworks-kSBTfNf6d6Fs-0-t500x500.jpg',
   },
   {
@@ -142,7 +142,7 @@ export const playerPlaylist = [
     liked: true,
     album: 'Stadium Arcadium',
     audio:
-      'https://cdn.drivemusic.me/dl/online/m2Ryzj7r4UsAEydKnauqnw/1699324321/download_music/2014/07/red-hot-chili-peppers-dani-california.mp3',
+      'https://cdn2.drivemusic.me/dl/online/m2Ryzj7r4UsAEydKnauqnw/1699324321/download_music/2014/07/red-hot-chili-peppers-dani-california.mp3',
     cover:
       'https://upload.wikimedia.org/wikipedia/ru/thumb/b/bd/Dani_California.jpg/274px-Dani_California.jpg',
   },
@@ -155,7 +155,7 @@ export const playerPlaylist = [
     liked: false,
     album: 'Rawwest Nigga Alive',
     audio:
-      'https://cdn.drivemusic.me/dl/online/6jSyml-054NvMtnf16TSJg/1699325495/download_music/2019/08/doja-cat-tyga-juicy.mp3',
+      'https://cdn2.drivemusic.me/dl/online/6jSyml-054NvMtnf16TSJg/1699325495/download_music/2019/08/doja-cat-tyga-juicy.mp3',
     cover: 'https://i1.sndcdn.com/artworks-8PdIjBHZMgMX-0-t500x500.jpg',
   },
   {
@@ -167,7 +167,7 @@ export const playerPlaylist = [
     liked: true,
     album: 'InHer World',
     audio:
-      'https://cdn.drivemusic.me/dl/online/doAZqfKmsitx894nwMvEGQ/1699323488/download_music/2023/09/charlotte-plank-feat.-hybrid-minds-lights.mp3',
+      'https://cdn2.drivemusic.me/dl/online/doAZqfKmsitx894nwMvEGQ/1699323488/download_music/2023/09/charlotte-plank-feat.-hybrid-minds-lights.mp3',
     cover: 'https://i.ytimg.com/vi/pkQ9OwXx4-w/maxresdefault.jpg',
   },
   {
@@ -203,7 +203,7 @@ export const playerPlaylist = [
     liked: true,
     album: 'DAMN.',
     audio:
-      'https://cdn.drivemusic.me/dl/online/ZgVHzobFIZaoz462WP_QSA/1699324548/download_music/2018/03/kendrick-lamar-dna.mp3',
+      'https://cdn2.drivemusic.me/dl/online/ZgVHzobFIZaoz462WP_QSA/1699324548/download_music/2018/03/kendrick-lamar-dna.mp3',
     cover: 'https://i1.sndcdn.com/artworks-db7Z9vu52zaH-0-t500x500.jpg',
   },
   {
@@ -215,7 +215,7 @@ export const playerPlaylist = [
     duration: 210,
     liked: true,
     audio:
-      'https://cdn.drivemusic.me/dl/online/f2PIX4XHY6xh3w3ol_8moA/1699323245/download_music/2019/02/our-last-night-high-hopes.mp3',
+      'https://cdn2.drivemusic.me/dl/online/f2PIX4XHY6xh3w3ol_8moA/1699323245/download_music/2019/02/our-last-night-high-hopes.mp3',
     cover:
       'https://i.discogs.com/BWDvogGJrpnvqiApphdWHlbs9AXZtcQ-0SvGklWCpbY/rs:fit/g:sm/q:90/h:554/w:554/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE0NTU3/MjMyLTE1NzcwMjA1/NjEtODg5OC5qcGVn.jpeg',
   },
@@ -228,7 +228,7 @@ export const playerPlaylist = [
     duration: 236,
     liked: false,
     audio:
-      'https://cdn.drivemusic.me/dl/online/mE6sShajWpyFBUb7safy4Q/1699323488/download_music/2023/10/chase-status-feat.-clementine-douglas-say-the-word.mp3',
+      'https://cdn2.drivemusic.me/dl/online/mE6sShajWpyFBUb7safy4Q/1699323488/download_music/2023/10/chase-status-feat.-clementine-douglas-say-the-word.mp3',
     cover: 'https://i1.sndcdn.com/artworks-Bi8FioUJhV05-0-t500x500.jpg',
   },
   {
@@ -240,7 +240,7 @@ export const playerPlaylist = [
     duration: 213,
     liked: false,
     audio:
-      'https://cdn.drivemusic.me/dl/online/Uk7Wd27KCW6F9wm6TY7XFQ/1699325057/download_music/2013/10/koven-feat.-folly-rae-make-it-there.mp3',
+      'https://cdn2.drivemusic.me/dl/online/Uk7Wd27KCW6F9wm6TY7XFQ/1699325057/download_music/2013/10/koven-feat.-folly-rae-make-it-there.mp3',
     cover: 'https://i1.sndcdn.com/artworks-000058587680-15eicl-t500x500.jpg',
   },
 ];

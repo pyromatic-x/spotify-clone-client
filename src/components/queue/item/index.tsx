@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeTrackById, onPause, onPlay } from '../../../store/reducers/playerSlice';
 import LikeButton from '../../common/buttons/LikeButton';
-import { formatDuration } from '../../../utils/strings';
 import { memo } from 'react';
 import { AlbumLink, ListItemContainer } from './styled';
 import Status from './Status';
 import Track from './Track';
+import { formatDuration } from '../../../utils/time';
 
 type IProps = {
   track: any;

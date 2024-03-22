@@ -1,9 +1,9 @@
 import { Avatar, Box, Grid, IconButton, Link, Typography } from '@mui/material';
 import { memo, useState } from 'react';
 import LikeButton from '../../common/buttons/LikeButton';
-import { formatDuration } from '../../../utils/strings';
 import { MoreHoriz, PlayArrow } from '@mui/icons-material';
 import { StyledTrackCard } from './styled';
+import { formatDuration } from '../../../utils/time';
 
 const Track = memo(function Track({ track }: any) {
   const [hovering, setHovering] = useState(false);

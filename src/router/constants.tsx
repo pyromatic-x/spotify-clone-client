@@ -1,5 +1,5 @@
-import Search from '../components/header/extensions/Search';
 import Filters from '../components/header/extensions/filters';
+import Search from '../components/header/extensions/search';
 import Browse from '../pages/Browse';
 import Queue from '../pages/Queue';
 import Home from '../pages/home/Home';

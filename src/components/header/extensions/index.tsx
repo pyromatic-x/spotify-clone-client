@@ -14,7 +14,9 @@ const Extensions = () => {
 
   useEffect(() => {
     if (ref.current) {
-      setHeaderHeight(DEFAULT_HEADER_HEIGHT + ref.current.clientHeight);
+      const padding = HEADER_EXTENSION?.PLACEMENT !== 'built-in' ? 0 : 14;
+
+      setHeaderHeight(DEFAULT_HEADER_HEIGHT - padding + ref.current.clientHeight);
     }
   });
 

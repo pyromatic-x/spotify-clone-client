@@ -3,7 +3,7 @@ import { Box, styled } from '@mui/material';
 export const RootContainer = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'auto 1fr',
-  gridTemplateRows: '102px 1fr 92px',
+  gridTemplateRows: '102px 1fr auto',
   padding: '8px 8px 0 8px',
   height: '100vh',
 

@@ -18,7 +18,7 @@ export default function Error() {
   document.title = 'Spotify - Error';
 
   const navigate = useNavigate();
-  const error = useRouteError();
+  const error: any = useRouteError();
 
   const theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down('md'));

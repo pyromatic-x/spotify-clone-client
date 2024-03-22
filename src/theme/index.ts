@@ -84,6 +84,10 @@ export default createTheme({
           -ms-user-select: none; /* IE 10 and IE 11 */
           user-select: none; /* Standard syntax */
         }
+
+        .MuiTooltip-tooltip {
+          background: #282828 !important;
+        }
       `,
     },
     MuiTooltip: {

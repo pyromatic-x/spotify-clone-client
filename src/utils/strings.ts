@@ -36,9 +36,3 @@ export function checkIsColorTooBright(hex: string) {
   const luma = 0.2126 * values.r + 0.7152 * values.g + 0.0722 * values.b; // ITU-R BT.709
   return luma > 127.5;
 }
-
-export function formatDuration(value: number) {
-  const minute = Math.floor(value / 60);
-  const secondLeft = Math.floor(value - minute * 60);
-  return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-}

@@ -1,16 +1,16 @@
 import { useMediaQuery, useTheme } from '@mui/material';
-import AudioBar from '../audiobar/AudioBar';
 import { Outlet, useLocation } from 'react-router-dom';
 import MainContainer from '../common/MainContainer';
 import Header from '../header';
 import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
 import NoMobileModal from '../../NoMobileMiddleware';
 import { RootContainer, StyledOutletContainer } from './styles';
-import Sidebar from '../sidebar';
 import { setOutletWidth } from './effect';
 import { IRoute, ROUTES } from '../../router/constants';
 import { useUnit } from 'effector-react';
 import { $headerHeight } from '../header/effect';
+import Leftbar from '../leftbar';
+import AudioBar from '../audiobar';
 
 export default function Root({ children }: PropsWithChildren) {
   const headerHeight = useUnit($headerHeight);
@@ -39,7 +39,7 @@ export default function Root({ children }: PropsWithChildren) {
 
   return (
     <RootContainer>
-      <Sidebar />
+      <Leftbar />
       <MainContainer sx={{ padding: '0' }} gridRow="span 2">
         <Header containerRef={containerRef} />
         <StyledOutletContainer

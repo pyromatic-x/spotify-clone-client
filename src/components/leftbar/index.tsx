@@ -8,7 +8,7 @@ import { useUnit } from 'effector-react';
 import { $collapsed, $width, changeMenuWidth } from './effect';
 import { menuConfig } from './constants';
 
-const Sidebar = () => {
+const Leftbar = () => {
   const width = useUnit($width);
   const collapsed = useUnit($collapsed);
 
@@ -30,4 +30,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Leftbar;

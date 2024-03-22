@@ -22,8 +22,8 @@ export const StyledLogo = styled(Logo, {
 })<{ isColorBright: boolean }>(({ isColorBright }) => ({
   display: 'block',
   position: 'absolute',
-  top: '2px',
-  left: '2px',
+  top: '4px',
+  left: '4px',
   '& path': { fill: isColorBright ? 'black' : '' },
 }));
 

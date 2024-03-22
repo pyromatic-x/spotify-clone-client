@@ -14,10 +14,13 @@ const Btn = ({
     <Tooltip title={title} placement="top">
       <IconButton
         sx={{
-          backgroundColor: 'rgba(0,0,0,0.7)',
-          transition: '0.2s',
+          width: '30px',
+          height: '30px',
+          padding: '4px',
+          fontSize: '1.1rem',
+          backgroundColor: 'rgba(0,0,0,0.5)',
           '&:hover': {
-            transform: 'scale(1.15)',
+            transform: 'scale(1.1)',
             '& svg': {
               fill: 'white',
             },
@@ -25,7 +28,7 @@ const Btn = ({
         }}
         disableRipple
       >
-        <Icon sx={{ fontSize: '1.2rem' }} color="secondary" />
+        <Icon color="secondary" width="100%" height="100%" fontSize="inherit" />
       </IconButton>
     </Tooltip>
   );
