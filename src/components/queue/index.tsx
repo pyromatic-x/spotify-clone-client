@@ -37,7 +37,8 @@ const Queue = () => {
         </StyledButton>
       </Tabs>
       <Content onScroll={handleScroll} ref={contentRef}>
-        {activeTab === 'QUEUE' ? <QueueList /> : <RecentlyPlayedList />}
+        {activeTab === 'QUEUE' && <QueueList />}
+        {activeTab === 'RECENTLY_PLAYED' && <RecentlyPlayedList />}
       </Content>
     </Box>
   );

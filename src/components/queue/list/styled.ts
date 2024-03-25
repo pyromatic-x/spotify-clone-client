@@ -1,11 +1,8 @@
-import { Box, ListItem as MUIListItem, styled } from '@mui/material';
-import { ImageBase } from '../../common/images/styled';
+import { Box, ListItem, styled } from '@mui/material';
 
-export const StyledImage = styled(ImageBase)();
-
-export const StyledListItem = styled(MUIListItem, {
+export const StyledListItem = styled(ListItem, {
   shouldForwardProp: (prop) => prop !== 'selected' && prop !== 'firstSelected' && prop !== 'lastSelected',
-})<{ selected: boolean; firstSelected: boolean; lastSelected: boolean }>(
+})<{ selected?: boolean; firstSelected?: boolean; lastSelected?: boolean }>(
   ({ theme, selected, firstSelected, lastSelected }) => ({
     position: 'relative',
     padding: '8px',
@@ -92,7 +89,7 @@ export const StyledListItem = styled(MUIListItem, {
 );
 
 export const IconWrapper = styled(Box, {
-  name: 'IconWrapper',
+  label: 'IconWrapper',
 })({
   position: 'absolute',
   top: 0,
@@ -106,7 +103,7 @@ export const IconWrapper = styled(Box, {
 });
 
 export const MoreWrapper = styled(Box, {
-  name: 'MoreWrapper',
+  label: 'MoreWrapper',
 })(({ theme }) => ({
   position: 'relative',
   opacity: 0,

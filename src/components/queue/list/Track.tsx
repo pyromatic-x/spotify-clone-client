@@ -33,13 +33,6 @@ const Track = ({
   const isCurrent = !!track._current;
   const { playing, pause, play } = useGlobalAudioPlayer();
 
-  const onDragStartProp = draggable
-    ? {
-        onDragStart: (e: React.DragEvent<HTMLLIElement>) => handleOnDragStart(e, track.id),
-        onDragEnd: () => handleDropEffect(null, true),
-      }
-    : {};
-
   const handleOnPlay = () => {
     if (isCurrent) play();
     else setCurrentTrackFromQueue(track.id);
@@ -50,6 +43,13 @@ const Track = ({
   let IconAction = handleOnPlay;
   if (playing && isCurrent) IconAction = pause;
 
+  const draggableProps = draggable
+    ? {
+        onDragStart: (e: React.DragEvent<HTMLLIElement>) => handleOnDragStart(e, track.id),
+        onDragEnd: () => handleDropEffect(null, true),
+      }
+    : {};
+
   return (
     <StyledListItem
       key={track.id}
@@ -58,7 +58,7 @@ const Track = ({
       lastSelected={lastSelected}
       onClick={(event) => handleOnSelect(event.shiftKey, index)}
       draggable={!!draggable}
-      {...onDragStartProp}
+      {...draggableProps}
       aria-rowindex={index}
       aria-label="queue-list-track"
       id={track.id}

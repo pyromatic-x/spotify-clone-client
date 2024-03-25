@@ -4,9 +4,12 @@ import Additional from './additional';
 import Player from './player';
 import { setQueue } from './effect';
 import { MOCK_QUEUE } from './mock';
+import { useEffect } from 'react';
 
 const AudioBar = () => {
-  setQueue(MOCK_QUEUE);
+  useEffect(() => {
+    setQueue(MOCK_QUEUE);
+  }, []);
 
   return (
     <Container>
