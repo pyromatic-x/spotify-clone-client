@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 
 export const Container = styled(MainContainer)({
   gridArea: 'rightbar',
-  minWidth: '400px',
+  minWidth: '450px',
   marginLeft: '8px',
   position: 'relative',
 });
@@ -13,6 +13,7 @@ export const CloseIconWrapper = styled(IconButton)(({ theme }) => ({
   position: 'absolute',
   top: '8px',
   right: '8px',
+  zIndex: 10,
 
   '& .MuiSvgIcon-root': {
     width: '1.4rem',

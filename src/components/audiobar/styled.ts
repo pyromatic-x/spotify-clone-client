@@ -7,5 +7,6 @@ export const Container = styled(Box)({
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '100%',
+  maxWidth: 'calc(100vw - 16px)',
   padding: '14px 16px',
 });
