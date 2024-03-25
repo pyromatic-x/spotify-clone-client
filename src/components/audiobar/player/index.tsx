@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import { Grid } from '@mui/material';
-import AudioHandler from './Audio';
 import Controllers from './controllers';
 import Seeker from './Seeker';
+import AudioHandler from './AudioHandler';
 
 const Player = memo(() => {
   return (

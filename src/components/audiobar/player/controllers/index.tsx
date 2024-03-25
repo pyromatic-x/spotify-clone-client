@@ -1,6 +1,6 @@
 import { Loop, Pause, PlayArrow, Shuffle, SkipNext, SkipPrevious } from '@mui/icons-material';
 import { Grid, Tooltip } from '@mui/material';
-import { $loop, $shuffle, changeLoop, changeShuffle, nextTrack, prevTrack } from '../../effect';
+import { $loop, $shuffle, changeLoop, onShuffle, nextTrack, prevTrack } from '../../effect';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
 import { ControlButton, LoopButton, PlayPauseButton } from './styled';
 import { useUnit } from 'effector-react';
@@ -31,7 +31,7 @@ function Controllers() {
   return (
     <Grid container columnGap={1} width="max-content" flexWrap="nowrap">
       <Tooltip title={shuffleTooltip}>
-        <ControlButton active={shuffle !== 'DISABLED'} onClick={() => changeShuffle()}>
+        <ControlButton active={shuffle !== 'DISABLED'} onClick={() => onShuffle()}>
           <Shuffle color="secondary" />
         </ControlButton>
       </Tooltip>

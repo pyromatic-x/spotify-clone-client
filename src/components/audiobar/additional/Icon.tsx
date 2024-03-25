@@ -4,14 +4,15 @@ import { SvgIconComponent } from '@mui/icons-material';
 
 type IProps = {
   tooltip: string;
+  active?: boolean;
   Icon: SvgIconComponent;
   onClick?: () => void;
 };
 
-const IconWithTooltip = ({ tooltip, Icon, onClick }: IProps) => (
+const IconWithTooltip = ({ tooltip, active, Icon, onClick }: IProps) => (
   <Tooltip title={tooltip} onClick={onClick}>
-    <StyledIconButton disableRipple>
-      <Icon color="secondary" />
+    <StyledIconButton disableRipple active={active}>
+      <Icon />
     </StyledIconButton>
   </Tooltip>
 );

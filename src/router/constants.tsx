@@ -1,7 +1,6 @@
 import Filters from '../components/header/extensions/filters';
 import Search from '../components/header/extensions/search';
 import Browse from '../pages/Browse';
-import Queue from '../pages/Queue';
 import Home from '../pages/home/Home';
 import HomeMusic from '../pages/home/HomeMusic';
 import HomePodcasts from '../pages/home/HomePodcasts';
@@ -56,10 +55,5 @@ export const ROUTES: IRoutes = {
       ELEMENT: <Search />,
       PLACEMENT: 'built-in',
     },
-  },
-  QUEUE: {
-    PATH: '/queue',
-    PAGE_TITLE: 'Spotify - Queue',
-    ELEMENT: <Queue />,
   },
 };

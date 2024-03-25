@@ -1,21 +1,24 @@
 import { useUnit } from 'effector-react';
-import { $currentTrack, nextTrack, onEnd, prevTrack } from '../effect';
+import { $queue, nextTrack, onEnd, prevTrack } from '../effect';
 import { useEffect } from 'react';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
 
 const VOLUME_STEP = 0.05;
 
 const AudioHandler = () => {
-  const { load, volume, playing, play, pause, setVolume, mute, src } = useGlobalAudioPlayer();
+  const { load, volume, playing, play, pause, setVolume, mute, src, stop } = useGlobalAudioPlayer();
 
-  const currentTrack = useUnit($currentTrack);
+  const current = useUnit($queue).find((t) => t._current);
 
   useEffect(() => {
-    load(currentTrack.audio, {
-      autoplay: !!src,
-      onend: () => onEnd(),
-    });
-  }, [load, currentTrack]);
+    if (current) {
+      stop();
+      load(current.audio, {
+        autoplay: !!src,
+        onend: () => onEnd(),
+      });
+    }
+  }, [load, current]);
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {

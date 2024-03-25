@@ -1,5 +1,6 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { OverridableComponent } from '@mui/types';
+import Queue from '../queue';
 
 export interface IContent {
   readonly QUEUE: OverridableComponent<any>;
@@ -7,6 +8,6 @@ export interface IContent {
 }
 
 export const Components: IContent = {
-  QUEUE: Typography,
+  QUEUE: Queue,
   NOW_PLAYING: Box,
 };
