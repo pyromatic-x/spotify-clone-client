@@ -3,19 +3,22 @@ import { useUnit } from 'effector-react';
 import { $rightbarContent, setRightbarContent } from './effect';
 import { Components, IContent } from './constants';
 import CloseIcon from '@mui/icons-material/Close';
+import { Tooltip } from '@mui/material';
 
 const Rightbar = () => {
   const content = useUnit($rightbarContent);
   if (!content) return null;
 
-  const Component = Components[content as keyof IContent];
+  const { COMPONENT: Component, SCROLLABLE } = Components[content as keyof IContent];
 
   return (
-    <Container>
+    <Container overflow={SCROLLABLE ? 'scroll' : 'inherit'}>
       <Component />
-      <CloseIconWrapper disableTouchRipple onClick={() => setRightbarContent(null)}>
-        <CloseIcon />
-      </CloseIconWrapper>
+      <Tooltip title="Close">
+        <CloseIconWrapper disableTouchRipple onClick={() => setRightbarContent(null)}>
+          <CloseIcon />
+        </CloseIconWrapper>
+      </Tooltip>
     </Container>
   );
 };

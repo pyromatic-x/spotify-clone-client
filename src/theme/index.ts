@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 import GothamTTF from '../fonts/Gotham-Black.otf';
 import GothamBoldTTF from '../fonts/Gotham-Bold.otf';
 
-export default createTheme({
+const global = createTheme({
   typography: {
     fontFamily: 'Gotham, sans-serif',
     button: {
@@ -55,9 +55,13 @@ export default createTheme({
       xxl: 1920,
     },
   },
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: `
+});
+
+export default createTheme(
+  {
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: `
         @font-face {
           font-family: 'Gotham';
           font-style: normal;
@@ -89,32 +93,58 @@ export default createTheme({
           background: #282828 !important;
         }
       `,
-    },
-    MuiTooltip: {
-      defaultProps: {
-        placement: 'top',
-        PopperProps: {
-          modifiers: [
-            {
-              name: 'offset',
-              options: {
-                offset: [0, -10],
-              },
-            },
-          ],
-        },
-        enterDelay: 400,
-        enterNextDelay: 400,
-        disableTouchListener: false,
       },
-    },
-    MuiLink: {
-      defaultProps: {
-        sx: { cursor: 'pointer' },
+      MuiTooltip: {
+        defaultProps: {
+          placement: 'top',
+          PopperProps: {
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, -10],
+                },
+              },
+            ],
+          },
+          enterDelay: 400,
+          enterNextDelay: 400,
+          disableTouchListener: false,
+        },
+      },
+      MuiLink: {
+        defaultProps: {
+          sx: { cursor: 'pointer' },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          outlined: {
+            color: global.palette.common.white,
+            fontWeight: 'bold',
+            fontSize: '0.9rem',
+            textTransform: 'none',
+            backgroundColor: 'transparent',
+            borderColor: global.palette.secondary.light2,
+            borderRadius: 16,
+            padding: '3px 15px',
+            transition: 'none',
+
+            '&:hover': {
+              backgroundColor: 'transparent',
+              borderColor: global.palette.common.white,
+            },
+            '&:active': {
+              backgroundColor: 'transparent',
+              borderColor: global.palette.common.white,
+            },
+          },
+        },
       },
     },
   },
-});
+  global,
+);
 
 declare module '@mui/material/styles' {
   export interface BreakpointOverrides {
