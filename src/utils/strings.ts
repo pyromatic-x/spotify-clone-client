@@ -36,3 +36,12 @@ export function checkIsColorTooBright(hex: string) {
   const luma = 0.2126 * values.r + 0.7152 * values.g + 0.0722 * values.b; // ITU-R BT.709
   return luma > 127.5;
 }
+
+export function numberWithDigits(num: string) {
+  return num
+    .split('')
+    .toReversed()
+    .map((t, i) => (i % 3 === 0 && i !== 0 ? t + ',' : t))
+    .toReversed()
+    .join('');
+}

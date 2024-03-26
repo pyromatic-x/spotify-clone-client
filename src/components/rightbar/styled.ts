@@ -4,7 +4,8 @@ import { IconButton } from '@mui/material';
 
 export const Container = styled(MainContainer)({
   gridArea: 'rightbar',
-  minWidth: '450px',
+  minWidth: '420px',
+  maxWidth: '420px',
   marginLeft: '8px',
   position: 'relative',
 });
