@@ -1,5 +1,4 @@
-import Filters from '../components/header/extensions/filters';
-import Search from '../components/header/extensions/search';
+import Filters from '../components/root/header/extensions/filters';
 import Browse from '../pages/Browse';
 import Home from '../pages/home/Home';
 import HomeMusic from '../pages/home/HomeMusic';
@@ -9,10 +8,7 @@ export interface IRoute {
   readonly PATH: string;
   readonly PAGE_TITLE: string;
   readonly ELEMENT: React.ReactElement;
-  readonly HEADER_EXTENSION?: {
-    ELEMENT: React.ReactElement;
-    PLACEMENT: 'built-in' | 'outer';
-  };
+  readonly ROOT_HEADER_EXTENSION?: React.ReactElement;
 }
 
 export interface IRoutes {
@@ -24,36 +20,23 @@ export const ROUTES: IRoutes = {
     PATH: '/',
     PAGE_TITLE: 'Spotify - Home',
     ELEMENT: <Home />,
-    HEADER_EXTENSION: {
-      ELEMENT: <Filters />,
-      PLACEMENT: 'outer',
-    },
+    ROOT_HEADER_EXTENSION: <Filters />,
   },
   HOME_MUSIC: {
     PATH: '/home/music',
     PAGE_TITLE: 'Spotify - Music',
     ELEMENT: <HomeMusic />,
-    HEADER_EXTENSION: {
-      ELEMENT: <Filters />,
-      PLACEMENT: 'outer',
-    },
+    ROOT_HEADER_EXTENSION: <Filters />,
   },
   HOME_PODCASTS: {
     PATH: '/home/podcasts',
     PAGE_TITLE: 'Spotify - Podcasts',
     ELEMENT: <HomePodcasts />,
-    HEADER_EXTENSION: {
-      ELEMENT: <Filters />,
-      PLACEMENT: 'outer',
-    },
+    ROOT_HEADER_EXTENSION: <Filters />,
   },
   SEARCH: {
     PATH: '/search',
     PAGE_TITLE: 'Spotify - Search',
     ELEMENT: <Browse />,
-    HEADER_EXTENSION: {
-      ELEMENT: <Search />,
-      PLACEMENT: 'built-in',
-    },
   },
 };

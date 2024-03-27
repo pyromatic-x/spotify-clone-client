@@ -16,6 +16,7 @@ const AudioHandler = () => {
       load(current.audio, {
         autoplay: !!src,
         onend: () => onEnd(),
+        html5: true,
       });
     }
   }, [load, current]);

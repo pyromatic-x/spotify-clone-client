@@ -22,7 +22,7 @@ export const Tabs = styled(Box, {
 
 export const Content = styled(Box)(() => ({
   overflow: 'scroll',
-  maxHeight: 'calc(100vh - 108px)',
+  maxHeight: 'calc(100vh - 163px)',
   margin: '0 -4px',
   paddingTop: '70px',
 }));

@@ -8,7 +8,7 @@ const Filters = () => {
   const navigate = useNavigate();
 
   return (
-    <Grid container gap={1} mt={3}>
+    <Grid container gap={1}>
       {filters.map((t) => (
         <StyledButton active={location.pathname === t.path} onClick={() => navigate(t.path)} key={t.title}>
           {t.title}

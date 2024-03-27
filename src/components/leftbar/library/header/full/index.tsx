@@ -30,12 +30,14 @@ const Full = () => {
           <NewButton />
           {expanded ? (
             <ButtonWithTooltip
+              disableTouchRipple
               title="Show less"
               Icon={ArrowBackIcon}
               onClick={() => changeMenuWidth(menuConfig.defaultWidth)}
             />
           ) : (
             <ButtonWithTooltip
+              disableTouchRipple
               title="Show more"
               Icon={ArrowForwardIcon}
               onClick={() => changeMenuWidth(menuConfig.expandedViewBreakpoint)}

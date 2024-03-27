@@ -9,7 +9,7 @@ const NewButton = () => {
     <Popover
       vertical="bottom"
       horizontal="left"
-      toggler={<ButtonWithTooltip title="Create playlist or folder" Icon={Add} />}
+      toggler={<ButtonWithTooltip title="Create playlist or folder" Icon={Add} disableTouchRipple />}
       content={
         <>
           <StyledPopoverItem sx={{ gap: '10px', justifyContent: 'flex-start' }}>

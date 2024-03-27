@@ -1,13 +1,13 @@
-import { IconButton, IconButtonProps, SvgIconTypeMap, Tooltip } from '@mui/material';
+import { IconButton, IconButtonProps, SvgIconTypeMap, Tooltip, TooltipProps } from '@mui/material';
 import { DefaultComponentProps } from '@mui/material/OverridableComponent';
 import { ComponentType, useState } from 'react';
 
 interface IProps extends IconButtonProps {
-  title: string;
+  placement?: TooltipProps['placement'];
   Icon: ComponentType<DefaultComponentProps<SvgIconTypeMap>>;
 }
 
-const ButtonWithTooltip = ({ title, Icon, ...rest }: IProps) => {
+const ButtonWithTooltip = ({ placement = 'bottom', title, Icon, onClick, sx, ...rest }: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
@@ -20,26 +20,28 @@ const ButtonWithTooltip = ({ title, Icon, ...rest }: IProps) => {
 
   const handleOnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setIsOpen(false);
-    if (rest.onClick) rest.onClick(event);
+    if (onClick) onClick(event);
+  };
+
+  const _sx = {
+    width: '32px',
+    height: '32px',
+    color: 'secondary.main',
+
+    '&:hover': {
+      color: 'common.white',
+      transform: 'scale(1.1)',
+    },
+    '& svg': {
+      fontSize: '1.3rem',
+    },
+
+    ...sx,
   };
 
   return (
-    <Tooltip title={title} open={isOpen} onClose={handleClose} onOpen={handleOpen}>
-      <IconButton
-        sx={{
-          width: '32px',
-          height: '32px',
-          color: 'secondary.main',
-          transition: '0.2s ease',
-          '&:hover': {
-            color: 'white',
-          },
-          '& svg': {
-            fontSize: '1.3rem',
-          },
-        }}
-        onClick={handleOnClick}
-      >
+    <Tooltip title={title} open={isOpen} onClose={handleClose} onOpen={handleOpen} placement={placement}>
+      <IconButton sx={_sx} onClick={handleOnClick} {...rest}>
         <Icon />
       </IconButton>
     </Tooltip>
