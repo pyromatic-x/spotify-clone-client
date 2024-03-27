@@ -3,13 +3,14 @@ import { Box, styled } from '@mui/material';
 export const RootContainer = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateAreas: `
+    "header header header"
     "leftbar main rightbar"
     "leftbar main rightbar"
     "audiobar audiobar audiobar"
   `,
   gridTemplateColumns: 'auto 1fr',
-  gridTemplateRows: '102px 1fr auto',
-  padding: '8px 8px 0 8px',
+  gridTemplateRows: 'auto 1fr auto',
+  padding: '0 8px',
   height: '100vh',
 
   [theme.breakpoints.down('sm')]: {
@@ -20,4 +21,5 @@ export const RootContainer = styled(Box)(({ theme }) => ({
 export const StyledOutletContainer = styled(Box)({
   height: '100%',
   overflow: 'scroll',
+  position: 'relative',
 });

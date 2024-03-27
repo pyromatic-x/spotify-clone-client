@@ -1,50 +1,24 @@
-import Navigation from './Navigation';
-import Menu from './Menu';
-import { StyledHeader } from './styled';
-import { RefObject, memo, useEffect, useState } from 'react';
-import { $headerColor, setHeaderTransition } from './effect';
-import { useUnit } from 'effector-react';
-import Extensions from './extensions';
-import { useLocation } from 'react-router-dom';
+import { Grid } from '@mui/material';
+import HeaderLeftPart from './left';
+import HeaderRightPart from './right';
+import Search from './search';
 
-interface IProps {
-  containerRef: RefObject<HTMLDivElement>;
-}
-
-const Header = memo(({ containerRef }: IProps) => {
-  const location = useLocation();
-
-  const [opacity, setOpacity] = useState(0);
-  const headerColor = useUnit($headerColor);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.addEventListener('scroll', (event: any) => {
-        event.stopPropagation();
-
-        const breakpoint = 150;
-        const scrollTop = event.target!.scrollTop;
-        const newOpacity = Number(Number((scrollTop / breakpoint) * 100 * 0.01).toPrecision(1));
-
-        if (scrollTop > breakpoint) setOpacity(1);
-        else setOpacity(newOpacity);
-      });
-    }
-  }, [containerRef]);
-
-  useEffect(() => {
-    const path = location.pathname;
-
-    setHeaderTransition(path.includes('home') || path === '/');
-  }, [location]);
-
+const Header = () => {
   return (
-    <StyledHeader bgColor={headerColor} opacity={opacity}>
-      <Navigation />
-      <Menu />
-      <Extensions />
-    </StyledHeader>
+    <Grid
+      component="header"
+      gridArea="header"
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      flexWrap="nowrap"
+      py={1}
+    >
+      <HeaderLeftPart />
+      <Search />
+      <HeaderRightPart />
+    </Grid>
   );
-});
+};
 
 export default Header;

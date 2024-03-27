@@ -62,12 +62,11 @@ sample({
   source: [$queue, $recentlyPlayed],
   fn: ([queue, recently]) => {
     const playing = queue.find((t) => t._current);
-    playing._current = false;
 
     const alreadyInRecentlyIndex = recently.findIndex((t) => t.id === playing.id);
     if (alreadyInRecentlyIndex > -1) recently.splice(alreadyInRecentlyIndex, 1);
 
-    return [playing, ...recently];
+    return [{ ...playing, _current: false }, ...recently];
   },
   target: $recentlyPlayed,
 });

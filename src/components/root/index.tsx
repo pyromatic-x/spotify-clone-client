@@ -1,21 +1,18 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 import { Outlet, useLocation } from 'react-router-dom';
 import MainContainer from '../common/MainContainer';
-import Header from '../header';
 import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
 import NoMobileModal from '../../NoMobileMiddleware';
-import { RootContainer, StyledOutletContainer } from './styles';
+import { RootContainer, StyledOutletContainer } from './styled';
 import { setOutletWidth } from './effect';
 import { IRoute, ROUTES } from '../../router/constants';
-import { useUnit } from 'effector-react';
-import { $headerHeight } from '../header/effect';
 import Leftbar from '../leftbar';
 import AudioBar from '../audiobar';
 import Rightbar from '../rightbar';
+import RootHeader from './header';
+import Header from '../header';
 
 export default function Root({ children }: PropsWithChildren) {
-  const headerHeight = useUnit($headerHeight);
-
   const containerRef = useRef(null);
 
   const location = useLocation();
@@ -38,15 +35,20 @@ export default function Root({ children }: PropsWithChildren) {
     document.title = routes.find((t) => t.PATH === location.pathname)?.PAGE_TITLE || 'Spotify';
   }, [location, routes]);
 
+  const { ROOT_HEADER_EXTENSION } = Object.keys(ROUTES)
+    .map((key: any) => ROUTES[key])
+    .find((t) => t.PATH === location.pathname) as IRoute;
+
   return (
     <RootContainer>
+      <Header />
       <Leftbar />
-      <MainContainer sx={{ padding: '0' }} gridArea="main">
-        <Header containerRef={containerRef} />
+      <MainContainer sx={{ padding: '0', overflow: 'hidden' }} gridArea="main">
+        <RootHeader containerRef={containerRef} />
         <StyledOutletContainer
           ref={containerRef}
           id="OutletContainer"
-          padding={`${headerHeight + 'px'} 14px 20px 14px`}
+          padding={`${!!ROOT_HEADER_EXTENSION ? 64 : 14}px 14px 40px 14px`}
         >
           {children ?? <Outlet />}
         </StyledOutletContainer>

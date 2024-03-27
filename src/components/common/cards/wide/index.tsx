@@ -1,7 +1,6 @@
 import { CardContent, Typography } from '@mui/material';
 
 import { StyledCard, MediaContainer } from './styled';
-import { setHeaderColor } from '../../../header/effect';
 import { ISectionItem } from '../../../home/constants';
 import PlayButton from '../../buttons/PlayButton';
 import theme from '../../../../theme';
@@ -11,6 +10,7 @@ import { ImageBase } from '../../images/styled';
 import { checkIsColorTooBright } from '../../../../utils/strings';
 import { useState } from 'react';
 import { setBackgroundColor } from '../../../../pages/home/effect';
+import { setHeaderColor } from '../../../root/header/effect';
 
 const WideCard = ({ title, image, color }: ISectionItem) => {
   const [loaded, setIsLoaded] = useState(false);
