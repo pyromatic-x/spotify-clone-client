@@ -16,7 +16,7 @@ const Full = () => {
 
   return (
     <>
-      <Grid container alignItems="center" justifyContent="space-between" wrap="nowrap" paddingLeft="10px">
+      <Grid container alignItems="center" justifyContent="space-between" wrap="nowrap" paddingLeft="11px">
         <Tooltip title="Collapse Your Library">
           <LibraryButton
             disableRipple

@@ -1,7 +1,7 @@
 import { useUnit } from 'effector-react';
 import { $rightbarContent, setRightbarContent } from '../../rightbar/effect';
 import IconWithTooltip from './Icon';
-import { Airplay } from '@mui/icons-material';
+import { Slideshow } from '@mui/icons-material';
 
 const NowPlayingButton = () => {
   const rightbarContent = useUnit($rightbarContent);
@@ -13,7 +13,7 @@ const NowPlayingButton = () => {
   return (
     <IconWithTooltip
       tooltip="Now Playing View"
-      Icon={Airplay}
+      Icon={Slideshow}
       onClick={() => handleOnClick()}
       active={rightbarContent === 'NOW_PLAYING'}
     />

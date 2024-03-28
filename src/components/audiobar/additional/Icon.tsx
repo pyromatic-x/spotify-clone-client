@@ -6,7 +6,7 @@ type IProps = {
   tooltip: string;
   active?: boolean;
   Icon: SvgIconComponent;
-  onClick?: () => void;
+  onClick?: (event: any) => unknown;
 };
 
 const IconWithTooltip = ({ tooltip, active, Icon, onClick }: IProps) => (

@@ -1,16 +1,17 @@
 import { Grid } from '@mui/material';
-import { Devices, Lyrics, OpenInFull } from '@mui/icons-material';
+import { KeyboardVoice, OpenInFull } from '@mui/icons-material';
 import IconWithTooltip from './Icon';
 import Volume from './Volume';
 import QueueButton from './queue';
 import NowPlayingButton from './nowPlaying';
+import Devices from './devices';
 
 const Additional = () => (
   <Grid container flexWrap="nowrap" columnGap={1.35} width="max-content" justifySelf="end">
     <NowPlayingButton />
-    <IconWithTooltip tooltip="Lyrics" Icon={Lyrics} />
+    <IconWithTooltip tooltip="Lyrics" Icon={KeyboardVoice} />
     <QueueButton />
-    <IconWithTooltip tooltip="Connect to a device" Icon={Devices} />
+    <Devices />
     <Volume />
     <IconWithTooltip tooltip="Full screen" Icon={OpenInFull} />
   </Grid>

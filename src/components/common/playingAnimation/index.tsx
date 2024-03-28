@@ -1,16 +1,24 @@
-import { Box } from '@mui/material';
+import { Box, BoxProps } from '@mui/material';
 import { AnimationLine } from './styled';
 
-const PlayingAnimation = () => (
+interface IProps extends BoxProps {
+  width?: string;
+  height?: string;
+  gap?: string;
+}
+
+const PlayingAnimation = ({ width = '15px', height = '18px', gap = '1px', ...rest }: IProps) => (
   <Box
     component="div"
     sx={{
       display: 'flex',
-      width: '15px',
-      height: '18px',
-      gap: '1px',
+      width,
+      height,
+      gap,
       transform: 'rotate(180deg)',
+      ...rest.sx,
     }}
+    {...rest}
   >
     <AnimationLine animation="first" />
     <AnimationLine animation="second" />

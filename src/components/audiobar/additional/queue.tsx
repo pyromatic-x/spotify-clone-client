@@ -1,7 +1,7 @@
 import { useUnit } from 'effector-react';
 import { $rightbarContent, setRightbarContent } from '../../rightbar/effect';
 import IconWithTooltip from './Icon';
-import { QueueMusicRounded } from '@mui/icons-material';
+import { Reorder } from '@mui/icons-material';
 
 const QueueButton = () => {
   const rightbarContent = useUnit($rightbarContent);
@@ -13,7 +13,7 @@ const QueueButton = () => {
   return (
     <IconWithTooltip
       tooltip="Queue"
-      Icon={QueueMusicRounded}
+      Icon={Reorder}
       onClick={() => handleOnClick()}
       active={rightbarContent === 'QUEUE'}
     />
