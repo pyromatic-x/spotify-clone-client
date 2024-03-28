@@ -4,9 +4,9 @@ import { PropsWithChildren } from 'react';
 
 function HomeWrapper({ children }: PropsWithChildren) {
   return (
-    <Box position="relative">
+    <Box>
       <Background />
-      <Grid position="relative" container direction="column" gap={3.5} zIndex={1}>
+      <Grid position="relative" container direction="column" gap={3.5} zIndex={1} maxWidth="1920px">
         {children}
       </Grid>
     </Box>

@@ -9,7 +9,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   backgroundImage: 'none',
   boxShadow: 'none',
   overflow: 'hidden',
-  width: '200px',
+  width: '100%',
 
   '&:hover': {
     backgroundColor: theme.palette.background.cardHover,

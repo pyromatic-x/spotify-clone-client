@@ -13,7 +13,7 @@ export const StyledHeader = styled(Box, {
   top: 0,
   left: 0,
   width: '100%',
-  padding: '4px 16px',
+  padding: '4px 22px',
   height: '64px',
   background: hexToRgbA(bgColor, opacity),
   borderTopRightRadius: '8px',

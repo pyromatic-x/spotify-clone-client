@@ -5,7 +5,7 @@ import { menuConfig } from '../../constants';
 
 const Collapsed = () => (
   <Tooltip title="Expand Your Library">
-    <LibraryButton disableRipple onClick={() => changeMenuWidth(menuConfig.defaultWidth)}>
+    <LibraryButton disableRipple onClick={() => changeMenuWidth(menuConfig.default)}>
       <LibraryIcon />
     </LibraryButton>
   </Tooltip>

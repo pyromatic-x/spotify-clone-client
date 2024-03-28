@@ -3,7 +3,6 @@ import { CardContent, Typography } from '@mui/material';
 import { StyledCard, MediaContainer } from './styled';
 import { ISectionItem } from '../../../home/constants';
 import PlayButton from '../../buttons/PlayButton';
-import theme from '../../../../theme';
 import LikedSongsImage from '../../images/likedSongs';
 import Curves from '../../images/curves';
 import { ImageBase } from '../../images/styled';
@@ -12,11 +11,11 @@ import { useState } from 'react';
 import { setBackgroundColor } from '../../../../pages/home/effect';
 import { setHeaderColor } from '../../../root/header/effect';
 
-const WideCard = ({ title, image, color }: ISectionItem) => {
+const WideCard = ({ title, image, color }: Omit<ISectionItem, 'id'>) => {
   const [loaded, setIsLoaded] = useState(false);
   const [size, setSize] = useState(0);
 
-  color = color || theme.palette.background.purple;
+  color = color || '#211260';
 
   const isColorBright = checkIsColorTooBright(color);
 
@@ -25,8 +24,8 @@ const WideCard = ({ title, image, color }: ISectionItem) => {
     setBackgroundColor(color!);
   };
   const handleOnMouseLeave = () => {
-    setHeaderColor(theme.palette.background.purple);
-    setBackgroundColor(theme.palette.background.purple);
+    setHeaderColor('#211260');
+    setBackgroundColor('#211260');
   };
 
   return (

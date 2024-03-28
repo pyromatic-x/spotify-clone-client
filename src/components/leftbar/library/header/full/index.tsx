@@ -16,7 +16,7 @@ const Full = () => {
 
   return (
     <>
-      <Grid container alignItems="center" justifyContent="space-between" wrap="nowrap" paddingLeft="11px">
+      <Grid container alignItems="center" justifyContent="space-between" wrap="nowrap" paddingLeft="15px">
         <Tooltip title="Collapse Your Library">
           <LibraryButton
             disableRipple
@@ -33,14 +33,14 @@ const Full = () => {
               disableTouchRipple
               title="Show less"
               Icon={ArrowBackIcon}
-              onClick={() => changeMenuWidth(menuConfig.defaultWidth)}
+              onClick={() => changeMenuWidth(menuConfig.default)}
             />
           ) : (
             <ButtonWithTooltip
               disableTouchRipple
               title="Show more"
               Icon={ArrowForwardIcon}
-              onClick={() => changeMenuWidth(menuConfig.expandedViewBreakpoint)}
+              onClick={() => changeMenuWidth(menuConfig.expand)}
             />
           )}
         </Grid>

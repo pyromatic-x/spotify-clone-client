@@ -5,7 +5,7 @@ import { checkIsColorTooBright } from '../../../utils/strings';
 import Curves from './curves';
 import Lines from './lines';
 
-const CardImage = ({ color, image, title }: ISectionItem) => {
+const CardImage = ({ color, image, title }: Omit<ISectionItem, 'id'>) => {
   const [loaded, setLoaded] = useState(false);
 
   const isColorBright = checkIsColorTooBright(color!);

@@ -4,7 +4,7 @@ import MainContainer from '../common/MainContainer';
 import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
 import NoMobileModal from '../../NoMobileMiddleware';
 import { RootContainer, StyledOutletContainer } from './styled';
-import { setOutletWidth } from './effect';
+import { setOutletWidth, setSectionItemsCountByWidth } from './effect';
 import { IRoute, ROUTES } from '../../router/constants';
 import Leftbar from '../leftbar';
 import AudioBar from '../audiobar';
@@ -26,6 +26,7 @@ export default function Root({ children }: PropsWithChildren) {
     if (!containerRef.current) return;
     const resizeObserver = new ResizeObserver(([container]) => {
       setOutletWidth(container.contentRect.width);
+      setSectionItemsCountByWidth(container.contentRect.width);
     });
     resizeObserver.observe(containerRef.current);
     return () => resizeObserver.disconnect();
@@ -48,7 +49,7 @@ export default function Root({ children }: PropsWithChildren) {
         <StyledOutletContainer
           ref={containerRef}
           id="OutletContainer"
-          padding={`${!!ROOT_HEADER_EXTENSION ? 64 : 14}px 14px 40px 14px`}
+          padding={`${!!ROOT_HEADER_EXTENSION ? 64 : 22}px 22px 40px 22px`}
         >
           {children ?? <Outlet />}
         </StyledOutletContainer>

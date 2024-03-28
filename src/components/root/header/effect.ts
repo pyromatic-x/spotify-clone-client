@@ -1,7 +1,7 @@
 import { createEvent, createStore } from 'effector';
 import theme from '../../../theme';
 
-const DEFAULT_COLOR = theme.palette.background.purple;
+const DEFAULT_COLOR = '#211260' || theme.palette.background.purple;
 
 export const setHeaderTransition = createEvent<boolean>();
 export const $headerTransition = createStore(true).on(setHeaderTransition, (state) => !state);

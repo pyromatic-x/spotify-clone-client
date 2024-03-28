@@ -28,10 +28,10 @@ export const changeMenuWidth = createEvent<number>();
 
 export const $collapsed = createStore(false);
 export const $expanded = createStore(false);
-export const $width = createStore<number>(menuConfig.defaultWidth).on(changeMenuWidth, (state, payload) => {
-  const { minWidth, maxWidth, collapseBreakpoint } = menuConfig;
+export const $width = createStore<number>(menuConfig.default).on(changeMenuWidth, (_, payload) => {
+  const { minWidth, maxWidth, collapse } = menuConfig;
 
-  if (payload <= collapseBreakpoint) return minWidth;
+  if (payload <= collapse) return minWidth;
   if (payload >= maxWidth) return maxWidth;
   if (payload <= minWidth) return minWidth;
 
@@ -40,12 +40,12 @@ export const $width = createStore<number>(menuConfig.defaultWidth).on(changeMenu
 
 sample({
   clock: changeMenuWidth,
-  fn: (state) => state <= menuConfig.collapseBreakpoint,
+  fn: (state) => state <= menuConfig.collapse,
   target: $collapsed,
 });
 sample({
   clock: changeMenuWidth,
-  fn: (state) => state >= menuConfig.expandedViewBreakpoint,
+  fn: (state) => state >= menuConfig.expand,
   target: $expanded,
 });
 //#endregion

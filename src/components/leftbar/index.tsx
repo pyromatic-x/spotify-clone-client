@@ -2,7 +2,6 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import Library from './library';
 import { useEffect } from 'react';
 import { Container } from './styled';
-import Resize from './resize';
 import { useUnit } from 'effector-react';
 import { $collapsed, $width, changeMenuWidth } from './effect';
 import { menuConfig } from './constants';
@@ -19,9 +18,8 @@ const Leftbar = () => {
   }, [collapse, collapsed]);
 
   return (
-    <Container resizedWidth={width}>
+    <Container resizedWidth={width} mr="8px">
       <Library />
-      <Resize />
     </Container>
   );
 };

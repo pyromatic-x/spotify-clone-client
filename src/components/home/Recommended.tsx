@@ -8,7 +8,7 @@ const RecommendedSection = () => {
   const outletWidth = useUnit($outletWidth);
 
   return (
-    <Box display="grid" gridTemplateColumns={`repeat(${outletWidth < 750 ? 1 : 3}, auto)`} gap={1.5}>
+    <Box display="grid" gridTemplateColumns={`repeat(${outletWidth < 950 ? 2 : 4}, auto)`} gap={1.5}>
       <WideCard title="Liked Songs" />
       {recommended.map((t, i) => (
         <WideCard {...t} key={t.title + i} />
