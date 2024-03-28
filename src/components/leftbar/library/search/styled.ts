@@ -35,8 +35,8 @@ export const SearchContainer = styled(FormControl, {
   }),
 }));
 
-export const StyledSearchInput = styled(TextField)({
-  backgroundColor: '#292828',
+export const StyledSearchInput = styled(TextField)(({ theme }) => ({
+  backgroundColor: theme.palette.background.popover,
   border: 'none',
   borderRadius: '6px',
   maxWidth: '190px',
@@ -62,7 +62,7 @@ export const StyledSearchInput = styled(TextField)({
   '& .MuiOutlinedInput-notchedOutline': {
     border: 'none',
   },
-});
+}));
 
 export const StyledSearchButton = styled(IconButton, {
   shouldForwardProp: (prop) => prop !== 'hide',

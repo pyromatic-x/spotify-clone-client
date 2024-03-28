@@ -52,7 +52,7 @@ export const HeaderContainer = styled(Grid, {
 }));
 
 export const ClearIconButton = styled(IconButton)({
-  backgroundColor: 'secondary.light',
+  backgroundColor: 'transparent',
   height: '32px',
   width: '32px',
   '& svg': {

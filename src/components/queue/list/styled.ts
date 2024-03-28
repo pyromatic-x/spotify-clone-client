@@ -14,7 +14,7 @@ export const StyledListItem = styled(ListItem, {
     },
 
     '&:hover': {
-      backgroundColor: '#1A1A1A',
+      backgroundColor: theme.palette.hover.button,
 
       '& img': {
         filter: 'brightness(0.7)',
@@ -70,7 +70,7 @@ export const StyledListItem = styled(ListItem, {
       left: '0',
       width: '100%',
       height: '2px',
-      backgroundColor: theme.palette.green.main,
+      backgroundColor: theme.palette.green,
     },
     '&.on-drag-over-bottom::after': {
       content: "''",
@@ -79,7 +79,7 @@ export const StyledListItem = styled(ListItem, {
       left: '0',
       width: '100%',
       height: '2px',
-      backgroundColor: theme.palette.green.main,
+      backgroundColor: theme.palette.green,
     },
 
     '&.on-dragged': {
@@ -110,7 +110,7 @@ export const MoreWrapper = styled(Box, {
   padding: 0,
 
   '& svg': {
-    color: theme.palette.secondary.light2,
+    color: theme.palette.secondary.main,
   },
 
   '&:hover svg': {

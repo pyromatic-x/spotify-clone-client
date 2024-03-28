@@ -74,7 +74,7 @@ const Track = ({
           maxWidth="80%"
           lines={1}
           fontSize="0.9rem"
-          color={track._current && 'green.main'}
+          color={track._current && 'green'}
           fontWeight={500}
         >
           {track.name}

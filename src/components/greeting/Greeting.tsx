@@ -24,7 +24,7 @@ export default function Greeting({ loading }: { loading: boolean }) {
         </Typography>
         <Typography marginBottom={2}>
           A demo of our lovely Spotify made by{' '}
-          <Link href="https://pyromatic.me/" target="_blank" color="black" fontWeight="bold">
+          <Link href="https://pyromatic.me/" target="_blank" color="common.black" fontWeight="bold">
             @pyromatic
           </Link>
         </Typography>

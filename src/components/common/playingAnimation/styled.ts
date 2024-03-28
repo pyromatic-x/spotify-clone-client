@@ -4,7 +4,7 @@ export const AnimationLine = styled('div', {
   shouldForwardProp: (prop) => prop !== 'animation',
 })<{ animation: 'first' | 'second' | 'third' | 'fourth' }>(({ theme, animation = 'first' }) => ({
   width: '100%',
-  backgroundColor: theme.palette.green.main,
+  backgroundColor: theme.palette.green,
   animationName: animation,
   animationDuration: '0.65s',
   animationTimingFunction: 'ease-out',

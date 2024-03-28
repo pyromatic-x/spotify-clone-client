@@ -1,7 +1,7 @@
 import { Box, CardContent, CardMedia, styled } from '@mui/material';
 
 export const StyledCardContent = styled(CardContent)(({ theme }) => ({
-  backgroundColor: theme.palette.secondary.light,
+  backgroundColor: theme.palette.background.popover,
   padding: '14px !important',
   fontSize: '0.95rem',
   display: 'flex',

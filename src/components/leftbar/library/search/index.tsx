@@ -1,4 +1,4 @@
-import { Cancel, Search as SearchIcon } from '@mui/icons-material';
+import { Close, Search as SearchIcon } from '@mui/icons-material';
 import { ClickAwayListener, InputAdornment } from '@mui/material';
 import { useRef, useState } from 'react';
 import { SearchContainer, StyledSearchButton, StyledSearchInput, Wrapper } from './styled';
@@ -65,7 +65,7 @@ function Search({ reverse = false }: { reverse?: boolean }) {
               ),
               endAdornment: searchValue && (
                 <InputAdornment position="end" onClick={() => search('')}>
-                  <Cancel />
+                  <Close sx={{ fill: 'text.secondary' }} />
                 </InputAdornment>
               ),
             }}

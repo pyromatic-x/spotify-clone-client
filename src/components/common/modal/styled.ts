@@ -25,7 +25,7 @@ export const StyledModal = styled(Box)(({ theme }) => ({
   borderRadius: '8px',
   width: '80%',
   height: '80%',
-  backgroundColor: theme.palette.green.main,
+  backgroundColor: theme.palette.green,
   padding: '16px 34px',
   color: theme.palette.text.gray,
   overflow: 'hidden',

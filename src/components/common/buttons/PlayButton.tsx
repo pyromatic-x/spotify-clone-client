@@ -8,7 +8,7 @@ const PlayButton = ({ sx = {}, className = '' }) => (
     sx={{
       ...{
         color: 'black',
-        backgroundColor: 'green.main',
+        backgroundColor: 'green',
         opacity: '0',
         transition: 'opacity 0.3s ease',
         fontSize: '2rem',
@@ -20,7 +20,7 @@ const PlayButton = ({ sx = {}, className = '' }) => (
       ...sx,
     }}
   >
-    <PlayArrow sx={{ fontSize: '2rem' }} color="black" />
+    <PlayArrow sx={{ fontSize: '2rem', color: 'black' }} />
   </IconButton>
 );
 

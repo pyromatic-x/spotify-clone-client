@@ -19,7 +19,7 @@ export const StyledPopoverItem = styled(ListItem, {
 
   ...(!disabled && {
     '&:hover': {
-      backgroundColor: theme.palette.background.popoverHighlight,
+      backgroundColor: theme.palette.hover.popover,
     },
   }),
 

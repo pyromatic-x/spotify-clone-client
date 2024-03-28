@@ -37,7 +37,7 @@ export const StyledButton = styled(Button, {
   fontWeight: 'bold',
 
   '&:hover': {
-    backgroundColor: '#1A1A1A',
+    backgroundColor: theme.palette.hover.button,
   },
   '&:active': {
     backgroundColor: theme.palette.common.black,
@@ -50,7 +50,7 @@ export const StyledButton = styled(Button, {
       bottom: '5px',
       height: '2px',
       width: 'calc(100% - 16px)',
-      backgroundColor: theme.palette.green.main,
+      backgroundColor: theme.palette.green,
     },
   }),
 }));

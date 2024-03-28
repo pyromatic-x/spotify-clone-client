@@ -29,7 +29,7 @@ const Filters = () => {
             .filter((t) => typeof t === 'string')
             .map((t: any) => (
               <StyledPopoverItem onClick={() => changeSort(t)} key={t}>
-                <Typography color={sort === t ? 'green.main' : 'white'}>{t}</Typography>
+                <Typography color={sort === t ? 'green' : 'white'}>{t}</Typography>
                 {sort === t && <CheckIcon color="green" />}
               </StyledPopoverItem>
             ))}

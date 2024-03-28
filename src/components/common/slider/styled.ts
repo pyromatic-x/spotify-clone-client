@@ -7,12 +7,12 @@ export const StyledSlider = styled(Slider)(({ theme }) => ({
     opacity: 1,
   },
   '&:hover .MuiSlider-track': {
-    backgroundColor: theme.palette.green.main,
+    backgroundColor: theme.palette.green,
     transition: 'none',
   },
   '& .MuiSlider-rail': {
     opacity: 1,
-    backgroundColor: theme.palette.secondary.light2,
+    backgroundColor: theme.palette.background.slider,
   },
   '& .MuiSlider-track': {
     backgroundColor: theme.palette.common.white,

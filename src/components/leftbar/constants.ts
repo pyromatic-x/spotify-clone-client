@@ -177,7 +177,7 @@ export const items: Array<ItemType> = [...albums, ...playlists, ...artists];
 
 export const menuConfig = {
   default: 420,
-  minWidth: 90,
+  minWidth: 78,
   maxWidth: 590,
   collapse: 280,
   expand: 590,

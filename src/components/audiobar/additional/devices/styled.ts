@@ -3,7 +3,7 @@ import { Box, ListItem, Popover, styled } from '@mui/material';
 export const StyledPopover = styled(Popover)(({ theme }) => ({
   '& .MuiPaper-root': {
     borderRadius: '8px',
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.background.popover,
     backgroundImage: 'none',
     boxShadow: 'none',
     overflow: 'visible',
@@ -17,7 +17,7 @@ export const StyledPopover = styled(Popover)(({ theme }) => ({
       height: '0',
       borderLeft: '10px solid transparent',
       borderRight: '10px solid transparent',
-      borderTop: `10px solid ${theme.palette.secondary.light}`,
+      borderTop: `10px solid ${theme.palette.background.popover}`,
     },
   },
 }));
@@ -42,7 +42,7 @@ export const ContentRow = styled(Box)(({ theme }) => ({
   },
 
   '&:first-child span': {
-    color: theme.palette.green.main,
+    color: theme.palette.green,
   },
 }));
 
@@ -56,7 +56,7 @@ export const RowText = styled(Box)(({ theme }) => ({
   },
 }));
 
-export const StyledListItem = styled(ListItem)(({}) => ({
+export const StyledListItem = styled(ListItem)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -75,6 +75,6 @@ export const StyledListItem = styled(ListItem)(({}) => ({
   },
 
   '&:hover': {
-    backgroundColor: '#313131',
+    backgroundColor: theme.palette.hover.popover,
   },
 }));

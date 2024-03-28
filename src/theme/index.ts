@@ -14,36 +14,30 @@ const global = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      default: common.black,
-      paper: common.black,
       section: '#121212',
       card: '#100f0f',
-      cardHover: '#181818',
-      purple: '#381861',
       popover: '#282828',
-      popoverHighlight: '#3E3E3E',
+      button: '#242424',
+      slider: '#4d4d4d',
+    },
+    hover: {
+      card: '#1a1a1a',
+      track: '#2a2a2a',
+      popover: '#3E3E3E',
+      button: '#1a1a1a',
     },
     text: {
       primary: common.white,
       secondary: '#b3b3b3',
-      gray: '#3d3b40',
     },
     secondary: {
-      main: '#b3b3b3',
+      main: '#8d8d8d',
       dark: '#100f0f',
-      light: '#242424',
-      light2: '#4d4c4c',
+      light: '#636363',
     },
-    container: {
-      main: '#121212',
-    },
-    section: '#121212',
-    green: {
-      main: '#1cd760',
-    },
+    green: '#1cd760',
     grandis: '#FFCC66',
-    white: '#ffffff',
-    black: '#000000',
+    iris: '#211260',
   },
   breakpoints: {
     values: {
@@ -78,6 +72,10 @@ export default createTheme(
           src: local('Gotham'), local('Gotham-Bold'), url(${GothamBoldTTF}) format('otf');
           unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
         },
+
+        body {
+          background-color: ${global.palette.common.black}
+        }
 
         ::-webkit-scrollbar {
           display: none;
@@ -125,7 +123,7 @@ export default createTheme(
             fontSize: '0.9rem',
             textTransform: 'none',
             backgroundColor: 'transparent',
-            borderColor: global.palette.secondary.light2,
+            borderColor: global.palette.hover.popover,
             borderRadius: 16,
             padding: '3px 15px',
             transition: 'none',
@@ -154,57 +152,52 @@ declare module '@mui/material/styles' {
   export interface TypeBackground {
     section: string;
     card: string;
-    cardHover: string;
-    purple: string;
     popover: string;
-    popoverHighlight: string;
+    button: string;
+    slider: string;
   }
-  export interface PaletteColor {
-    light2: string;
-  }
+
   export interface TypeText {
     gray: string;
   }
 
   export interface Palette {
-    container: {
-      main: string;
-    };
     grandis: string;
-    black: string;
-    white: string;
-    green: {
-      main: string;
+    green: string;
+    iris: string;
+    hover: {
+      card: string;
+      track: string;
+      popover: string;
+      button: string;
     };
-    section: string;
   }
   export interface PaletteOptions {
-    container: {
-      main: string;
-    };
     grandis: string;
-    black: string;
-    white: string;
-    green: {
-      main: string;
+    green: string;
+    iris: string;
+
+    hover: {
+      card: string;
+      track: string;
+      popover: string;
+      button: string;
     };
-    section: string;
   }
 
-  export interface PaletteColorOptions {
-    section?: string;
-    main?: string;
-    dark?: string;
-    light?: string;
-    light2?: string;
-    green?: string;
-    black?: string;
-  }
+  // export interface PaletteColorOptions {
+  //   green?: string;
+  //   grandis?: string;
+  //   secondary?: {
+  //     main?: string;
+  //   };
+  // }
 }
 
 declare module '@mui/material/SvgIcon' {
   interface SvgIconPropsColorOverrides {
-    black: true;
+    grandis: true;
     green: true;
+    iris: true;
   }
 }

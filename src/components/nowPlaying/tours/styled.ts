@@ -1,9 +1,9 @@
 import { Box, styled } from '@mui/material';
 
-export const DateIconContainer = styled(Box)(({}) => ({
+export const DateIconContainer = styled(Box)(({ theme }) => ({
   borderRadius: '4px',
   width: '56px',
-  backgroundColor: '#1a1a1a',
+  backgroundColor: theme.palette.hover.button,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

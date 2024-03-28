@@ -12,7 +12,7 @@ export const StyledCard = styled(Card)(({ theme }) => ({
   width: '100%',
 
   '&:hover': {
-    backgroundColor: theme.palette.background.cardHover,
+    backgroundColor: theme.palette.hover.card,
 
     '& .MuiIconButton-root': {
       opacity: '1',

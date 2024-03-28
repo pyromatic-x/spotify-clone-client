@@ -5,10 +5,10 @@ export const ProfileIcon = styled(ButtonBase)(({ theme }) => ({
   height: '46px',
   borderRadius: '50%',
   padding: '7px',
-  backgroundColor: theme.palette.secondary.light,
+  backgroundColor: theme.palette.background.button,
 
   '&:hover': {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.background.button,
     transform: 'scale(1.05)',
   },
 }));

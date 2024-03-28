@@ -5,12 +5,12 @@ import vinylImage from '../assets/images/vinyl.png';
 
 const StyledButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.light,
-  color: theme.palette.white,
+  color: theme.palette.common.white,
   width: 'max-content',
   padding: '6px 20px',
 
   '&:hover': {
-    backgroundColor: theme.palette.secondary.light2,
+    backgroundColor: theme.palette.secondary.light,
   },
 }));
 

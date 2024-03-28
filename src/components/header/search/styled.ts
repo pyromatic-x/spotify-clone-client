@@ -1,7 +1,7 @@
 import { Box, InputBase, styled } from '@mui/material';
 
 export const StyledInput = styled(InputBase)(({ theme }) => ({
-  backgroundColor: '#2a2a2a',
+  backgroundColor: theme.palette.hover.track,
   padding: '6px 16px',
   borderRadius: '26px',
   maxWidth: '500px',
@@ -11,7 +11,7 @@ export const StyledInput = styled(InputBase)(({ theme }) => ({
   cursor: 'default',
 
   '&:hover': {
-    borderColor: '#3C3C3C',
+    borderColor: theme.palette.hover.popover,
 
     '& .MuiInputAdornment-positionStart svg': {
       fill: theme.palette.common.white,
@@ -35,9 +35,9 @@ export const StyledInput = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const Divider = styled(Box)(() => ({
+export const Divider = styled(Box)(({ theme }) => ({
   width: '1px',
   height: '30px',
   marginRight: '10px',
-  backgroundColor: '#636363',
+  backgroundColor: theme.palette.secondary.light,
 }));

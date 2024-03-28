@@ -1,22 +1,6 @@
 import { Box, Card, SvgIcon, Typography, styled } from '@mui/material';
 import { hexToRgbA } from '../../../utils/strings';
 
-export const StyledRectangularCard = styled(Card)(({ theme }) => ({
-  height: '100%',
-  padding: '18px',
-  backgroundColor: theme.palette.background.card,
-  transition: '0.25s ease',
-  cursor: 'pointer',
-
-  '&:hover': {
-    backgroundColor: theme.palette.background.cardHover,
-
-    '& .MuiIconButton-root': {
-      opacity: '1',
-    },
-  },
-}));
-
 export const StyledSearchCard = styled(Card, {
   shouldForwardProp: (prop) => prop !== 'color',
 })<{ color: string }>(({ color }) => ({

@@ -27,34 +27,34 @@ export const StyledLoaderContainer = styled(Box)({
   justifyContent: 'center',
 });
 
-export const StyledLoader = styled('span')(({ theme }) => ({
+export const StyledLoader = styled('span')(({}) => ({
   width: '16px',
   height: '16px',
   borderRadius: '50%',
   display: 'block',
   margin: '15px auto',
   position: 'relative',
-  background: theme.palette.secondary.light2,
-  boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.secondary.light2}`,
-  boxSizing: 'border-box',
-  animation: 'shadowPulse 1.5s linear infinite',
+  // background: theme.palette.secondary.light2,
+  // boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.secondary.light2}`,
+  // boxSizing: 'border-box',
+  // animation: 'shadowPulse 1.5s linear infinite',
 
-  '@keyframes shadowPulse': {
-    '0%': {
-      background: theme.palette.secondary.light2,
-      boxShadow: `-32px 0 ${theme.palette.green.main}, 32px 0 ${theme.palette.secondary.light2}`,
-    },
-    '33%': {
-      background: `${theme.palette.green.main}`,
-      boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.secondary.light2}`,
-    },
-    '66%': {
-      background: theme.palette.secondary.light2,
-      boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.green.main}`,
-    },
-    '100%': {
-      background: theme.palette.secondary.light2,
-      boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.secondary.light2}`,
-    },
-  },
+  // '@keyframes shadowPulse': {
+  //   '0%': {
+  //     background: theme.palette.secondary.light2,
+  //     boxShadow: `-32px 0 ${theme.palette.green}, 32px 0 ${theme.palette.secondary.light2}`,
+  //   },
+  //   '33%': {
+  //     background: `${theme.palette.green}`,
+  //     boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.secondary.light2}`,
+  //   },
+  //   '66%': {
+  //     background: theme.palette.secondary.light2,
+  //     boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.green}`,
+  //   },
+  //   '100%': {
+  //     background: theme.palette.secondary.light2,
+  //     boxShadow: `-32px 0 ${theme.palette.secondary.light2}, 32px 0 ${theme.palette.secondary.light2}`,
+  //   },
+  // },
 }));

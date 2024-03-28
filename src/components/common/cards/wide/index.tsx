@@ -10,12 +10,13 @@ import { checkIsColorTooBright } from '../../../../utils/strings';
 import { useState } from 'react';
 import { setBackgroundColor } from '../../../../pages/home/effect';
 import { setHeaderColor } from '../../../root/header/effect';
+import theme from '../../../../theme';
 
 const WideCard = ({ title, image, color }: Omit<ISectionItem, 'id'>) => {
   const [loaded, setIsLoaded] = useState(false);
   const [size, setSize] = useState(0);
 
-  color = color || '#211260';
+  color = color || theme.palette.iris;
 
   const isColorBright = checkIsColorTooBright(color);
 
@@ -24,8 +25,8 @@ const WideCard = ({ title, image, color }: Omit<ISectionItem, 'id'>) => {
     setBackgroundColor(color!);
   };
   const handleOnMouseLeave = () => {
-    setHeaderColor('#211260');
-    setBackgroundColor('#211260');
+    setHeaderColor(theme.palette.iris);
+    setBackgroundColor(theme.palette.iris);
   };
 
   return (

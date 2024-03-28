@@ -30,7 +30,7 @@ export const Item = styled(ListItem, {
   },
 
   '&:hover': {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.hover.card,
   },
 }));
 
@@ -42,7 +42,7 @@ export const CollapsedItem = styled(ListItem)(({ theme }) => ({
   cursor: 'pointer',
 
   '&:hover': {
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.hover.card,
   },
 }));
 
