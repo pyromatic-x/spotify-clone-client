@@ -11,6 +11,10 @@ import AudioBar from '../audiobar';
 import Rightbar from '../rightbar';
 import RootHeader from './header';
 import Header from '../header';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
+
+dayjs.extend(relativeTime);
 
 export default function Root({ children }: PropsWithChildren) {
   const containerRef = useRef(null);

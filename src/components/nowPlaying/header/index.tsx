@@ -23,9 +23,10 @@ const Header = () => {
           <Grid container>
             <TextTruncated maxWidth="90%" lines={1} fontSize="0.95rem" color="secondary">
               {track?.authors?.map((author, index: number) => (
-                <Link to="" key={author.id || author.name}>
-                  {author.name + (index !== track.authors.length - 1 && ',\xa0')}
-                </Link>
+                <span key={author.id || author.name}>
+                  <Link to="">{author.name}</Link>
+                  {index !== track.authors.length - 1 && ', '}
+                </span>
               ))}
             </TextTruncated>
           </Grid>

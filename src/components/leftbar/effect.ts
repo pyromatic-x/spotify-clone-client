@@ -1,11 +1,13 @@
 import { createEvent, createStore, sample } from 'effector';
-import { items as defaultItems, menuConfig } from './constants';
-import { Categories, ItemType, Sortings } from './types';
+import { menuConfig } from './constants';
+import { Categories, Sortings } from './types';
+import { LIBRARY_IEMS } from '../../api/mock/library';
+import { ILibrary } from '../../api/types/library';
 
 export const reset = createEvent();
 
 // #region items
-export const $items = createStore<Array<ItemType>>(defaultItems).on(reset, () => defaultItems);
+export const $items = createStore<ILibrary>(LIBRARY_IEMS).on(reset, () => LIBRARY_IEMS);
 // #endregion
 
 // #region category
@@ -59,16 +61,14 @@ sample({
   fn: (searchValue: string | null) => {
     const category = $category.getState();
 
-    if (!category && !searchValue) return defaultItems;
+    if (!category && !searchValue) return LIBRARY_IEMS;
 
-    const items = category ? defaultItems.filter((t) => t.type === category) : defaultItems;
+    const items = category ? LIBRARY_IEMS.filter((t) => t.type === category) : LIBRARY_IEMS;
 
     if (!searchValue) return items;
 
     const regex = new RegExp(`${searchValue}`, 'gi');
-    return items.filter(
-      (t) => regex.test(t.title) || regex.test(t.subTitle) || regex.test(t.author as string),
-    );
+    return items.filter((t) => regex.test(t.name) || regex.test(t.by || ''));
   },
   target: $items,
 });
@@ -92,12 +92,3 @@ $collapsed.watch((state) => {
 // #region sort
 export const changeSort = createEvent<keyof typeof Sortings>();
 export const $sort = createStore(Sortings[0]).on(changeSort, (_, payload) => payload);
-
-// sample({
-//   clock: sort,
-//   fn: (state) => {
-//     // sort items
-//   },
-//   target: $items,
-// })
-// #endregion

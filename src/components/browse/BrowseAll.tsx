@@ -1,20 +1,19 @@
-import { Box, Grid, Typography } from '@mui/material';
-import SearchCard from '../common/cards/SearchCard';
+import { Box } from '@mui/material';
+import { useUnit } from 'effector-react';
+import { $browseCategories, $recentSearches } from '../../pages/Browse/effect';
+import Section from '../common/section';
+import Categories from './categories';
 
-export default function BrowseAll() {
+const BrowseAll = () => {
+  const categories = useUnit($browseCategories);
+  const recent = useUnit($recentSearches);
+
   return (
     <Box>
-      <Typography fontWeight="bold" variant="h6" color="white" mb={2}>
-        Browse All
-      </Typography>
-      <Grid container spacing={2.5}>
-        {true &&
-          [].map((c: any) => (
-            <Grid item lg={2.4} md={4} xs={6} key={'search-cards-' + c.title}>
-              <SearchCard {...c} />
-            </Grid>
-          ))}
-      </Grid>
+      {recent && <Section title="Recently searches" items={recent} />}
+      {categories && <Categories categories={categories} />}
     </Box>
   );
-}
+};
+
+export default BrowseAll;

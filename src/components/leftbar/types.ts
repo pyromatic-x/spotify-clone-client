@@ -1,7 +1,7 @@
 export enum Categories {
-  'albums',
-  'playlists',
-  'artists',
+  'album',
+  'playlist',
+  'artist',
 }
 export enum Sortings {
   'Recents',
@@ -9,11 +9,3 @@ export enum Sortings {
   'Alphabetical',
   'Creator',
 }
-
-export type ItemType = {
-  author?: string;
-  title: string;
-  subTitle: string;
-  image: string;
-  type: keyof typeof Categories;
-};

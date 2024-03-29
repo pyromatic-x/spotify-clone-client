@@ -1,6 +1,6 @@
+import { HOME_SECTIONS } from '../../api/mock/home';
 import Section from '../common/section';
-import { homeSections } from './constants';
 
-const Sections = () => homeSections.map((s) => <Section {...s} key={s.title} />);
+const Sections = () => HOME_SECTIONS.map((t) => <Section {...t} key={t.title} />);
 
 export default Sections;

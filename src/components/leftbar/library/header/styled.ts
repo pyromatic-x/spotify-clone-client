@@ -51,11 +51,11 @@ export const HeaderContainer = styled(Grid, {
   }),
 }));
 
-export const ClearIconButton = styled(IconButton)({
-  backgroundColor: 'transparent',
+export const ClearIconButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: theme.palette.background.button,
   height: '32px',
   width: '32px',
   '& svg': {
     fill: 'secondary.main',
   },
-});
+}));

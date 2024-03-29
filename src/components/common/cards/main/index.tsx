@@ -1,15 +1,18 @@
 import { Box, CardContent } from '@mui/material';
 import PlayButton from '../../../common/buttons/PlayButton';
 import { StyledCard } from './styled';
-import { ISectionItem } from '../../../home/constants';
 import CardImage from '../../images';
 import { TextTruncated } from '../../text/styled';
+import { ISectionItem } from '../../../../api/types/section';
+import SubTitle from './SubTitle';
 
-const Card = ({ image, color, title, subTitle }: ISectionItem) => {
+const Card = (props: ISectionItem) => {
+  const { name, image, type, styles } = props;
+
   return (
     <StyledCard>
       <Box position="relative" mb={1}>
-        <CardImage image={image} title={title} color={color} />
+        <CardImage image={image} name={name} styles={styles} type={type} />
         <PlayButton
           sx={{
             position: 'absolute',
@@ -22,13 +25,9 @@ const Card = ({ image, color, title, subTitle }: ISectionItem) => {
       </Box>
       <CardContent sx={{ padding: '0', '&:last-child': { padding: '0' } }}>
         <TextTruncated fontWeight="bold" lines={1}>
-          {title}
+          {name}
         </TextTruncated>
-        {subTitle && (
-          <TextTruncated color="secondary" fontSize="small">
-            {subTitle}
-          </TextTruncated>
-        )}
+        <SubTitle {...props} />
       </CardContent>
     </StyledCard>
   );

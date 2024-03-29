@@ -1,26 +1,29 @@
 import { Grid, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import { capitalizeFirstLetter } from '../../../../utils/strings';
-import { ItemType } from '../../types';
 import { useUnit } from 'effector-react';
-import { $category, $collapsed, $expanded, $search } from '../../effect';
+import { $category, $collapsed, $expanded } from '../../effect';
 import { CollapsedItem, Item, StyledAvatar } from './styled';
+import { ILibraryItem } from '../../../../api/types/library';
+import dayjs from 'dayjs';
 
-const LibraryListItem = ({ author, title, subTitle, image, type }: ItemType) => {
+const LibraryListItem = ({ name, image, type, by, addedAt, playedAt }: ILibraryItem) => {
   const collapsed = useUnit($collapsed);
   const category = useUnit($category);
-  const search = useUnit($search);
   const expanded = useUnit($expanded);
 
-  const secondaryText = !!category || !!search ? author : capitalizeFirstLetter(type.slice(0, -1));
+  let secondaryText = category ? '' : capitalizeFirstLetter(type);
+  if (type === 'album' || type === 'playlist') {
+    secondaryText = category ? by ?? '' : capitalizeFirstLetter(type) + ` ● ${by}`;
+  }
 
   if (collapsed)
     return (
       <CollapsedItem>
         <StyledAvatar
-          alt={author}
+          alt={name}
           src={image}
           sx={{ width: 48, height: 48 }}
-          type={type === 'artists' ? 'circle' : 'square'}
+          type={type === 'artist' ? 'circle' : 'square'}
         />
       </CollapsedItem>
     );
@@ -30,25 +33,25 @@ const LibraryListItem = ({ author, title, subTitle, image, type }: ItemType) => 
       <Grid container width="auto">
         <ListItemAvatar sx={{ minWidth: 'auto' }}>
           <StyledAvatar
-            alt={author || subTitle}
+            alt={name}
             src={image}
             sx={{ width: 48, height: 48 }}
-            type={type === 'artists' ? 'circle' : 'square'}
+            type={type === 'artist' ? 'circle' : 'square'}
           />
         </ListItemAvatar>
         <ListItemText
           sx={{ alignSelf: 'center', margin: '0 0 0 12px' }}
-          primary={title}
+          primary={name}
           secondary={secondaryText}
         />
       </Grid>
       {expanded && (
         <>
           <Typography textAlign="center" fontSize="14px" color="secondary">
-            date
+            {dayjs(addedAt).format('MMM DD, YYYY')}
           </Typography>
           <Typography textAlign="end" fontSize="14px" color="secondary">
-            played
+            {dayjs(playedAt).fromNow()}
           </Typography>
         </>
       )}

@@ -35,7 +35,7 @@ const LibraryList = () => {
       {!!items.length ? (
         <StyledList>
           {items.map((t) => (
-            <LibraryListItem {...t} key={t.title + Math.random()} />
+            <LibraryListItem {...t} key={t.id} />
           ))}
         </StyledList>
       ) : (
