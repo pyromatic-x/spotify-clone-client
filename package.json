@@ -1,6 +1,6 @@
 {
   "name": "spotify-clone",
-  "version": "0.2.2",
+  "version": "0.2.32",
   "description": "Design is based on 20.03.2024",
   "private": true,
   "dependencies": {
