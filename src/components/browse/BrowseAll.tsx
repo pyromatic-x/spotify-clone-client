@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { useUnit } from 'effector-react';
-import { $browseCategories, $recentSearches } from '../../pages/Browse/effect';
 import Section from '../common/section';
 import Categories from './categories';
+import { $browseCategories, $recentSearches } from '../../pages/browse/effect';
 
 const BrowseAll = () => {
   const categories = useUnit($browseCategories);

@@ -5,9 +5,18 @@ import { ComponentType, useState } from 'react';
 interface IProps extends IconButtonProps {
   placement?: TooltipProps['placement'];
   Icon: ComponentType<DefaultComponentProps<SvgIconTypeMap>>;
+  disableTransform?: boolean;
 }
 
-const ButtonWithTooltip = ({ placement = 'bottom', title, Icon, onClick, sx, ...rest }: IProps) => {
+const ButtonWithTooltip = ({
+  placement = 'bottom',
+  title,
+  Icon,
+  onClick,
+  sx,
+  disableTransform,
+  ...rest
+}: IProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
@@ -30,8 +39,9 @@ const ButtonWithTooltip = ({ placement = 'bottom', title, Icon, onClick, sx, ...
 
     '&:hover': {
       color: 'common.white',
-      transform: 'scale(1.1)',
+      transform: !disableTransform ? 'scale(1.1)' : 'scale(1)',
     },
+
     '& svg': {
       fontSize: '1.3rem',
     },

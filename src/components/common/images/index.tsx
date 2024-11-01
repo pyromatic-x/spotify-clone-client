@@ -14,7 +14,7 @@ const CardImage = ({ image, name, styles, type }: IProps) => {
 
   const isColorBright = checkIsColorTooBright(color);
 
-  const radius = type === 'artist' ? '50%' : '4px';
+  const radius = type === 'artist' || type === 'profile' ? '50%' : '4px';
 
   return (
     <Wrapper radius={radius}>

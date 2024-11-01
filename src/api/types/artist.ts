@@ -1,7 +1,7 @@
 export interface IArtist {
   id: string;
   name: string;
-  avatar: string;
+  image: string;
   backdrop: string;
   followers?: string;
   about?: {
@@ -25,8 +25,8 @@ export interface IArtist {
   type: 'artist';
 }
 
-export type IArtistCard = Pick<IArtist, 'id' | 'name' | 'avatar' | 'type'>;
-export type IArtistNowPlaying = Omit<IArtist, 'backdrop' | 'type' | 'avatar'>;
+export type IArtistCard = Pick<IArtist, 'id' | 'name' | 'image' | 'type'>;
+export type IArtistNowPlaying = Omit<IArtist, 'backdrop' | 'type' | 'image'>;
 export type IArtistLibrary = Pick<IArtist, 'id' | 'name' | 'type'> & {
   image: string;
   addedAt: string;

@@ -8,7 +8,7 @@ export interface IAlbum {
   };
   by: {
     id: string;
-    avatar: string;
+    image: string;
     name: string;
   };
   release: {

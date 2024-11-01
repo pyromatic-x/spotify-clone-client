@@ -6,7 +6,7 @@ export interface IPlaylist {
   image: string;
   description?: string;
   tracks: Array<ITrack>;
-  headliners: Array<{
+  headliners?: Array<{
     id: string;
     name: string;
   }>;
@@ -18,7 +18,7 @@ export interface IPlaylist {
   };
   by?: {
     id: string;
-    avatar: string;
+    image: string;
     name: string;
   };
   type: 'playlist';

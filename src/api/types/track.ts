@@ -12,6 +12,9 @@ export interface ITrack {
     type: 'single' | 'EP';
     image: string;
   };
+  addedAt?: string;
+  duration?: number;
+  listenedCount?: string;
 }
 
 export interface ITrackPlayer extends ITrack {

@@ -1,5 +1,5 @@
 import Filters from '../components/root/header/extensions/filters';
-import Browse from '../pages/Browse';
+import Browse from '../pages/browse';
 import Home from '../pages/home/Home';
 import HomeMusic from '../pages/home/HomeMusic';
 import HomePodcasts from '../pages/home/HomePodcasts';
@@ -18,25 +18,25 @@ export interface IRoutes {
 export const ROUTES: IRoutes = {
   HOME: {
     PATH: '/',
-    PAGE_TITLE: 'Spotify - Home',
+    PAGE_TITLE: 'Spotify',
     ELEMENT: <Home />,
     ROOT_HEADER_EXTENSION: <Filters />,
   },
   HOME_MUSIC: {
     PATH: '/home/music',
-    PAGE_TITLE: 'Spotify - Music',
+    PAGE_TITLE: 'Spotify ● Music',
     ELEMENT: <HomeMusic />,
     ROOT_HEADER_EXTENSION: <Filters />,
   },
   HOME_PODCASTS: {
     PATH: '/home/podcasts',
-    PAGE_TITLE: 'Spotify - Podcasts',
+    PAGE_TITLE: 'Spotify ● Podcasts',
     ELEMENT: <HomePodcasts />,
     ROOT_HEADER_EXTENSION: <Filters />,
   },
   SEARCH: {
     PATH: '/search',
-    PAGE_TITLE: 'Spotify - Search',
+    PAGE_TITLE: 'Spotify ● Search',
     ELEMENT: <Browse />,
   },
 };

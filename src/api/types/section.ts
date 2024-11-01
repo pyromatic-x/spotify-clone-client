@@ -4,7 +4,7 @@ export interface ISectionItem {
   id: string;
   name: string;
   image: string;
-  type: 'artist' | 'playlist' | 'album';
+  type: 'artist' | 'playlist' | 'album' | 'profile';
 
   description?: string;
   headliners?: IPlaylist['headliners'];

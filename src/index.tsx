@@ -6,6 +6,7 @@ import theme from './theme';
 import Router from './router';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import NoMobileModal from './NoMobileMiddleware';
+import AuthProvider from './components/root/auth';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NoMobileModal>
-        <RouterProvider router={Router} />
+        <AuthProvider>
+          <RouterProvider router={Router} />
+        </AuthProvider>
       </NoMobileModal>
     </ThemeProvider>
   </React.StrictMode>,

@@ -8,7 +8,7 @@ function Section({ title, link, items = [] }: ISection) {
   const count = useUnit($sectionItemsCount);
 
   return (
-    <Grid container>
+    <Grid>
       <Grid container alignItems="center" justifyContent="space-between" mb={2}>
         <Link underline="hover" fontWeight="bold" variant="h6" color="white">
           {title}
@@ -19,7 +19,13 @@ function Section({ title, link, items = [] }: ISection) {
           </Link>
         )}
       </Grid>
-      <Box display="grid" overflow="hidden" margin="0 -10px" gridTemplateColumns={`repeat(${count}, 1fr)`}>
+      <Box
+        display="grid"
+        overflow="hidden"
+        margin="0 -10px"
+        gridTemplateColumns={`repeat(${count}, 1fr)`}
+        width="auto"
+      >
         {items.slice(0, count).map((item) => (
           <Card {...item} key={item.id} />
         ))}

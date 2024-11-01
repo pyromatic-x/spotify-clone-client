@@ -2,16 +2,17 @@ import { ISectionItem } from '../../../../api/types/section';
 import Link from '../../text/Link';
 import { TextTruncated } from '../../text/styled';
 import { getDateValues } from '../../../../utils/date';
+import { capitalizeFirstLetter } from '../../../../utils/strings';
 
 const SubTitle = ({ type, releasedAt, by, headliners }: ISectionItem) => {
-  if (type === 'artist') return Artist();
+  if (type === 'artist' || type === 'profile') return Simple(type);
   if (type === 'playlist') return Playlist({ headliners, by });
   if (type === 'album') return Album({ releasedAt, by });
 };
 
-const Artist = () => (
+const Simple = (type: ISectionItem['type']) => (
   <TextTruncated color="secondary" fontSize="small">
-    Artist
+    {capitalizeFirstLetter(type)}
   </TextTruncated>
 );
 const Album = ({ releasedAt, by }: Pick<ISectionItem, 'releasedAt' | 'by'>) => {

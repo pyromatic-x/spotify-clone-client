@@ -2,10 +2,10 @@ import { Box, Paper, styled } from '@mui/material';
 import { ImageRadius } from './types';
 
 export const ImageBase = styled('img', {
-  shouldForwardProp: (prop) => prop !== 'radius',
-})<{ radius: ImageRadius }>(({ radius }) => ({
-  width: '100%',
-  height: '100%',
+  shouldForwardProp: (prop) => prop !== 'radius' && prop !== 'width' && prop !== 'height',
+})<{ radius: ImageRadius; width?: string; height?: string }>(({ radius, width, height }) => ({
+  width: width || '100%',
+  height: height || '100%',
   display: 'block',
   objectFit: 'cover',
   transition: '0.25s ease-in-out',

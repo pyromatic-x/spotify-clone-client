@@ -4,6 +4,16 @@ import { ISectionItem } from '../types/section';
 import { IPlaylistRecommended } from '../types/playlist';
 import { capitalizeFirstLetter, hexToRgbA, randomColor } from '../../utils/strings';
 import { ILibrary, ILibraryItem } from '../types/library';
+import {
+  IBrowse,
+  IBrowseAlbums,
+  IBrowseArtists,
+  IBrowseFeaturing,
+  IBrowsePlaylists,
+  IBrowseTopResult,
+  IBrowseTracks,
+  IBrowseUsers,
+} from '../types/browse';
 
 export const generateRecommended = (): Array<IPlaylistRecommended> => {
   const liked = {
@@ -136,4 +146,62 @@ export function generateLibraryItems(): ILibrary {
   return [...artists, ...playlists, ...albums].sort((a, b) =>
     a.playedAt > b.playedAt ? -1 : a.playedAt < b.playedAt ? 1 : 0,
   );
+}
+
+export function generateSearchItems(): IBrowse {
+  const section_base = [...Array(10).keys()];
+  const tracks_base = [...Array(4).keys()];
+
+  const top: IBrowseTopResult = {
+    id: crypto.randomUUID(),
+    name: faker.internet.userName(),
+    image: faker.image.avatar(),
+    type: 'artist',
+  };
+
+  const tracks: IBrowseTracks = tracks_base.map(() => ({
+    id: crypto.randomUUID(),
+    name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
+    image: faker.image.url({ width: 160, height: 160 }),
+    audio: '',
+    liked: faker.datatype.boolean(),
+    authors: [
+      {
+        id: crypto.randomUUID(),
+        name: faker.internet.userName(),
+      },
+    ],
+  }));
+
+  const featuring: IBrowseFeaturing = section_base.map(() => ({
+    id: crypto.randomUUID(),
+    name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
+    image: faker.image.url({ width: 160, height: 160 }),
+    by: {
+      id: crypto.randomUUID(),
+      name: 'Spotify',
+    },
+    type: 'playlist',
+  }));
+
+  const users: IBrowseUsers = section_base.map(() => ({
+    id: crypto.randomUUID(),
+    name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
+    image: faker.image.url({ width: 160, height: 160 }),
+    type: 'profile',
+  }));
+
+  const artists: IBrowseArtists = section_base.map(() => generateArtist());
+  const playlists: IBrowsePlaylists = section_base.map(() => generatePlaylist());
+  const albums: IBrowseAlbums = section_base.map(() => generateAlbum());
+
+  return {
+    top,
+    tracks,
+    featuring,
+    artists,
+    playlists,
+    albums,
+    users,
+  };
 }
