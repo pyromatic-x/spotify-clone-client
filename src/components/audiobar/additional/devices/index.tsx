@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { ContentRow, PopoverContent, RowText, StyledListItem, StyledPopover } from './styled';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
 import PlayingAnimation from '../../../common/playingAnimation';
+import { generateUUID } from '../../../../utils/strings';
 
 const Devices = () => {
   const { playing } = useGlobalAudioPlayer();
@@ -15,7 +16,7 @@ const Devices = () => {
   const handleClose = () => setAnchorEl(null);
 
   const open = Boolean(anchorEl);
-  const id = open ? crypto.randomUUID() : undefined;
+  const id = open ? generateUUID() : undefined;
 
   return (
     <>

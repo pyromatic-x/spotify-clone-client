@@ -2,7 +2,7 @@ import theme from '../../theme';
 import { faker } from '@faker-js/faker';
 import { ISectionItem } from '../types/section';
 import { IPlaylistRecommended } from '../types/playlist';
-import { capitalizeFirstLetter, hexToRgbA, randomColor } from '../../utils/strings';
+import { capitalizeFirstLetter, generateUUID, hexToRgbA, randomColor } from '../../utils/strings';
 import { ILibrary, ILibraryItem } from '../types/library';
 import {
   IBrowse,
@@ -17,7 +17,7 @@ import {
 
 export const generateRecommended = (): Array<IPlaylistRecommended> => {
   const liked = {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: 'Liked Songs',
     image: 'https://i.scdn.co/image/ab67706c0000da849d25907759522a25b86a3033',
     styles: {
@@ -25,7 +25,7 @@ export const generateRecommended = (): Array<IPlaylistRecommended> => {
     },
   };
   const random = [...Array(7).keys()].map((_, index) => ({
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: 'Daily Mix ' + (index + 1),
     image: faker.image.url({ width: 160, height: 160 }),
     styles: {
@@ -38,7 +38,7 @@ export const generateRecommended = (): Array<IPlaylistRecommended> => {
 };
 
 const generateArtist = (): ISectionItem => ({
-  id: crypto.randomUUID(),
+  id: generateUUID(),
   name: faker.internet.userName(),
   image: faker.image.avatar(),
   type: 'artist',
@@ -48,19 +48,19 @@ const generatePlaylist = (): ISectionItem => {
   const headlinersOrBy = Math.random() > 0.5 ? 'headliners' : 'by';
 
   return {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     image: faker.image.url({ width: 200, height: 200 }),
     name: capitalizeFirstLetter(faker.word.adjective({ length: { min: 3, max: 10 } })) + ' Mix',
     ...(headlinersOrBy === 'headliners'
       ? {
           headliners: [...Array(2).keys()].map(() => ({
-            id: crypto.randomUUID(),
+            id: generateUUID(),
             name: faker.internet.userName(),
           })),
         }
       : {
           by: {
-            id: crypto.randomUUID(),
+            id: generateUUID(),
             name: faker.internet.userName(),
           },
         }),
@@ -73,12 +73,12 @@ const generatePlaylist = (): ISectionItem => {
 };
 
 export const generateAlbum = (): ISectionItem => ({
-  id: crypto.randomUUID(),
+  id: generateUUID(),
   image: faker.image.url({ width: 200, height: 200 }),
   name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
   releasedAt: faker.date.past({ years: 20 }).toISOString(),
   by: {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: faker.internet.userName(),
   },
   type: 'album',
@@ -98,7 +98,7 @@ export const generateSectionItems = (type: 'artist' | 'playlist' | 'album' | 'mi
 
 export function generateBrowseCategories() {
   return [...Array(68).keys()].map(() => ({
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     title: faker.music.genre(),
     image: faker.image.url({ width: 200, height: 200 }),
     color: hexToRgbA(randomColor(), 0.5),
@@ -110,7 +110,7 @@ export function generateLibraryItems(): ILibrary {
 
   const artists = base.map(
     (): ILibraryItem => ({
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
       image: faker.image.url({ width: 160, height: 160 }),
       addedAt: faker.date.past({ years: 1 }).toISOString(),
@@ -121,7 +121,7 @@ export function generateLibraryItems(): ILibrary {
 
   const playlists = base.map(
     (): ILibraryItem => ({
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
       image: faker.image.url({ width: 160, height: 160 }),
       addedAt: faker.date.past({ years: 1 }).toISOString(),
@@ -133,7 +133,7 @@ export function generateLibraryItems(): ILibrary {
 
   const albums = base.map(
     (): ILibraryItem => ({
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
       image: faker.image.url({ width: 160, height: 160 }),
       addedAt: faker.date.past({ years: 1 }).toISOString(),
@@ -153,39 +153,39 @@ export function generateSearchItems(): IBrowse {
   const tracks_base = [...Array(4).keys()];
 
   const top: IBrowseTopResult = {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: faker.internet.userName(),
     image: faker.image.avatar(),
     type: 'artist',
   };
 
   const tracks: IBrowseTracks = tracks_base.map(() => ({
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
     image: faker.image.url({ width: 160, height: 160 }),
     audio: '',
     liked: faker.datatype.boolean(),
     authors: [
       {
-        id: crypto.randomUUID(),
+        id: generateUUID(),
         name: faker.internet.userName(),
       },
     ],
   }));
 
   const featuring: IBrowseFeaturing = section_base.map(() => ({
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
     image: faker.image.url({ width: 160, height: 160 }),
     by: {
-      id: crypto.randomUUID(),
+      id: generateUUID(),
       name: 'Spotify',
     },
     type: 'playlist',
   }));
 
   const users: IBrowseUsers = section_base.map(() => ({
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: capitalizeFirstLetter(faker.word.verb({ length: { min: 6, max: 18 } })),
     image: faker.image.url({ width: 160, height: 160 }),
     type: 'profile',

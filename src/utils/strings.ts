@@ -45,3 +45,20 @@ export function numberWithDigits(num: string) {
     .toReversed()
     .join('');
 }
+
+export const generateUUID = () => {
+  const getRandomHex = () => Math.floor(Math.random() * 16).toString(16);
+
+  let uuid = '';
+
+  for (let i = 0; i < 32; i++) {
+    if (i === 8 || i === 12 || i === 16 || i === 20) {
+      uuid += '-';
+    }
+    uuid += getRandomHex();
+  }
+
+  uuid = uuid.replace(/[89ab]/g, (c) => ((parseInt(c, 16) & 0x3) | 0x8).toString(16));
+
+  return uuid;
+};

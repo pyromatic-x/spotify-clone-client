@@ -1,6 +1,7 @@
 import { List, Popover as PopoverMUI, SxProps } from '@mui/material';
 import { ReactElement, cloneElement, useState } from 'react';
 import { PopoverContent } from './styled';
+import { generateUUID } from '../../../utils/strings';
 
 interface IProps {
   content: string | JSX.Element | JSX.Element[] | ReactElement;
@@ -17,7 +18,7 @@ const Popover = ({ content, toggler, horizontal, vertical, sx }: IProps) => {
   const handleClose = () => setAnchorEl(null);
 
   const open = Boolean(anchorEl);
-  const id = open ? crypto.randomUUID() : undefined;
+  const id = open ? generateUUID() : undefined;
 
   const Toggler = cloneElement(toggler, { onClick: handleClick });
 
