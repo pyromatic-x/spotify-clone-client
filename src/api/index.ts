@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { AuthUserParams, AuthUserResponse, LibraryItemsResponse } from './types';
 
 interface FullRequestParams {
   path: string;
@@ -29,6 +30,13 @@ class HttpClient {
 }
 
 class Api_Service extends HttpClient {
+  library = {
+    get: () =>
+      this.request<LibraryItemsResponse>({
+        path: '/library',
+        method: 'GET',
+      }),
+  };
   personal = {
     get: () =>
       this.request<{ featured: any }>({
@@ -37,13 +45,12 @@ class Api_Service extends HttpClient {
       }),
   };
   auth = {
-    login: (data: { username: string; password: string }) => {
-      this.request({
+    login: (data: AuthUserParams) =>
+      this.request<AuthUserResponse>({
         path: '/auth/login',
         method: 'POST',
         body: data,
-      });
-    },
+      }),
   };
 }
 

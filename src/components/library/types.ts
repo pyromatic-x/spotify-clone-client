@@ -1,11 +1,11 @@
-export enum Categories {
+export enum LibraryCategories {
   'album',
   'playlist',
-  'artist',
+  'musician',
 }
-export enum Sortings {
+
+export enum LibrarySortings {
   'Recents',
   'Recently added',
   'Alphabetical',
-  'Creator',
 }

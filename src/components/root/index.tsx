@@ -6,13 +6,13 @@ import NoMobileModal from '../../NoMobileMiddleware';
 import { RootContainer, StyledOutletContainer } from './styled';
 import { setOutletWidth, setSectionItemsCountByWidth } from './effect';
 import { IRoute, ROUTES } from '../../router/constants';
-import Leftbar from '../leftbar';
 import AudioBar from '../audiobar';
 import Rightbar from '../rightbar';
 import RootHeader from './header';
 import Header from '../header';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
+import Library from '../library';
 
 dayjs.extend(relativeTime);
 
@@ -47,7 +47,7 @@ export default function Root({ children }: PropsWithChildren) {
   return (
     <RootContainer>
       <Header />
-      <Leftbar />
+      <Library />
       <MainContainer sx={{ padding: '0', overflow: 'hidden' }} gridArea="main">
         <RootHeader containerRef={containerRef} />
         <StyledOutletContainer

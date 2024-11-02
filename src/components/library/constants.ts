@@ -1,4 +1,4 @@
-export const menuConfig = {
+export const libraryUIConfig = {
   default: 420,
   minWidth: 78,
   maxWidth: 590,
