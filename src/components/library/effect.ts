@@ -8,8 +8,11 @@ import { sortLibraryItems } from './utils';
 export const reset = createEvent();
 
 export const getLibraryItems = createEvent();
+
 export const $libraryItems = createStore<LibraryItemsResponse | null>(null);
+export const $libraryItemsDefault = createStore<LibraryItemsResponse | null>(null);
 export const $libraryItemsError = createStore<string | null>(null);
+
 export const getLibraryItemsFx = createEffect<unknown, LibraryItemsResponse, Error>(async () => {
   const { data } = await API.library.get();
   return data;
@@ -22,34 +25,12 @@ sample({
 
 sample({
   clock: getLibraryItemsFx.doneData,
-  target: $libraryItems,
+  target: [$libraryItems, $libraryItemsDefault],
 });
 sample({
   clock: getLibraryItemsFx.failData,
   fn: (e: any) => e?.message,
   target: $libraryItemsError,
-});
-
-export const changeCategory = createEvent<keyof typeof LibraryCategories | null>();
-export const $category = createStore<keyof typeof LibraryCategories | null>(null).on(
-  changeCategory,
-  (_, payload) => payload,
-);
-
-export const changeSort = createEvent<keyof typeof LibrarySortings>();
-export const $sort = createStore(LibrarySortings[LibrarySortings.Alphabetical]).on(
-  changeSort,
-  (_, payload) => payload,
-);
-
-sample({
-  clock: changeSort,
-  source: $libraryItems,
-  fn: (items, newSort) => {
-    sortLibraryItems(items!, newSort);
-    return items;
-  },
-  target: $libraryItems,
 });
 
 export const toggleShadow = createEvent<boolean>();
@@ -80,36 +61,53 @@ sample({
   target: $expanded,
 });
 
-export const search = createEvent<string | null>();
-export const $search = createStore<string | null>(null);
+export const changeSort = createEvent<keyof typeof LibrarySortings>();
+export const $sort = createStore<keyof typeof LibrarySortings>('Alphabetical').on(
+  changeSort,
+  (_, payload) => payload,
+);
 
-// sample({
-//   clock: search,
-//   fn: (searchValue: string | null) => {
-//     const category = $category.getState();
+sample({
+  clock: changeSort,
+  source: $libraryItems,
+  fn: (items, newSort) => {
+    sortLibraryItems(items!, newSort);
+    return items;
+  },
+  target: $libraryItems,
+});
 
-//     if (!category && !searchValue) return LIBRARY_IEMS;
+export const filter = createEvent<{ search?: string; category?: keyof typeof LibraryCategories | null }>();
+export const $filter = createStore<{ search: string; category: keyof typeof LibraryCategories | null }>({
+  search: '',
+  category: null,
+}).on(filter, (state, payload) => ({ ...state, ...payload }));
 
-//     const items = category ? LIBRARY_IEMS.filter((t) => t.type === category) : LIBRARY_IEMS;
+sample({
+  clock: filter,
+  source: { $libraryItemsDefault, $sort, $filter },
+  fn: ({ $libraryItemsDefault, $sort, $filter }) => {
+    let items = [...$libraryItemsDefault!];
 
-//     if (!searchValue) return items;
+    const { search, category } = $filter;
 
-//     const regex = new RegExp(`${searchValue}`, 'gi');
-//     return items.filter((t) => regex.test(t.name) || regex.test(t.by || ''));
-//   },
-//   target: $items,
-// });
+    if (search) {
+      const regex = new RegExp(`${search}`, 'gi');
+      items = items!.filter((t) => regex.test(t.name));
+    }
 
-// sample({
-//   clock: search,
-//   target: $search,
-// });
+    if (category) {
+      items = items.filter((t) => t._collection === category);
+    }
 
-// sample({
-//   clock: setCategory,
-//   fn: () => null,
-//   target: search,
-// });
+    if ($sort) {
+      sortLibraryItems(items!, $sort);
+    }
+
+    return items;
+  },
+  target: $libraryItems,
+});
 
 // $collapsed.watch((state) => {
 //   if (state) search(null);

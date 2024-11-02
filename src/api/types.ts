@@ -19,7 +19,7 @@ export interface AuthUserParams {
 
 export type LibraryItemsResponse = Array<{
   _id: string;
-  type: Extract<CollectionEnums, 'album' | 'playlist' | 'musician'>;
+  _collection: Extract<CollectionEnums, 'album' | 'playlist' | 'musician'>;
   lastPlayedAt?: IsoDateString;
   addedAt: IsoDateString;
   cover: string;

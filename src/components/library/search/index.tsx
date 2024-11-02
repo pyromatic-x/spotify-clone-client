@@ -3,7 +3,7 @@ import { ClickAwayListener, InputAdornment } from '@mui/material';
 import { useRef, useState } from 'react';
 
 import { useUnit } from 'effector-react';
-import { $category, $search, search } from '../effect';
+import { $filter, filter } from '../effect';
 import { capitalizeFirstLetter } from '../../../utils/strings';
 import {
   LibrarySearchContainer,
@@ -13,8 +13,7 @@ import {
 } from './styled';
 
 function LibrarySearch({ reverse = false }: { reverse?: boolean }) {
-  const category = useUnit($category);
-  const searchValue = useUnit($search);
+  const { search, category } = useUnit($filter);
 
   const [searchOpened, setSeachOpened] = useState(false);
 
@@ -25,19 +24,17 @@ function LibrarySearch({ reverse = false }: { reverse?: boolean }) {
       searchRef.current &&
       // @ts-expect-error err
       !searchRef.current.contains(event.target) &&
-      !searchValue &&
-      !searchValue &&
+      !search &&
+      !search &&
       searchOpened
     ) {
       setSeachOpened(false);
-      search('');
+      filter({ search: '' });
     }
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const value = event.target.value;
-    search(value);
-    search(value);
+    filter({ search: event.target.value });
   };
 
   const handleOnOpen = () => {
@@ -59,18 +56,18 @@ function LibrarySearch({ reverse = false }: { reverse?: boolean }) {
             size="small"
             variant="outlined"
             type="text"
-            value={searchValue ?? ''}
+            value={search ?? ''}
             onChange={handleOnChange}
             inputProps={{ maxLength: 30 }}
-            placeholder={`Search in ${category ? capitalizeFirstLetter(category) : 'Library'}`}
+            placeholder={`Search in ${category ? capitalizeFirstLetter(category) : 'Your Library'}`}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />
                 </InputAdornment>
               ),
-              endAdornment: searchValue && (
-                <InputAdornment position="end" onClick={() => search('')}>
+              endAdornment: search && (
+                <InputAdornment position="end" onClick={() => filter({ search: '' })}>
                   <Close sx={{ fill: 'text.secondary' }} />
                 </InputAdornment>
               ),
