@@ -11,7 +11,7 @@ class HttpClient {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: process.env.API_BASE || 'http://localhost:3001',
+      baseURL: process.env.REACT_APP_API_BASE_URL,
       withCredentials: true,
     });
   }
