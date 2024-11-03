@@ -5,14 +5,9 @@ import { useRef, useState } from 'react';
 import { useUnit } from 'effector-react';
 import { $filter, filter } from '../effect';
 import { capitalizeFirstLetter } from '../../../utils/strings';
-import {
-  LibrarySearchContainer,
-  LibrarySearchWrapper,
-  StyledSearchButton,
-  StyledSearchInput,
-} from './styled';
+import { LibrarySearchContainer, StyledSearchButton, StyledSearchInput } from './styled';
 
-function LibrarySearch({ reverse = false }: { reverse?: boolean }) {
+function LibrarySearch({ direction = 'openToRight' }: { direction?: 'openToRight' | 'openToLeft' }) {
   const { search, category } = useUnit($filter);
 
   const [searchOpened, setSeachOpened] = useState(false);
@@ -46,35 +41,34 @@ function LibrarySearch({ reverse = false }: { reverse?: boolean }) {
 
   return (
     <ClickAwayListener onClickAway={handleClickOutside}>
-      <LibrarySearchWrapper moveLeft={reverse && searchOpened}>
-        <StyledSearchButton hide={!searchOpened} onClick={handleOnOpen}>
+      <LibrarySearchContainer moveToLeft={direction === 'openToLeft' && searchOpened}>
+        <StyledSearchButton onClick={handleOnOpen} disableTouchRipple>
           <SearchIcon />
         </StyledSearchButton>
-        <LibrarySearchContainer moveLeft={reverse && searchOpened} hide={!searchOpened}>
-          <StyledSearchInput
-            ref={searchRef}
-            size="small"
-            variant="outlined"
-            type="text"
-            value={search ?? ''}
-            onChange={handleOnChange}
-            inputProps={{ maxLength: 30 }}
-            placeholder={`Search in ${category ? capitalizeFirstLetter(category) : 'Your Library'}`}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-              endAdornment: search && (
-                <InputAdornment position="end" onClick={() => filter({ search: '' })}>
-                  <Close sx={{ fill: 'text.secondary' }} />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </LibrarySearchContainer>
-      </LibrarySearchWrapper>
+        <StyledSearchInput
+          show={searchOpened}
+          ref={searchRef}
+          size="small"
+          variant="outlined"
+          type="text"
+          value={search ?? ''}
+          onChange={handleOnChange}
+          inputProps={{ maxLength: 30 }}
+          placeholder={`Search in ${category ? capitalizeFirstLetter(category) : 'Your Library'}`}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+            endAdornment: search && (
+              <InputAdornment position="end" onClick={() => filter({ search: '' })}>
+                <Close sx={{ fill: 'text.secondary' }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </LibrarySearchContainer>
     </ClickAwayListener>
   );
 }

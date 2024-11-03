@@ -20,6 +20,13 @@ const global = createTheme({
       button: '#242424',
       slider: '#4d4d4d',
     },
+    library: {
+      list: {
+        hover: '#1F1F1F',
+        selected: '#2A2A2A',
+        hoverOnSelected: '#484848',
+      },
+    },
     hover: {
       card: '#1a1a1a',
       track: '#2a2a2a',
@@ -171,6 +178,14 @@ declare module '@mui/material/styles' {
       popover: string;
       button: string;
     };
+
+    library: {
+      list: {
+        hover: string;
+        selected: string;
+        hoverOnSelected: string;
+      };
+    };
   }
   export interface PaletteOptions {
     grandis: string;
@@ -182,6 +197,14 @@ declare module '@mui/material/styles' {
       track: string;
       popover: string;
       button: string;
+    };
+
+    library: {
+      list: {
+        hover: string;
+        selected: string;
+        hoverOnSelected: string;
+      };
     };
   }
 

@@ -1,4 +1,4 @@
-import { ButtonBase, Chip, Grid, IconButton, styled } from '@mui/material';
+import { Box, ButtonBase, Chip, Grid, IconButton, styled } from '@mui/material';
 import { HorizontalSplit as HorizontalSplitIcon } from '@mui/icons-material';
 
 export const HeaderCategoryChip = styled(Chip)(({ theme }) => ({
@@ -24,6 +24,8 @@ export const LibraryHeaderContainer = styled(Grid, {
   position: 'sticky',
   top: '0',
   rowGap: '16px',
+  borderTopRightRadius: '8px',
+  borderTopLeftRadius: '8px',
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: theme.palette.background.section,
@@ -64,5 +66,19 @@ export const LibraryHeaderButton = styled(ButtonBase)(({ theme }) => ({
   '&.shadow': {
     boxShadow: '6px 6px 10px 0 black',
     zIndex: 1,
+  },
+}));
+
+export const StyledLibraryTableHeader = styled(Box)(({ theme }) => ({
+  display: 'grid',
+  margin: '0 -8px',
+  gridTemplateColumns: '60% 20% 20%',
+  paddingBottom: '5px',
+  borderBottom: `1px solid ${theme.palette.background.slider}`,
+
+  '& > p': {
+    fontSize: '0.75rem',
+    fontWeight: 'bold',
+    color: theme.palette.secondary.main,
   },
 }));

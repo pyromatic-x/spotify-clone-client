@@ -3,13 +3,13 @@ import { useUnit } from 'effector-react';
 import { Typography } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import { LibrarySortings } from '../types';
-import { $sort, changeSort } from '../effect';
+import { $filter, filter } from '../effect';
 import Popover from '../../common/popover';
 import { StyledSortButton } from './styled';
 import { StyledPopoverItem } from '../../common/popover/styled';
 
 const LibrarySort = () => {
-  const sort = useUnit($sort);
+  const { sort } = useUnit($filter);
 
   return (
     <Popover
@@ -28,7 +28,7 @@ const LibrarySort = () => {
           {Object.values(LibrarySortings)
             .filter((t) => typeof t === 'string')
             .map((t: any) => (
-              <StyledPopoverItem onClick={() => changeSort(t)} key={t}>
+              <StyledPopoverItem onClick={() => filter({ sort: t })} key={t}>
                 <Typography color={sort === t ? 'green' : 'white'}>{t}</Typography>
                 {sort === t && <CheckIcon color="green" />}
               </StyledPopoverItem>

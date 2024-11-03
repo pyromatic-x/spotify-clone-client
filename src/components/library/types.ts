@@ -1,7 +1,7 @@
 export enum LibraryCategories {
   'album',
   'playlist',
-  'musician',
+  'artist',
 }
 
 export enum LibrarySortings {

@@ -1,34 +1,38 @@
 import { useUnit } from 'effector-react';
-import { $collapsed, $shadow, $width, changeWidth } from '../effect';
+import { $UI, changeWidth, filter } from '../effect';
 import { Grid, Tooltip, Typography } from '@mui/material';
 import { LibraryHeaderButton, LibraryHeaderContainer, LibraryHeaderIcon } from './styled';
-import { libraryUIConfig } from '../constants';
 import { Add } from '@mui/icons-material';
 import ButtonWithTooltip from '../../common/buttons/ButtonWithTooltip';
 import { ArrowForward as ArrowMore, ArrowBack as ArrowLess } from '@mui/icons-material';
 import LibraryHeaderCategories from './Categories';
+import { LibraryUIConfig } from '../constants';
+import LibrarySearch from '../search';
+import LibrarySort from '../sort';
+import LibraryTableHeader from './TableHeader';
 
 const LibraryHeader = () => {
-  const collapsed = useUnit($collapsed);
-  const shadow = useUnit($shadow);
-  const width = useUnit($width);
+  const { shadow, width } = useUnit($UI);
+
+  const { default: def, min, max } = LibraryUIConfig;
 
   const handleOnTitleClick = () => {
-    changeWidth(collapsed ? libraryUIConfig.default : libraryUIConfig.collapse);
+    changeWidth(width.name !== 'min' ? min : def);
+    if (width.name !== 'min') filter({ search: '' });
   };
 
   const handleOnArrowClick = () => {
-    changeWidth(width > libraryUIConfig.default ? libraryUIConfig.collapse : libraryUIConfig.default);
+    changeWidth(width.name === 'default' ? max : def);
   };
 
   return (
     <LibraryHeaderContainer shadow={shadow}>
       <Grid container justifyContent="space-between" wrap="nowrap">
-        <Tooltip title={`${collapsed ? 'Expand' : 'Collapse'} Your Library`}>
+        <Tooltip title={`${width.name === 'min' ? 'Expand' : 'Collapse'} Your Library`}>
           <Grid container alignItems="center" width="max-content">
             <LibraryHeaderButton disableRipple onClick={handleOnTitleClick}>
               <LibraryHeaderIcon />
-              {!collapsed && (
+              {width.name !== 'min' && (
                 <Typography fontWeight="bold" fontSize="1.05rem" ml={1}>
                   Your Library
                 </Typography>
@@ -36,7 +40,7 @@ const LibraryHeader = () => {
             </LibraryHeaderButton>
           </Grid>
         </Tooltip>
-        {!collapsed && (
+        {width.name !== 'min' && (
           <Grid container alignItems="center" width="max-content">
             <ButtonWithTooltip
               title="Create playlist or folder"
@@ -46,15 +50,26 @@ const LibraryHeader = () => {
             />
             <ButtonWithTooltip
               disableTouchRipple
-              title={width > libraryUIConfig.default ? 'Show more' : 'Show less'}
-              Icon={width > libraryUIConfig.default ? ArrowMore : ArrowLess}
+              title={width.name === 'default' ? 'Show more' : 'Show less'}
+              Icon={width.name === 'default' ? ArrowMore : ArrowLess}
               onClick={handleOnArrowClick}
               placement="top"
             />
           </Grid>
         )}
       </Grid>
-      {!collapsed && <LibraryHeaderCategories />}
+      {width.name !== 'min' && (
+        <Grid container alignItems="center" justifyContent="space-between" wrap="nowrap">
+          <LibraryHeaderCategories />
+          {width.name === 'max' && (
+            <Grid container alignItems="center" wrap="nowrap" justifyContent="end" gap={1}>
+              <LibrarySearch direction="openToLeft" />
+              <LibrarySort />
+            </Grid>
+          )}
+        </Grid>
+      )}
+      {width.name === 'max' && <LibraryTableHeader />}
     </LibraryHeaderContainer>
   );
 };

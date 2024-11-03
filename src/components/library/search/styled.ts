@@ -1,45 +1,44 @@
-import { Box, FormControl, IconButton, TextField, styled } from '@mui/material';
-
-export const LibrarySearchWrapper = styled(Box, { shouldForwardProp: (prop) => prop !== 'moveLeft' })<{
-  moveLeft: boolean;
-}>(({ moveLeft = false }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  position: 'relative',
-  width: '100%',
-  left: 0,
-  transition: 'left 0.2s ease',
-
-  ...(moveLeft && {
-    left: '-124px',
-  }),
-}));
+import { FormControl, IconButton, TextField, styled } from '@mui/material';
 
 export const LibrarySearchContainer = styled(FormControl, {
-  shouldForwardProp: (prop) => prop !== 'moveLeft' && prop !== 'hide',
+  shouldForwardProp: (prop) => prop !== 'moveToLeft',
 })<{
-  moveLeft: boolean;
-  hide: boolean;
-}>(({ moveLeft = false, hide = false }) => ({
-  transition: '0.2s ease',
-  width: moveLeft ? '150px' : 'auto',
-  opacity: '1',
-  pointerEvents: 'all',
-  position: 'absolute',
+  moveToLeft?: boolean;
+}>(({ moveToLeft = false }) => ({
+  position: 'relative',
 
-  ...(hide && {
-    width: '0px',
-    opacity: '0',
-    pointerEvents: 'none',
+  transform: 'translateX(0px)',
+  transition: 'transform 0.3s ease',
+
+  ...(moveToLeft && {
+    transform: 'translateX(-160px)',
   }),
 }));
 
-export const StyledSearchInput = styled(TextField)(({ theme }) => ({
+export const StyledSearchInput = styled(TextField, {
+  shouldForwardProp: (prop) => prop !== 'show',
+})<{
+  show: boolean;
+}>(({ theme, show = false }) => ({
   backgroundColor: theme.palette.background.popover,
   border: 'none',
   borderRadius: '6px',
   maxWidth: '190px',
+  position: 'absolute',
+  left: 0,
+  transition: 'all 0.3s ease',
+
+  ...(show
+    ? {
+        width: '190px',
+        opacity: 1,
+        pointerEvents: 'all',
+      }
+    : {
+        width: '0px',
+        opacity: 0,
+        pointerEvents: 'none',
+      }),
 
   '& .MuiInputBase-root': {
     height: '32px',
@@ -64,11 +63,7 @@ export const StyledSearchInput = styled(TextField)(({ theme }) => ({
   },
 }));
 
-export const StyledSearchButton = styled(IconButton, {
-  shouldForwardProp: (prop) => prop !== 'hide',
-})<{
-  hide: boolean;
-}>(({ hide = false }) => ({
+export const StyledSearchButton = styled(IconButton)(() => ({
   padding: '0',
   minWidth: 'auto',
   width: '31px',
@@ -80,9 +75,4 @@ export const StyledSearchButton = styled(IconButton, {
   '& svg': {
     fontSize: '1.3rem',
   },
-
-  ...(!hide && {
-    opacity: '0',
-    pointerEvents: 'none',
-  }),
 }));

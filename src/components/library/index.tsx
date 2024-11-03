@@ -1,42 +1,38 @@
-import { Grid, useMediaQuery, useTheme } from '@mui/material';
-import { useEffect } from 'react';
+import { Grid } from '@mui/material';
 import { LibraryContainer } from './styled';
 import { useUnit } from 'effector-react';
-import { $collapsed, $filter, $libraryItems, $width, changeWidth, getLibraryItems } from './effect';
-import { libraryUIConfig } from './constants';
+import { $UI, toggleShadow } from './effect';
 import LibraryHeader from './header';
 import LibrarySearch from './search';
 import LibrarySort from './sort';
+import LibraryList from './list';
+import { LibraryListConrainer } from './list/styled';
 
 const Library = () => {
-  const width = useUnit($width);
-  const collapsed = useUnit($collapsed);
+  const { width } = useUnit($UI);
 
-  const filter = useUnit($filter);
-  const items = useUnit($libraryItems);
-
-  console.log(filter, items);
-
-  const theme = useTheme();
-  const collapseMediaQuery = useMediaQuery(theme.breakpoints.between('xs', 'md'));
-
-  useEffect(() => {
-    if (!collapsed && collapseMediaQuery) changeWidth(libraryUIConfig.minWidth);
-  }, [collapseMediaQuery, collapsed]);
-
-  useEffect(() => {
-    getLibraryItems();
-  }, []);
+  const handleScroll = (event: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    toggleShadow(event.currentTarget.scrollTop > 1);
+  };
 
   return (
-    <LibraryContainer resizedWidth={width} mr="8px">
+    <LibraryContainer resizedWidth={width.value} mr="8px">
       <LibraryHeader />
-      {!collapsed && (
-        <Grid container alignItems="center" justifyContent="space-between" padding="0 22px" wrap="nowrap">
-          <LibrarySearch />
-          <LibrarySort />
-        </Grid>
-      )}
+      <LibraryListConrainer onScroll={handleScroll}>
+        {width.name === 'default' && (
+          <Grid
+            container
+            alignItems="center"
+            justifyContent="space-between"
+            padding="0px 22px 8px 22px"
+            wrap="nowrap"
+          >
+            <LibrarySearch />
+            <LibrarySort />
+          </Grid>
+        )}
+        <LibraryList />
+      </LibraryListConrainer>
     </LibraryContainer>
   );
 };

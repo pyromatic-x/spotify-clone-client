@@ -1,21 +1,25 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
-import { libraryUIConfig } from './constants';
+import { LibraryUIConfig } from './constants';
 import { LibraryCategories, LibrarySortings } from './types';
-import { LibraryItemsResponse } from '../../api/types';
+import { LibraryItemsDto } from '../../api/types';
 import { API } from '../../api';
 import { sortLibraryItems } from './utils';
 
 export const reset = createEvent();
 
+// #region items
 export const getLibraryItems = createEvent();
 
-export const $libraryItems = createStore<LibraryItemsResponse | null>(null);
-export const $libraryItemsDefault = createStore<LibraryItemsResponse | null>(null);
+export const $libraryItems = createStore<LibraryItemsDto | null>(null);
+export const $libraryItemsDefault = createStore<LibraryItemsDto | null>(null);
 export const $libraryItemsError = createStore<string | null>(null);
 
-export const getLibraryItemsFx = createEffect<unknown, LibraryItemsResponse, Error>(async () => {
+export const getLibraryItemsFx = createEffect<unknown, LibraryItemsDto, Error>(async () => {
   const { data } = await API.library.get();
-  return data;
+  return data.map((t) => ({
+    ...t,
+    cover: 'https://lastfm.freetls.fastly.net/i/u/ar0/b98e73f45eb766a8f989ffec41839492.jpg',
+  }));
 });
 
 sample({
@@ -32,64 +36,53 @@ sample({
   fn: (e: any) => e?.message,
   target: $libraryItemsError,
 });
+// #endregion items
 
+// #region UI
 export const toggleShadow = createEvent<boolean>();
-export const $shadow = createStore(false).on(toggleShadow, (_, payload) => payload);
+export const changeWidth = createEvent<LibraryUIConfig>();
 
-export const changeWidth = createEvent<number>();
-
-export const $collapsed = createStore(false);
-export const $expanded = createStore(false);
-export const $width = createStore<number>(libraryUIConfig.default).on(changeWidth, (_, payload) => {
-  const { minWidth, maxWidth, collapse } = libraryUIConfig;
-
-  if (payload <= collapse) return minWidth;
-  if (payload >= maxWidth) return maxWidth;
-  if (payload <= minWidth) return minWidth;
-
-  return payload;
-});
-
-sample({
-  clock: changeWidth,
-  fn: (state) => state <= libraryUIConfig.collapse,
-  target: $collapsed,
-});
-sample({
-  clock: changeWidth,
-  fn: (state) => state >= libraryUIConfig.expand,
-  target: $expanded,
-});
-
-export const changeSort = createEvent<keyof typeof LibrarySortings>();
-export const $sort = createStore<keyof typeof LibrarySortings>('Alphabetical').on(
-  changeSort,
-  (_, payload) => payload,
-);
-
-sample({
-  clock: changeSort,
-  source: $libraryItems,
-  fn: (items, newSort) => {
-    sortLibraryItems(items!, newSort);
-    return items;
+export const $UI = createStore<{
+  shadow: boolean;
+  width: { value: LibraryUIConfig; name: keyof typeof LibraryUIConfig };
+}>({
+  shadow: false,
+  width: {
+    value: LibraryUIConfig.default,
+    name: LibraryUIConfig[LibraryUIConfig.default] as keyof typeof LibraryUIConfig,
   },
-  target: $libraryItems,
-});
+})
+  .on(toggleShadow, (state, payload) => ({ ...state, shadow: payload }))
+  .on(changeWidth, (state, payload) => ({
+    ...state,
+    width: { value: payload, name: LibraryUIConfig[payload] as keyof typeof LibraryUIConfig },
+  }));
 
-export const filter = createEvent<{ search?: string; category?: keyof typeof LibraryCategories | null }>();
-export const $filter = createStore<{ search: string; category: keyof typeof LibraryCategories | null }>({
+// #endregion
+
+// #region filters
+export const filter = createEvent<{
+  search?: string;
+  category?: keyof typeof LibraryCategories | null;
+  sort?: keyof typeof LibrarySortings;
+}>();
+export const $filter = createStore<{
+  search: string;
+  category: keyof typeof LibraryCategories | null;
+  sort: keyof typeof LibrarySortings;
+}>({
   search: '',
   category: null,
+  sort: 'Alphabetical',
 }).on(filter, (state, payload) => ({ ...state, ...payload }));
 
 sample({
   clock: filter,
-  source: { $libraryItemsDefault, $sort, $filter },
-  fn: ({ $libraryItemsDefault, $sort, $filter }) => {
+  source: { $libraryItemsDefault, $filter },
+  fn: ({ $libraryItemsDefault, $filter }) => {
     let items = [...$libraryItemsDefault!];
 
-    const { search, category } = $filter;
+    const { search, category, sort } = $filter;
 
     if (search) {
       const regex = new RegExp(`${search}`, 'gi');
@@ -100,18 +93,16 @@ sample({
       items = items.filter((t) => t._collection === category);
     }
 
-    if ($sort) {
-      sortLibraryItems(items!, $sort);
+    if (sort) {
+      sortLibraryItems(items, sort);
     }
 
     return items;
   },
   target: $libraryItems,
 });
+// #endregion
 
 // $collapsed.watch((state) => {
-//   if (state) search(null);
+//   if (state) filter({ search: '', category: null });
 // });
-// // #endregion
-
-// // #region sort

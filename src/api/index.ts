@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { AuthUserParams, AuthUserResponse, LibraryItemsResponse } from './types';
+import { AuthUserDto, AuthUserPayload, LibraryItemsDto } from './types';
 
 interface FullRequestParams {
   path: string;
@@ -32,7 +32,7 @@ class HttpClient {
 class Api_Service extends HttpClient {
   library = {
     get: () =>
-      this.request<LibraryItemsResponse>({
+      this.request<LibraryItemsDto>({
         path: '/library',
         method: 'GET',
       }),
@@ -45,8 +45,8 @@ class Api_Service extends HttpClient {
       }),
   };
   auth = {
-    login: (data: AuthUserParams) =>
-      this.request<AuthUserResponse>({
+    login: (data: AuthUserPayload) =>
+      this.request<AuthUserDto>({
         path: '/auth/login',
         method: 'POST',
         body: data,

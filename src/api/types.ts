@@ -1,25 +1,25 @@
 export enum CollectionEnums {
   'album' = 'album',
   'playlist' = 'playlist',
-  'musician' = 'musician',
+  'artist' = 'artist',
   'user' = 'user',
 }
 
 type IsoDateString = string & { format: 'yyyy-MM-ddTHH:mm:ss.SSSZ' };
 
-export interface AuthUserResponse {
+export interface AuthUserDto {
   _id: string;
   username: string;
   avatar: string;
 }
-export interface AuthUserParams {
+export interface AuthUserPayload {
   username: string;
   password: string;
 }
 
-export type LibraryItemsResponse = Array<{
+export type LibraryItemDto = {
   _id: string;
-  _collection: Extract<CollectionEnums, 'album' | 'playlist' | 'musician'>;
+  _collection: 'album' | 'playlist' | 'artist';
   lastPlayedAt?: IsoDateString;
   addedAt: IsoDateString;
   cover: string;
@@ -27,4 +27,6 @@ export type LibraryItemsResponse = Array<{
   author?: string;
   pin?: IsoDateString;
   tracksCount?: number;
-}>;
+};
+
+export type LibraryItemsDto = Array<LibraryItemDto>;
