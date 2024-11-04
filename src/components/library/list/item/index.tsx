@@ -1,10 +1,10 @@
 import { useUnit } from 'effector-react';
 import { $UI } from '../../effect';
-import { LibraryItemDto } from '../../../../api/types';
 import { LibraryItemCover, StyledLibraryItem } from './styled';
 import { Grid, Typography, TypographyProps } from '@mui/material';
 import LibraryItemMeta from './Meta';
 import { getDateDiff } from '../../utils';
+import { LibraryItemDto } from '../../../../api/dto/library';
 
 interface DateColumnProps extends TypographyProps {
   date?: string;

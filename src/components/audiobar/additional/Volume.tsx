@@ -1,8 +1,7 @@
 import { VolumeDown, VolumeOff } from '@mui/icons-material';
-import { Grid } from '@mui/material';
+import { Grid, Slider } from '@mui/material';
 import IconWithTooltip from './Icon';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
-import Slider from '../../common/slider';
 
 const Volume = () => {
   const { volume, muted, setVolume, mute } = useGlobalAudioPlayer();

@@ -3,7 +3,6 @@ import { InputAdornment, Tooltip } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Divider, StyledInput } from './styled';
-import { clearSearchResults, search } from '../../../pages/browse/effect';
 
 const Search = () => {
   const [value, setValue] = useState('');
@@ -19,14 +18,12 @@ const Search = () => {
 
     if (!!q && value !== q) {
       setValue(searchParams.get('q') ?? '');
-      search(q ?? '');
     }
   }, [location.search, value]);
 
   useEffect(() => {
     if (!isSearchPage) {
       setValue('');
-      clearSearchResults();
     }
   }, [location.pathname]);
 
@@ -35,7 +32,6 @@ const Search = () => {
 
     setValue(event.target.value);
     setSearchParams({ q: val });
-    search(val);
   };
 
   const handleOnClick = () => !isSearchPage && navigate('/search');
@@ -46,7 +42,6 @@ const Search = () => {
     if (!isSearchPage) navigate('/search');
     else {
       setValue('');
-      clearSearchResults();
       setSearchParams({});
     }
   };

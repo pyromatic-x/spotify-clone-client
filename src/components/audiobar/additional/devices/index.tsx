@@ -4,7 +4,6 @@ import { List, Typography } from '@mui/material';
 import { useState } from 'react';
 import { ContentRow, PopoverContent, RowText, StyledListItem, StyledPopover } from './styled';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
-import PlayingAnimation from '../../../common/playingAnimation';
 import { generateUUID } from '../../../../utils/strings';
 
 const Devices = () => {
@@ -43,11 +42,7 @@ const Devices = () => {
       >
         <PopoverContent>
           <ContentRow>
-            {playing ? (
-              <PlayingAnimation width="24px" height="24px" gap="4px" />
-            ) : (
-              <Computer sx={{ fontSize: '2rem' }} color="green" />
-            )}
+            {playing ? <></> : <Computer sx={{ fontSize: '2rem' }} color="green" />}
             <RowText>
               <Typography fontWeight="bold">Curent device</Typography>
               <Typography component="span">This computer</Typography>

@@ -1,20 +1,19 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { LibraryUIConfig } from './constants';
 import { LibraryCategories, LibrarySortings } from './types';
-import { LibraryItemsDto } from '../../api/types';
 import { API } from '../../api';
 import { sortLibraryItems } from './utils';
+import { loginFx } from '../root/effect';
+import { LibraryDto } from '../../api/dto/library';
 
 export const reset = createEvent();
 
 // #region items
-export const getLibraryItems = createEvent();
-
-export const $libraryItems = createStore<LibraryItemsDto | null>(null);
-export const $libraryItemsDefault = createStore<LibraryItemsDto | null>(null);
+export const $libraryItems = createStore<LibraryDto | null>(null);
+export const $libraryItemsDefault = createStore<LibraryDto | null>(null);
 export const $libraryItemsError = createStore<string | null>(null);
 
-export const getLibraryItemsFx = createEffect<unknown, LibraryItemsDto, Error>(async () => {
+export const getLibraryItemsFx = createEffect<unknown, LibraryDto, Error>(async () => {
   const { data } = await API.library.get();
   return data.map((t) => ({
     ...t,
@@ -23,7 +22,7 @@ export const getLibraryItemsFx = createEffect<unknown, LibraryItemsDto, Error>(a
 });
 
 sample({
-  clock: getLibraryItems,
+  clock: loginFx.doneData,
   target: getLibraryItemsFx,
 });
 

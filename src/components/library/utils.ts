@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { LibraryItemDto } from '../../api/types';
 import { LibrarySortings } from './types';
+import { LibraryItemDto } from '../../api/dto/library';
 
 const compareByName = (a: LibraryItemDto, b: LibraryItemDto): number => a.name.localeCompare(b.name);
 

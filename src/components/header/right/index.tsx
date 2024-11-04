@@ -1,24 +1,23 @@
 import { Box, Grid, Tooltip } from '@mui/material';
-import { Groups, Notifications } from '@mui/icons-material';
-import ButtonWithTooltip from '../../common/buttons/ButtonWithTooltip';
 import { ProfileIcon } from './styled';
 import Avatar from '../../../assets/images/profile_avatar.jpg';
+import { useUnit } from 'effector-react';
+import { $USER } from '../../root/effect';
 // import { useLocation, useNavigate } from 'react-router-dom';
 
 const HeaderRightPart = () => {
-  // const navigate = useNavigate();
-  // const location = useLocation();
+  const user = useUnit($USER);
 
   return (
     <Grid container alignItems="center" width="auto" flexWrap="nowrap" gap={1.2}>
-      <ButtonWithTooltip Icon={Notifications} title="What's New" disableRipple />
-      <ButtonWithTooltip Icon={Groups} title="What's New" disableRipple />
-      <Tooltip title="Pyromatic">
+      {/* <ButtonWithTooltip Icon={Notifications} title="What's New" disableRipple /> */}
+      {/* <ButtonWithTooltip Icon={Groups} title="What's New" disableRipple /> */}
+      <Tooltip title={user?.username}>
         <ProfileIcon disableRipple>
           <Box
             component="img"
             src={Avatar}
-            alt="pyromatic's profile picture"
+            alt={`${user?.username}'s profile picture`}
             width="32px"
             height="32px"
             borderRadius="50%"

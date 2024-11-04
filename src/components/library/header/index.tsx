@@ -2,9 +2,6 @@ import { useUnit } from 'effector-react';
 import { $UI, changeWidth, filter } from '../effect';
 import { Grid, Tooltip, Typography } from '@mui/material';
 import { LibraryHeaderButton, LibraryHeaderContainer, LibraryHeaderIcon } from './styled';
-import { Add } from '@mui/icons-material';
-import ButtonWithTooltip from '../../common/buttons/ButtonWithTooltip';
-import { ArrowForward as ArrowMore, ArrowBack as ArrowLess } from '@mui/icons-material';
 import LibraryHeaderCategories from './Categories';
 import { LibraryUIConfig } from '../constants';
 import LibrarySearch from '../search';
@@ -14,16 +11,16 @@ import LibraryTableHeader from './TableHeader';
 const LibraryHeader = () => {
   const { shadow, width } = useUnit($UI);
 
-  const { default: def, min, max } = LibraryUIConfig;
+  const { default: def, min } = LibraryUIConfig;
 
   const handleOnTitleClick = () => {
     changeWidth(width.name !== 'min' ? min : def);
     if (width.name !== 'min') filter({ search: '' });
   };
 
-  const handleOnArrowClick = () => {
-    changeWidth(width.name === 'default' ? max : def);
-  };
+  // const handleOnArrowClick = () => {
+  //   changeWidth(width.name === 'default' ? max : def);
+  // };
 
   return (
     <LibraryHeaderContainer shadow={shadow}>
@@ -42,7 +39,7 @@ const LibraryHeader = () => {
         </Tooltip>
         {width.name !== 'min' && (
           <Grid container alignItems="center" width="max-content">
-            <ButtonWithTooltip
+            {/* <ButtonWithTooltip
               title="Create playlist or folder"
               Icon={Add}
               disableTouchRipple
@@ -54,7 +51,7 @@ const LibraryHeader = () => {
               Icon={width.name === 'default' ? ArrowMore : ArrowLess}
               onClick={handleOnArrowClick}
               placement="top"
-            />
+            /> */}
           </Grid>
         )}
       </Grid>

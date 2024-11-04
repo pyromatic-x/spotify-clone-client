@@ -1,8 +1,7 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, Slider, Typography } from '@mui/material';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
 import { formatDuration } from '../../../utils/time';
 import { useEffect, useRef, useState } from 'react';
-import Slider from '../../common/slider';
 
 const Seeker = () => {
   const ref = useRef(null);

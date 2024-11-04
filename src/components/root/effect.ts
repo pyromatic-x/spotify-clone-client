@@ -1,24 +1,21 @@
-import { createEvent, createStore } from 'effector';
+import { createEvent, createStore, sample, createEffect } from 'effector';
 
-export const setOutletWidth = createEvent<number>();
-export const $outletWidth = createStore(0).on(setOutletWidth, (_, payload) => payload);
+import { API } from '../../api';
+import { AuthUserDto, AuthUserPayload } from '../../api/dto/auth';
 
-const SECTION_ITEMS_COUNT_BREAKPOINTS = [
-  { bp: 1840, count: 10 },
-  { bp: 1660, count: 9 },
-  { bp: 1480, count: 8 },
-  { bp: 1300, count: 7 },
-  { bp: 1100, count: 6 },
-  { bp: 930, count: 5 },
-  { bp: 740, count: 4 },
-  { bp: 1, count: 3 },
-];
+export const login = createEvent<AuthUserPayload>();
+export const $USER = createStore<AuthUserDto | null>(null);
+export const loginFx = createEffect<AuthUserPayload, AuthUserDto, unknown>(async (params) => {
+  const { data } = await API.auth.login(params);
+  return data;
+});
 
-export const setSectionItemsCountByWidth = createEvent<number>();
-export const $sectionItemsCount = createStore(1).on(setSectionItemsCountByWidth, (state, width) => {
-  const { count } = SECTION_ITEMS_COUNT_BREAKPOINTS.find((t) => t.bp < width)!;
+sample({
+  clock: login,
+  target: loginFx,
+});
 
-  if (state === count) return state;
-
-  return count;
+sample({
+  clock: loginFx.doneData,
+  target: $USER,
 });

@@ -17,9 +17,3 @@ export const RootContainer = styled(Box)(({ theme }) => ({
     gridTemplateColumns: '100%',
   },
 }));
-
-export const StyledOutletContainer = styled(Box)({
-  height: '100%',
-  overflow: 'scroll',
-  position: 'relative',
-});

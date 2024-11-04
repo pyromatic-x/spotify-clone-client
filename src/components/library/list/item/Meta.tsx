@@ -1,9 +1,9 @@
 import { useUnit } from 'effector-react';
 import { $filter } from '../../effect';
-import { LibraryItemDto } from '../../../../api/types';
 import { Grid, Typography } from '@mui/material';
 import { capitalizeFirstLetter } from '../../../../utils/strings';
 import { PinIcon } from './styled';
+import { LibraryItemDto } from '../../../../api/dto/library';
 
 const LibraryItemMeta = ({ item }: { item: LibraryItemDto }) => {
   const { _collection, name, author, tracksCount, pin } = item;
