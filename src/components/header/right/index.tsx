@@ -1,6 +1,5 @@
 import { Box, Grid, Tooltip } from '@mui/material';
 import { ProfileIcon } from './styled';
-import Avatar from '../../../assets/images/profile_avatar.jpg';
 import { useUnit } from 'effector-react';
 import { $USER } from '../../root/effect';
 // import { useLocation, useNavigate } from 'react-router-dom';
@@ -16,7 +15,7 @@ const HeaderRightPart = () => {
         <ProfileIcon disableRipple>
           <Box
             component="img"
-            src={Avatar}
+            src={''}
             alt={`${user?.username}'s profile picture`}
             width="32px"
             height="32px"

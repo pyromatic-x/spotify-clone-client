@@ -99,6 +99,14 @@ class Api_Service extends HttpClient {
       }),
   };
 
+  track = {
+    play: (id: string) =>
+      this.request({
+        path: `/track/${id}`,
+        method: 'GET',
+      }),
+  };
+
   follow = {
     follow: (data: FollowPayload) =>
       this.request({

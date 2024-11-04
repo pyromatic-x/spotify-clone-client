@@ -1,8 +1,6 @@
 import { Box, Button, Grid, Typography, styled, useMediaQuery, useTheme } from '@mui/material';
 import { useNavigate, useRouteError } from 'react-router-dom';
 
-import vinylImage from '../assets/images/vinyl.png';
-
 const StyledButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.light,
   color: theme.palette.common.white,
@@ -48,7 +46,7 @@ export default function Error() {
       <Grid item lg={6}>
         <Box
           component="img"
-          src={vinylImage}
+          src={''}
           alt={'Error Page Image'}
           mb={md ? 4 : 0}
           width={md ? 200 : '100%'}
