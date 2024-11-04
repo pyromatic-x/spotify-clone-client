@@ -15,10 +15,7 @@ export const $libraryItemsError = createStore<string | null>(null);
 
 export const getLibraryItemsFx = createEffect<unknown, LibraryDto, Error>(async () => {
   const { data } = await API.library.get();
-  return data.map((t) => ({
-    ...t,
-    cover: 'https://lastfm.freetls.fastly.net/i/u/ar0/b98e73f45eb766a8f989ffec41839492.jpg',
-  }));
+  return data;
 });
 
 sample({
