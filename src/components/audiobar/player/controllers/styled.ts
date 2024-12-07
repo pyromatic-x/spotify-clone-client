@@ -11,13 +11,13 @@ export const ControlButton = styled(IconButton, {
   transition: '0.2s ease',
   '& svg': {
     fontSize: '22px',
-    fill: active ? theme.palette.green : theme.palette.secondary,
+    fill: active ? theme.palette.primary.main : theme.palette.secondary,
     opacity: active ? 0.85 : 1,
   },
   '&:hover': {
     backgroundColor: 'transparent',
     '& svg': {
-      fill: active ? theme.palette.green : theme.palette.common.white,
+      fill: active ? theme.palette.primary.main : theme.palette.common.white,
       opacity: 1,
     },
   },
@@ -31,7 +31,7 @@ export const ControlButton = styled(IconButton, {
       width: '4px',
       height: '4px',
       borderRadius: '50%',
-      backgroundColor: theme.palette.green,
+      backgroundColor: theme.palette.primary.main,
     },
   }),
 }));
@@ -47,7 +47,7 @@ export const LoopButton = styled(ControlButton, {
       top: '10px',
       fontSize: '7px',
       fontWeight: 'bold',
-      color: theme.palette.green,
+      color: theme.palette.primary.main,
     },
   }),
 }));

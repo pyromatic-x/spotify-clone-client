@@ -9,5 +9,5 @@ export const LibraryContainer = styled(Box, {
   display: 'flex',
   borderRadius: '8px',
   flexDirection: 'column',
-  backgroundColor: theme.palette.background.section,
+  backgroundColor: theme.palette.background.main,
 }));

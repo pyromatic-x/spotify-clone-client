@@ -1,7 +1,6 @@
 import { useUnit } from 'effector-react';
 import { $filter, filter } from '../effect';
-import { Stack } from '@mui/material';
-import { HeaderCategoryChip, HeaderCategoryIconButton } from './styled';
+import { Chip, IconButton, Stack } from '@mui/material';
 import { Clear as ClearIcon } from '@mui/icons-material';
 import { LibraryCategories } from '../types';
 import { capitalizeFirstLetter } from '../../../utils/strings';
@@ -12,13 +11,13 @@ const LibraryHeaderCategories = () => {
   return (
     <Stack direction="row" spacing={1} alignItems="center" margin="0 -4px">
       {!!category && (
-        <HeaderCategoryIconButton onClick={() => filter({ category: null })}>
+        <IconButton onClick={() => filter({ category: null })} variant="filled">
           <ClearIcon />
-        </HeaderCategoryIconButton>
+        </IconButton>
       )}
 
       {!!category ? (
-        <HeaderCategoryChip
+        <Chip
           label={capitalizeFirstLetter(category)}
           onClick={() => filter({ category: null })}
           className="active"
@@ -26,12 +25,8 @@ const LibraryHeaderCategories = () => {
       ) : (
         Object.values(LibraryCategories)
           .filter((t) => typeof t === 'string')
-          .map((t: any) => (
-            <HeaderCategoryChip
-              key={t}
-              label={capitalizeFirstLetter(t)}
-              onClick={() => filter({ category: t })}
-            />
+          .map((t) => (
+            <Chip key={t} label={capitalizeFirstLetter(t)} onClick={() => filter({ category: t })} />
           ))
       )}
     </Stack>

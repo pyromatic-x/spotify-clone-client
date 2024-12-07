@@ -1,50 +1,45 @@
 import { common } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
-import GothamTTF from '../fonts/Gotham-Black.otf';
-import GothamBoldTTF from '../fonts/Gotham-Bold.otf';
+import CircularBlack from '../fonts/Circular-Black.otf';
+import CircularMedium from '../fonts/Circular-Medium.otf';
+import CircularLight from '../fonts/Circular-Light.otf';
 
 const global = createTheme({
   typography: {
-    fontFamily: 'Gotham, sans-serif',
+    fontFamily: 'Circular, sans-serif',
+
     button: {
       textTransform: 'none',
     },
   },
   palette: {
     mode: 'dark',
+    primary: {
+      main: '#1ED760',
+    },
     background: {
-      section: '#121212',
-      card: '#100f0f',
-      popover: '#282828',
-      button: '#242424',
+      main: '#121212',
+      secondary: '#282828',
       slider: '#4d4d4d',
     },
-    library: {
-      list: {
-        hover: '#1F1F1F',
-        selected: '#2A2A2A',
-        hoverOnSelected: '#484848',
-      },
-    },
     hover: {
-      card: '#1a1a1a',
+      main: '#1F1F1F',
+      secondary: '#3e3e3e',
       track: '#2a2a2a',
-      popover: '#3E3E3E',
-      button: '#1a1a1a',
+      dark: '#1e1e1e',
+      library: '#484848',
+      chip: '#333333',
     },
     text: {
       primary: common.white,
-      secondary: '#b3b3b3',
     },
     secondary: {
-      main: '#8d8d8d',
-      dark: '#100f0f',
-      light: '#636363',
+      main: '#b0b0b0',
     },
-    green: '#1cd760',
-    grandis: '#FFCC66',
-    iris: '#211260',
+  },
+  shape: {
+    borderRadius: 16,
   },
   breakpoints: {
     values: {
@@ -64,21 +59,29 @@ export default createTheme(
       MuiCssBaseline: {
         styleOverrides: `
         @font-face {
-          font-family: 'Gotham';
+          font-family: 'Circular Black';
           font-style: normal;
           font-display: swap;
-          font-weight: 400;
-          src: local('Gotham'), local('Gotham-Black'), url(${GothamTTF}) format('otf');
+          font-weight: 500, 600, 700;
+          src: local('Circular Black'), url(${CircularBlack}) format('woff');
           unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
         }
         @font-face {
-          font-family: 'Gotham';
+          font-family: 'Circular Medium';
           font-style: normal;
           font-display: swap;
-          font-weight: 600;
-          src: local('Gotham'), local('Gotham-Bold'), url(${GothamBoldTTF}) format('otf');
+          font-weight: 400;
+          src: local('Circular Medium'), url(${CircularMedium}) format('woff');
           unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
-        },
+        }
+        @font-face {
+          font-family: 'Circular Light';
+          font-style: normal;
+          font-display: swap;
+          font-weight: 300;
+          src: local('Circular Light'), url(${CircularLight}) format('woff');
+          unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF;
+        }
 
         body {
           background-color: ${global.palette.common.black}
@@ -93,55 +96,148 @@ export default createTheme(
           -ms-user-select: none; /* IE 10 and IE 11 */
           user-select: none; /* Standard syntax */
         }
-
-        .MuiTooltip-tooltip {
-          background: #282828 !important;
-        }
       `,
       },
       MuiTooltip: {
         defaultProps: {
           placement: 'top',
-          PopperProps: {
-            modifiers: [
-              {
-                name: 'offset',
-                options: {
-                  offset: [0, -10],
-                },
-              },
-            ],
+          enterDelay: 600,
+          leaveDelay: 0,
+          enterNextDelay: 600,
+          disableFocusListener: true,
+          disableTouchListener: true,
+          TransitionProps: {
+            exit: false,
           },
-          enterDelay: 400,
-          enterNextDelay: 400,
-          disableTouchListener: false,
         },
-      },
-      MuiLink: {
-        defaultProps: {
-          sx: { cursor: 'pointer' },
-        },
-      },
-      MuiButton: {
         styleOverrides: {
-          outlined: {
-            color: global.palette.common.white,
-            fontWeight: 'bold',
-            fontSize: '0.9rem',
-            textTransform: 'none',
-            backgroundColor: 'transparent',
-            borderColor: global.palette.hover.popover,
-            borderRadius: 16,
-            padding: '3px 15px',
-            transition: 'none',
-
-            '&:hover': {
-              backgroundColor: 'transparent',
-              borderColor: global.palette.common.white,
+          tooltip: {
+            borderRadius: '3px',
+            fontSize: '0.8rem',
+            fontWeight: 'normal',
+            backgroundColor: global.palette.background.secondary,
+            boxShadow: global.shadows[10],
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            backgroundColor: global.palette.hover.track,
+            ':hover': {
+              backgroundColor: global.palette.hover.chip,
             },
-            '&:active': {
+            '&.active': {
+              backgroundColor: global.palette.common.white,
+              color: global.palette.common.black,
+              fontWeight: '400',
+            },
+          },
+        },
+      },
+      MuiIconButton: {
+        defaultProps: {
+          variant: 'transparent',
+          disableRipple: true,
+        },
+        variants: [
+          {
+            props: { variant: 'filled' },
+            style: {
+              backgroundColor: global.palette.hover.track,
+              ':hover': {
+                backgroundColor: global.palette.hover.chip,
+              },
+            },
+          },
+          {
+            props: { variant: 'fill-on-hover' },
+            style: {
               backgroundColor: 'transparent',
-              borderColor: global.palette.common.white,
+              ':hover': {
+                backgroundColor: global.palette.hover.chip,
+                color: global.palette.common.white,
+              },
+            },
+          },
+          {
+            props: { variant: 'transparent' },
+            style: {
+              backgroundColor: 'transparent',
+              ':hover': {
+                color: global.palette.common.white,
+              },
+            },
+          },
+        ],
+        styleOverrides: {
+          root: {
+            color: global.palette.secondary.main,
+            width: '32px',
+            height: '32px',
+            padding: 0,
+          },
+        },
+      },
+      MuiTypography: {
+        styleOverrides: {
+          root: ({ ownerState }) => ({
+            ...(ownerState.truncate && {
+              display: '-webkit-box',
+              WebkitLineClamp: ownerState.truncate,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }),
+          }),
+        },
+      },
+      MuiPopover: {
+        styleOverrides: {
+          root: {
+            '.MuiPaper-root': {
+              borderRadius: '4px',
+              padding: '4px',
+              backgroundColor: global.palette.background.secondary,
+              backgroundImage: 'none',
+            },
+          },
+        },
+      },
+      MuiSlider: {
+        styleOverrides: {
+          rail: {
+            color: global.palette.background.slider,
+          },
+          track: ({ ownerState }) => ({
+            backgroundColor: ownerState.active ? global.palette.primary.main : global.palette.common.white,
+            border: 'unset',
+          }),
+          thumb: ({ ownerState }) => ({
+            width: '12px',
+            height: '12px',
+            opacity: ownerState.active ? 1 : 0,
+            backgroundColor: global.palette.common.white,
+
+            '&:hover, &.Mui-focusVisible, &.Mui-active': {
+              backgroundColor: global.palette.common.white,
+              boxShadow: 'none',
+            },
+
+            '&:before, &:after': {
+              content: 'unset',
+            },
+          }),
+          root: {
+            height: 4,
+            '&:hover .MuiSlider-track': {
+              backgroundColor: global.palette.primary.main,
+            },
+            '&:hover .MuiSlider-thumb': {
+              opacity: 1,
+            },
+
+            '&, &>*': {
+              transition: 'none !important',
             },
           },
         },
@@ -157,70 +253,61 @@ declare module '@mui/material/styles' {
   }
 
   export interface TypeBackground {
-    section: string;
-    card: string;
-    popover: string;
-    button: string;
+    main: string;
+    secondary: string;
     slider: string;
   }
 
-  export interface TypeText {
-    gray: string;
-  }
-
   export interface Palette {
-    grandis: string;
-    green: string;
-    iris: string;
     hover: {
-      card: string;
+      main: string;
+      secondary: string;
       track: string;
-      popover: string;
-      button: string;
-    };
-
-    library: {
-      list: {
-        hover: string;
-        selected: string;
-        hoverOnSelected: string;
-      };
+      dark: string;
+      library: string;
+      chip: string;
     };
   }
   export interface PaletteOptions {
-    grandis: string;
-    green: string;
-    iris: string;
-
     hover: {
-      card: string;
+      main: string;
+      secondary: string;
       track: string;
-      popover: string;
-      button: string;
-    };
-
-    library: {
-      list: {
-        hover: string;
-        selected: string;
-        hoverOnSelected: string;
-      };
+      dark: string;
+      library: string;
+      chip: string;
     };
   }
-
-  // export interface PaletteColorOptions {
-  //   green?: string;
-  //   grandis?: string;
-  //   secondary?: {
-  //     main?: string;
-  //   };
-  // }
 }
 
-declare module '@mui/material/SvgIcon' {
+declare module '@mui/material' {
   interface SvgIconPropsColorOverrides {
     grandis: true;
     green: true;
     iris: true;
+  }
+}
+
+declare module '@mui/material/IconButton' {
+  interface IconButtonOwnProps {
+    variant?: 'filled' | 'fill-on-hover' | 'transparent';
+  }
+}
+
+declare module '@mui/material/Typography' {
+  export interface TypographyOwnProps {
+    truncate?: number;
+  }
+  export interface MuiTypographyProps {
+    truncate?: number;
+  }
+}
+
+declare module '@mui/material/Slider' {
+  export interface SliderOwnProps {
+    active?: boolean;
+  }
+  export interface MuiSliderProps {
+    active?: boolean;
   }
 }

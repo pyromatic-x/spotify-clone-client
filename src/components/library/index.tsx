@@ -4,7 +4,7 @@ import { useUnit } from 'effector-react';
 import { $UI, toggleShadow } from './effect';
 import LibraryHeader from './header';
 import LibrarySearch from './search';
-import LibrarySort from './sort';
+import LibrarySortAndView from './sortAndView';
 import LibraryList from './list';
 import { LibraryListConrainer } from './list/styled';
 
@@ -24,11 +24,11 @@ const Library = () => {
             container
             alignItems="center"
             justifyContent="space-between"
-            padding="0px 22px 8px 22px"
+            padding="0px 22px 8px 18px"
             wrap="nowrap"
           >
             <LibrarySearch />
-            <LibrarySort />
+            <LibrarySortAndView />
           </Grid>
         )}
         <LibraryList />

@@ -20,7 +20,7 @@ export const StyledSearchInput = styled(TextField, {
 })<{
   show: boolean;
 }>(({ theme, show = false }) => ({
-  backgroundColor: theme.palette.background.popover,
+  backgroundColor: theme.palette.hover.track,
   border: 'none',
   borderRadius: '6px',
   maxWidth: '190px',

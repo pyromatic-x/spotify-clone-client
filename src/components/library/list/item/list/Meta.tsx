@@ -1,9 +1,9 @@
 import { useUnit } from 'effector-react';
-import { $filter } from '../../effect';
+import { $filter } from '../../../effect';
 import { Grid, Typography } from '@mui/material';
-import { capitalizeFirstLetter } from '../../../../utils/strings';
-import { PinIcon } from './styled';
-import { LibraryItemDto } from '../../../../api/dto/library';
+import { capitalizeFirstLetter } from '../../../../../utils/strings';
+import { PinIcon } from '../styled';
+import { LibraryItemDto } from '../../../../../api/dto/library';
 
 const LibraryItemMeta = ({ item }: { item: LibraryItemDto }) => {
   const { _collection, name, author, tracksCount, pin } = item;
@@ -11,13 +11,19 @@ const LibraryItemMeta = ({ item }: { item: LibraryItemDto }) => {
   const { category } = useUnit($filter);
 
   let description: string | undefined = capitalizeFirstLetter(_collection);
-  if (author) description += ` ● ${author}`;
+  if (author) description += ` 🞄 ${author}`;
   if (category) description = author;
-  if (tracksCount) description = `${tracksCount} songs`;
+  if (tracksCount) description = `${capitalizeFirstLetter(_collection)} 🞄 ${tracksCount} songs`;
 
   return (
     <Grid container alignItems="start" justifyContent="center" flexDirection="column">
-      <Typography fontWeight="bold" color="white" fontSize="0.9rem">
+      <Typography
+        fontWeight="bold"
+        color={pin ? 'primary' : 'white'}
+        fontSize="0.9rem"
+        truncate={1}
+        maxWidth="240px"
+      >
         {name}
       </Typography>
       {description && (

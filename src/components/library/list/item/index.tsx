@@ -1,56 +1,22 @@
 import { useUnit } from 'effector-react';
-import { $UI } from '../../effect';
-import { LibraryItemCover, StyledLibraryItem } from './styled';
-import { Grid, Typography, TypographyProps } from '@mui/material';
-import LibraryItemMeta from './Meta';
-import { getDateDiff } from '../../utils';
+import { $filter, $UI } from '../../effect';
+import { LibraryView } from '../../types';
+import LibraryItemList from './list';
 import { LibraryItemDto } from '../../../../api/dto/library';
+import LibraryItemCompact from './compact';
+import LibraryItemMinified from './minified';
+import LibraryItemGrid from './grid';
 
-interface DateColumnProps extends TypographyProps {
-  date?: string;
-}
-
-const DateColumn = ({ date, justifyContent }: DateColumnProps) => (
-  <Typography
-    color="secondary"
-    fontSize="0.9rem"
-    display="inline-flex"
-    alignItems="center"
-    justifyContent={justifyContent}
-  >
-    {getDateDiff(date)}
-  </Typography>
-);
-
-const LibraryItem = ({ item }: { item: LibraryItemDto }) => {
+const LibraryItem = (item: LibraryItemDto) => {
+  const { view } = useUnit($filter);
   const { width } = useUnit($UI);
 
-  const selected = false;
+  if (width.name === 'min') return <LibraryItemMinified {...item} />;
+  if (view.type === LibraryView['List']) return <LibraryItemList {...item} />;
+  if (view.type === LibraryView['Compact']) return <LibraryItemCompact {...item} />;
+  if (view.type === LibraryView['Grid']) return <LibraryItemGrid {...item} />;
 
-  // const handleOnClick = (_id: string, _collection: LibraryItemResponse['_collection']) => {};
-
-  return (
-    <StyledLibraryItem selected={selected}>
-      <Grid container gap="12px" wrap="nowrap">
-        <LibraryItemCover
-          alt={item.name}
-          src={item.cover}
-          variant={item._collection === 'artist' ? 'circle' : 'rounded'}
-        />
-        {width.name !== 'min' && (
-          <>
-            <LibraryItemMeta item={item} />
-          </>
-        )}
-      </Grid>
-      {width.name === 'max' && (
-        <>
-          <DateColumn date={item.addedAt} />
-          <DateColumn date={item.lastPlayedAt} justifyContent="end" />
-        </>
-      )}
-    </StyledLibraryItem>
-  );
+  return <></>;
 };
 
 export default LibraryItem;

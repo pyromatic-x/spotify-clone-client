@@ -1,11 +1,11 @@
 import { Close, Search as SearchIcon } from '@mui/icons-material';
-import { ClickAwayListener, InputAdornment } from '@mui/material';
+import { ClickAwayListener, IconButton, InputAdornment, Tooltip } from '@mui/material';
 import { useRef, useState } from 'react';
 
 import { useUnit } from 'effector-react';
 import { $filter, filter } from '../effect';
 import { capitalizeFirstLetter } from '../../../utils/strings';
-import { LibrarySearchContainer, StyledSearchButton, StyledSearchInput } from './styled';
+import { LibrarySearchContainer, StyledSearchInput } from './styled';
 
 function LibrarySearch({ direction = 'openToRight' }: { direction?: 'openToRight' | 'openToLeft' }) {
   const { search, category } = useUnit($filter);
@@ -42,9 +42,11 @@ function LibrarySearch({ direction = 'openToRight' }: { direction?: 'openToRight
   return (
     <ClickAwayListener onClickAway={handleClickOutside}>
       <LibrarySearchContainer moveToLeft={direction === 'openToLeft' && searchOpened}>
-        <StyledSearchButton onClick={handleOnOpen} disableTouchRipple>
-          <SearchIcon />
-        </StyledSearchButton>
+        <Tooltip title="Search in Your Library">
+          <IconButton onClick={handleOnOpen} variant="fill-on-hover">
+            <SearchIcon />
+          </IconButton>
+        </Tooltip>
         <StyledSearchInput
           show={searchOpened}
           ref={searchRef}

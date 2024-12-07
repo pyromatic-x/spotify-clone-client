@@ -6,7 +6,7 @@ import { ROUTES } from './constants';
 export default createBrowserRouter(
   createRoutesFromElements(
     <Route
-      path={ROUTES.HOME.PATH}
+      path={ROUTES[0].PATH}
       element={<Root />}
       errorElement={
         <Root>
@@ -14,8 +14,8 @@ export default createBrowserRouter(
         </Root>
       }
     >
-      {Object.keys(ROUTES).map((key) => (
-        <Route path={ROUTES[key].PATH} element={ROUTES[key].ELEMENT} key={ROUTES[key].PAGE_TITLE} />
+      {ROUTES.map((route) => (
+        <Route path={route.PATH} element={route.ELEMENT} key={route.KEY} />
       ))}
     </Route>,
   ),

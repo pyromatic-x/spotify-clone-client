@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { LibraryUIConfig } from './constants';
-import { LibraryCategories, LibrarySortings } from './types';
+import { ILibraryFilter, ILibraryFilterPayload, LibrarySortings, LibraryView } from './types';
 import { API } from '../../api';
 import { sortLibraryItems } from './utils';
 import { loginFx } from '../root/effect';
@@ -57,20 +57,21 @@ export const $UI = createStore<{
 // #endregion
 
 // #region filters
-export const filter = createEvent<{
-  search?: string;
-  category?: keyof typeof LibraryCategories | null;
-  sort?: keyof typeof LibrarySortings;
-}>();
-export const $filter = createStore<{
-  search: string;
-  category: keyof typeof LibraryCategories | null;
-  sort: keyof typeof LibrarySortings;
-}>({
+export const filter = createEvent<ILibraryFilterPayload>();
+export const $filter = createStore<ILibraryFilter>({
   search: '',
   category: null,
-  sort: 'Alphabetical',
-}).on(filter, (state, payload) => ({ ...state, ...payload }));
+  sort: LibrarySortings['Alphabetical'],
+  view: {
+    type: LibraryView['List'],
+    gridSize: 50,
+  },
+}).on(filter, (state, payload) => {
+  if (payload.view) {
+    return { ...state, view: { ...state.view, ...payload.view } };
+  }
+  return { ...state, ...payload };
+});
 
 sample({
   clock: filter,

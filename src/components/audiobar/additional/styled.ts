@@ -11,11 +11,11 @@ export const StyledIconButton = styled(IconButton, {
   },
 
   '&:hover': {
-    color: active ? theme.palette.green : theme.palette.common.white,
+    color: active ? theme.palette.primary.main : theme.palette.common.white,
   },
 
   ...(active && {
-    color: theme.palette.green,
+    color: theme.palette.primary.main,
 
     '&::after': {
       content: "''",
@@ -25,7 +25,7 @@ export const StyledIconButton = styled(IconButton, {
       width: '4px',
       height: '4px',
       borderRadius: '50%',
-      backgroundColor: theme.palette.green,
+      backgroundColor: theme.palette.primary.main,
     },
   }),
 }));
