@@ -3,7 +3,7 @@ import { LibraryUIConfig } from './constants';
 import { ILibraryFilter, ILibraryFilterPayload, LibrarySortings, LibraryView } from './types';
 import { API } from '../../api';
 import { sortLibraryItems } from './utils';
-import { loginFx } from '../root/effect';
+import { loginFx } from '../auth/effect';
 import { LibraryDto } from '../../api/dto/library';
 
 export const reset = createEvent();

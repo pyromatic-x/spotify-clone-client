@@ -7,7 +7,7 @@ export enum CollectionEnums {
 
 export type AuthorDto = {
   _id: string;
-  username: string;
+  name: string;
   avatar: string;
 };
 

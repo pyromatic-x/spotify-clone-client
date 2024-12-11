@@ -18,6 +18,7 @@ export interface AlbumDto {
   accent: string;
   cover: string;
   createdAt: string;
+  _collection: 'album' | 'playlist' | 'artist';
 }
 
 export interface AlbumPageDataDto {

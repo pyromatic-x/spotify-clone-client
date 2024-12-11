@@ -17,11 +17,11 @@ const Meta = ({ item, category }: { item: LibraryItemDto; category: LibraryCateg
   else if (category === LibraryCategories.Artists) text = '';
 
   return (
-    <Grid container flexDirection="column">
+    <Grid container flexDirection="column" mt={1}>
       <Typography color={pin ? 'primary' : 'white'} fontSize="0.9rem" fontWeight="bold" truncate={1}>
         {name}
       </Typography>
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" wrap="nowrap">
         {pin && (
           <>
             <PinIcon />
@@ -30,7 +30,7 @@ const Meta = ({ item, category }: { item: LibraryItemDto; category: LibraryCateg
         )}
 
         {text && (
-          <Typography color="secondary" fontSize="0.8rem">
+          <Typography color="secondary" fontSize="0.8rem" truncate={1}>
             {text}
           </Typography>
         )}
@@ -42,23 +42,34 @@ const Meta = ({ item, category }: { item: LibraryItemDto; category: LibraryCateg
 const LibraryItemGrid = (item: LibraryItemDto) => {
   const { category, view } = useUnit($filter);
 
+  const cover = item.cover + '?w=400&h=400&fit=contain';
+
   return (
     <Tooltip
       placement="right"
       title={view?.gridSize && view?.gridSize < 30 ? <Meta item={item} category={category} /> : null}
     >
       <StyledLibraryItem>
-        <Grid container flexDirection="column" alignItems="center">
-          <Box width="100%" mb={1}>
-            <LibraryItemCover
-              alt={item.name}
-              src={item.cover}
-              variant={item._collection === 'artist' ? 'circle' : 'rounded'}
-              fullwidth
-            />
-          </Box>
-          {view?.gridSize && view?.gridSize >= 30 && <Meta item={item} category={category} />}
-        </Grid>
+        {view.gridSize && view.gridSize < 30 ? (
+          <LibraryItemCover
+            alt={item.name}
+            src={cover}
+            variant={item._collection === 'artist' ? 'circle' : 'rounded'}
+            fullwidth
+          />
+        ) : (
+          <Grid container flexDirection="column" alignItems="center">
+            <Box width="100%">
+              <LibraryItemCover
+                alt={item.name}
+                src={cover}
+                variant={item._collection === 'artist' ? 'circle' : 'rounded'}
+                fullwidth
+              />
+            </Box>
+            {view?.gridSize && view?.gridSize >= 30 && <Meta item={item} category={category} />}
+          </Grid>
+        )}
       </StyledLibraryItem>
     </Tooltip>
   );

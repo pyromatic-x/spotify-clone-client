@@ -30,7 +30,7 @@ export const LibraryItemCover = styled('img', {
   ...(fullwidth
     ? {
         width: '100%',
-        height: '100%',
+        // height: '100%',
       }
     : {
         width: '50px',

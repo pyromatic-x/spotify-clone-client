@@ -3,7 +3,7 @@ import { Box, styled } from '@mui/material';
 export const LibraryContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'resizedWidth',
 })<{ resizedWidth: number }>(({ resizedWidth, theme }) => ({
-  gridArea: 'leftbar',
+  gridArea: 'library',
   width: `${resizedWidth}px`,
   height: '100%',
   display: 'flex',

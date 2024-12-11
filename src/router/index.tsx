@@ -1,17 +1,17 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
-import Root from '../components/root';
 import Error from '../pages/Error';
 import { ROUTES } from './constants';
+import App from '../App';
 
 export default createBrowserRouter(
   createRoutesFromElements(
     <Route
       path={ROUTES[0].PATH}
-      element={<Root />}
+      element={<App />}
       errorElement={
-        <Root>
+        <App>
           <Error />
-        </Root>
+        </App>
       }
     >
       {ROUTES.map((route) => (

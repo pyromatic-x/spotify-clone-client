@@ -8,6 +8,7 @@ import { FollowPayload } from './dto/follow';
 import { PlaylistPageDto } from './dto/playlist';
 import { SearchDto } from './dto/search';
 import { UserPageDto } from './dto/user';
+import { PlayDto, PlayDtoPayload } from './dto/play';
 
 interface FullRequestParams {
   path: string;
@@ -99,10 +100,15 @@ class Api_Service extends HttpClient {
       }),
   };
 
-  track = {
-    play: (id: string) =>
-      this.request({
-        path: `/track/${id}`,
+  play = {
+    get: ({ type, _id }: PlayDtoPayload) =>
+      this.request<PlayDto>({
+        path: `/play/${type}/${_id}`,
+        method: 'GET',
+      }),
+    liked: () =>
+      this.request<PlayDto>({
+        path: `/play/liked`,
         method: 'GET',
       }),
   };

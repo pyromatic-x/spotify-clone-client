@@ -6,3 +6,7 @@ export interface PlayDto {
   name: string;
   tracks: Array<TrackDto>;
 }
+export interface PlayDtoPayload {
+  type: 'album' | 'playlist' | 'artist';
+  _id: string;
+}

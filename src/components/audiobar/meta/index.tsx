@@ -1,23 +1,43 @@
-import { Grid } from '@mui/material';
-import { useUnit } from 'effector-react';
-import { $queue } from '../effect';
-import { Authors, Cover, Name } from './styled';
+import { Grid, IconButton, SvgIconTypeMap, Tooltip } from '@mui/material';
 
-const Meta = () => {
-  const queue = useUnit($queue);
-  const track = queue.find((t) => t._current);
+import {
+  Slideshow as NowPlayingIcon,
+  SettingsVoice as LyricsIcon,
+  QueueMusic as QueueIcon,
+  Speaker as DevicesIcon,
+  Tab as MiniplayerIcon,
+  OpenInFull as FullscreenIcon,
+} from '@mui/icons-material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+import AudiobarMetaVolume from './Volume';
+import { memo } from 'react';
 
-  // TODO: add placeholders when there's no current track
+const Button = ({
+  title,
+  Icon,
+}: {
+  title: string;
+  Icon: OverridableComponent<SvgIconTypeMap<object, 'svg'>>;
+}) => (
+  <Tooltip title={title}>
+    <IconButton variant="scalable" sx={{ '& svg': { fontSize: '1.2rem' } }}>
+      <Icon />
+    </IconButton>
+  </Tooltip>
+);
 
+const AudiobarMeta = () => {
   return (
-    <Grid container alignItems="center" columnGap="1rem" width="auto" flexWrap="nowrap">
-      <Cover alt={track?.name} src={track?.cover} />
-      <Grid>
-        <Name to="">{track?.name}</Name>
-        <Authors to="">{(track?.authors || []).slice(0, 2).join(', ')}</Authors>
-      </Grid>
+    <Grid container gap={0.1} justifyContent="flex-end" alignItems="center" wrap="nowrap">
+      <Button title="Now playing view" Icon={NowPlayingIcon} />
+      <Button title="Lyrics" Icon={LyricsIcon} />
+      <Button title="Queue" Icon={QueueIcon} />
+      <Button title="Connect to a device" Icon={DevicesIcon} />
+      <AudiobarMetaVolume />
+      <Button title="Open Miniplayer" Icon={MiniplayerIcon} />
+      <Button title="Open Full screen" Icon={FullscreenIcon} />
     </Grid>
   );
 };
 
-export default Meta;
+export default memo(AudiobarMeta);

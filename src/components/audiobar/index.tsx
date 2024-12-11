@@ -1,16 +1,21 @@
 import { Container } from './styled';
-import Meta from './meta';
-import Additional from './additional';
-import Player from './player';
+
+import AudiobarControllers from './controllers';
+import AudiobarInfo from './info';
+import AudiobarMeta from './meta';
+import { memo, useEffect } from 'react';
+import { init } from './effect';
 
 const AudioBar = () => {
+  useEffect(() => init(), []);
+
   return (
     <Container>
-      <Meta />
-      <Player />
-      <Additional />
+      <AudiobarInfo />
+      <AudiobarControllers />
+      <AudiobarMeta />
     </Container>
   );
 };
 
-export default AudioBar;
+export default memo(AudioBar);

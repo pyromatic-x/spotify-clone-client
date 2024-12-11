@@ -3,11 +3,9 @@ import { AuthorDto } from '.';
 export interface TrackDto {
   _id: string;
   name: string;
-  audio: string;
-  cover: string;
+  url: string;
 
   author: AuthorDto;
-  coAuthors?: Array<AuthorDto>;
 
   album: {
     _id: string;

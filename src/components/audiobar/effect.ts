@@ -1,182 +1,195 @@
-import { createEvent, createStore, sample } from 'effector';
-import { LoopVariants, ShuffleVariants } from './types';
-import { shuffleFisherYates } from '../../utils/array';
+import { createEffect, createEvent, createStore, sample } from 'effector';
 
-// #region loop
-export const changeLoop = createEvent();
-export const $loop = createStore<keyof typeof LoopVariants>('DISABLED').on(changeLoop, (current) => {
-  const variants = Object.keys(LoopVariants);
-  const index = variants.findIndex((t) => t === current);
-  const next = index + 1 > variants.length - 1 ? 0 : index + 1;
-
-  return variants[next] as keyof typeof LoopVariants;
-});
-// #endregion
-
-// #region shuffle
-export const onShuffle = createEvent();
-
-export const $shuffle = createStore<keyof typeof ShuffleVariants>('DISABLED').on(onShuffle, (current) => {
-  const variants = Object.keys(ShuffleVariants);
-  const index = variants.findIndex((t) => t === current);
-  const next = index + 1 > variants.length - 1 ? 0 : index + 1;
-
-  return variants[next] as keyof typeof ShuffleVariants;
-});
-// #endregion
-
-// #region recently played
-export const addToRecentlyPlayed = createEvent();
-export const $recentlyPlayed = createStore<Array<any>>([]);
-// #endregion
+import { PlayDtoPayload } from '../../api/dto/play';
+import { TrackDto } from '../../api/dto/track';
+import { API } from '../../api';
+import { RepeatVariants, TQueue } from './types';
 
 // #region queue
-export const setCurrentTrackFromQueue = createEvent<string>();
-export const nextTrack = createEvent();
-export const prevTrack = createEvent();
+export const $queue = createStore<TQueue | null>(null);
+const $initialTracks = createStore<TQueue['tracks'] | null>(null);
 
-export const onEnd = createEvent();
-export const onDragQueue = createEvent<{
-  dragged: string;
-  target: string;
-  selected: Array<any>;
-  position: 'top' | 'bottom';
-}>();
-export const onTrackListened = createEvent<string>();
+export const init = createEvent();
+export const changeQueue = createEvent<PlayDtoPayload>();
+export const addToQueue = createEvent<TrackDto>();
+export const removeFromQueue = createEvent<string>();
 
-export const setQueue = createEvent<Array<any>>();
-export const $queue = createStore<Array<any>>([]);
-export const $queueSource = createStore({
-  id: 'any',
-  type: 'playlist',
-  title: 'Liked Songs',
+export const next = createEvent();
+export const prev = createEvent();
+
+export const toggleshuffle = createEvent();
+export const toggleRepeat = createEvent();
+
+const initFx = createEffect<unknown, TQueue, unknown>(async () => {
+  const { data } = await API.play.liked();
+
+  return {
+    ...data,
+    shuffled: false,
+    repeat: 'DISABLED',
+    initialTracks: data.tracks,
+    current: 0,
+  } as TQueue;
 });
 
-sample({
-  clock: [nextTrack, prevTrack],
-  target: addToRecentlyPlayed,
-});
+const changeQueueFx = createEffect<{ dto: PlayDtoPayload; queue: TQueue | null }, TQueue, unknown>(
+  async ({ dto, queue }) => {
+    const { data } = await API.play.get(dto);
 
-sample({
-  clock: addToRecentlyPlayed,
-  source: [$queue, $recentlyPlayed],
-  fn: ([queue, recently]) => {
-    const playing = queue.find((t) => t._current);
+    const shuffled = queue?.shuffled || false;
+    const repeat = queue?.repeat || 'DISABLED';
 
-    const alreadyInRecentlyIndex = recently.findIndex((t) => t.id === playing.id);
-    if (alreadyInRecentlyIndex > -1) recently.splice(alreadyInRecentlyIndex, 1);
-
-    return [{ ...playing, _current: false }, ...recently];
+    return {
+      ...data,
+      shuffled,
+      repeat,
+      initialTracks: data.tracks,
+      current: 0,
+    } as TQueue;
   },
-  target: $recentlyPlayed,
+);
+
+sample({
+  clock: init,
+  target: initFx,
+});
+sample({
+  clock: initFx.doneData,
+  target: $queue,
+});
+sample({
+  clock: initFx.doneData,
+  fn: (payload) => payload.tracks,
+  target: $initialTracks,
 });
 
 sample({
-  clock: setQueue,
+  clock: changeQueue,
+  source: $queue,
+  fn: (queue, payload) => ({ dto: payload, queue }),
+  target: changeQueueFx,
+});
+sample({
+  clock: changeQueueFx.doneData,
+  target: $queue,
+});
+
+// sample({
+//   clock: next,
+//   source: $queue,
+//   filter: (queue) => {
+//     if (!queue) return false;
+
+//     const { current, tracks, repeat } = queue;
+//     return current === tracks.length - 1 && repeat === 'DISABLED';
+//   },
+//   target: init, // TODO: load random playlist
+// });
+
+sample({
+  clock: next,
+  source: $queue,
   fn: (queue) => {
-    queue[0]._current = true;
-    return queue.map((track, index) => ({ ...track, _initial_order: index }));
+    if (!queue) return queue;
+
+    const { current, tracks, repeat } = queue;
+
+    let next = current;
+
+    if (current === tracks.length - 1) {
+      if (repeat === 'QUEUE') next = 0;
+      else if (repeat === 'TRACK') next = current;
+    } else next += 1;
+
+    return { ...queue, current: next };
   },
   target: $queue,
 });
 
 sample({
-  clock: setCurrentTrackFromQueue,
-  source: $queue,
-  fn: (queue, id) => {
-    const toPlayIndex = queue.findIndex((track: any) => track.id === id);
-
-    return queue.map((track: any, index: number) => {
-      if (index === toPlayIndex) return { ...track, _current: true };
-
-      return { ...track, _current: false };
-    });
-  },
-  target: $queue,
-});
-
-sample({
-  clock: nextTrack,
+  clock: prev,
   source: $queue,
   fn: (queue) => {
-    const index = queue.findIndex((track: any) => track._current);
-    const next = index + 1 >= queue.length ? 0 : index + 1;
+    if (!queue) return queue;
 
-    return queue.map((track: any, index: number) => {
-      if (index === next) return { ...track, _current: true };
+    const { current, tracks, repeat } = queue;
 
-      return { ...track, _current: false };
-    });
+    let prev = current;
+
+    if (current === 0) {
+      if (repeat === 'QUEUE') prev = tracks.length - 1;
+    } else prev -= 1;
+
+    return { ...queue, current: prev };
   },
   target: $queue,
 });
 
 sample({
-  clock: prevTrack,
+  clock: toggleshuffle,
   source: $queue,
   fn: (queue) => {
-    const index = queue.findIndex((track: any) => track._current);
-    const prev = index - 1 < 0 ? queue.length - 1 : index - 1;
+    if (!queue) return queue;
 
-    return queue.map((track: any, index: number) => {
-      if (index === prev) return { ...track, _current: true };
+    const { current, shuffled, tracks, initialTracks } = queue;
 
-      return { ...track, _current: false };
-    });
-  },
-  target: $queue,
-});
-
-sample({
-  clock: onEnd,
-  source: $loop,
-  filter: (loop) => loop !== 'TRACK',
-  target: nextTrack,
-});
-
-sample({
-  clock: onDragQueue,
-  source: $queue,
-  fn: (queue, payload) => {
-    let { selected } = payload;
-    const { dragged, target, position } = payload;
-
-    if (!selected || !selected.length) selected = [dragged];
-
-    if (selected.includes(target)) return queue;
-
-    const selectedStartIndex = queue.findIndex((t) => selected[0] === t.id);
-    // const selectedEndIndex = queue.findIndex((t) => selected[selected.length - 1] === t.id);
-    const targetIndex = queue.findIndex((t) => t.id === target);
-
-    let placementIndex = 0;
-    if (targetIndex === 0) {
-      placementIndex = position === 'top' ? 0 : 1;
+    if (shuffled) {
+      return {
+        ...queue,
+        shuffled: false,
+        current: initialTracks.indexOf(tracks[current]),
+        currentBeforeShuffle: undefined,
+        tracks: initialTracks,
+      };
     } else {
-      placementIndex = targetIndex + (position === 'top' ? 0 : 1);
+      const currentTrack = tracks[current];
+      const restTracks = tracks.filter((_, idx) => idx !== current);
+
+      for (let i = restTracks.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [restTracks[i], restTracks[j]] = [restTracks[j], restTracks[i]];
+      }
+
+      return {
+        ...queue,
+        shuffled: true,
+        tracks: [currentTrack, ...restTracks],
+        current: 0,
+        currentBeforeShuffle: current,
+      };
     }
-
-    const toMove = queue.splice(selectedStartIndex, selected.length);
-    if (selectedStartIndex < targetIndex) placementIndex = placementIndex - toMove.length;
-
-    queue.splice(placementIndex, 0, ...toMove);
-
-    return [...queue] as any;
   },
   target: $queue,
 });
 
 sample({
-  clock: $shuffle.updates,
+  clock: toggleRepeat,
   source: $queue,
-  fn: (queue, shuffle) => {
-    if (shuffle === 'SIMPLE') {
-      return shuffleFisherYates(queue);
-    } else {
-      return queue.sort((a, b) => a._initial_order - b._initial_order);
-    }
+  fn: (queue) => {
+    if (!queue) return queue;
+
+    type KeyType = keyof typeof RepeatVariants;
+
+    const keys = Object.keys(RepeatVariants) as KeyType[];
+    const currentIndex = keys.indexOf(queue?.repeat);
+    const nextIndex = (currentIndex + 1) % keys.length;
+    const repeat = keys[nextIndex] as keyof typeof RepeatVariants;
+
+    return { ...queue, repeat };
   },
   target: $queue,
 });
 
+// #endreion
+
+// #region volume
+// react-use-audio-player has a bug which resets VOLUME after each load event that's why create our own store
+export const changeVolume = createEvent<number>();
+export const $volume = createStore(1).on(changeVolume, (_, payload) => payload);
+// #endregion
+
+// #region muted
+// react-use-audio-player has a bug which resets MUTED after each load event that's why create our own store
+export const mute = createEvent<boolean>();
+export const $muted = createStore(false).on(mute, (_, payload) => payload);
 // #endregion

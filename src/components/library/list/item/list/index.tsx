@@ -19,7 +19,7 @@ const LibraryItemList = (item: LibraryItemDto) => {
       <Grid container gap="12px" wrap="nowrap">
         <LibraryItemCover
           alt={item.name}
-          src={item.cover}
+          src={item.cover + '?w=100&h=100&fit=contain'}
           variant={item._collection === 'artist' ? 'circle' : 'rounded'}
         />
         <LibraryItemMeta item={item} />

@@ -1,20 +1,15 @@
-export enum ShuffleVariants {
-  'DISABLED' = 'DISABLED',
-  'SIMPLE' = 'SIMPLE',
-}
-export enum LoopVariants {
-  'DISABLED' = 'DISABLED',
-  'QUEUE' = 'QUEUE',
-  'TRACK' = 'TRACK',
+import { PlayDto } from '../../api/dto/play';
+
+export enum RepeatVariants {
+  'DISABLED' = 'Enable repeat',
+  'QUEUE' = 'Enable repeat one',
+  'TRACK' = 'Disable repeat',
 }
 
-export enum ShuffleTooltips {
-  'DISABLED' = 'Enable Shuffle',
-  'SIMPLE' = 'Disable Shuffle',
-}
-
-export enum LoopTooltips {
-  'DISABLED' = 'Enable Loop for current Queue',
-  'QUEUE' = 'Enable Loop for current Track',
-  'TRACK' = 'Disable Loop for current Track',
-}
+export type TQueue = PlayDto & {
+  current: number;
+  currentBeforeShuffle?: number;
+  initialTracks: PlayDto['tracks'];
+  shuffled: boolean;
+  repeat: keyof typeof RepeatVariants;
+};

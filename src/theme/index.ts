@@ -36,6 +36,7 @@ const global = createTheme({
     },
     secondary: {
       main: '#b0b0b0',
+      light: '#7c7c7c',
     },
   },
   shape: {
@@ -142,6 +143,17 @@ export default createTheme(
         },
         variants: [
           {
+            props: { variant: 'scalable' },
+            style: {
+              backgroundColor: 'transparent',
+              color: global.palette.secondary.main,
+              ':hover': {
+                transform: 'scale(1.06)',
+                color: global.palette.common.white,
+              },
+            },
+          },
+          {
             props: { variant: 'filled' },
             style: {
               backgroundColor: global.palette.hover.track,
@@ -242,6 +254,21 @@ export default createTheme(
           },
         },
       },
+      MuiLink: {
+        styleOverrides: {
+          root: ({ color }) => {
+            return {
+              color: color === 'primary' ? global.palette.common.white : (color as string),
+              textDecoration: 'none',
+
+              ':hover': {
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              },
+            };
+          },
+        },
+      },
     },
   },
   global,
@@ -290,7 +317,7 @@ declare module '@mui/material' {
 
 declare module '@mui/material/IconButton' {
   interface IconButtonOwnProps {
-    variant?: 'filled' | 'fill-on-hover' | 'transparent';
+    variant?: 'filled' | 'fill-on-hover' | 'transparent' | 'scalable';
   }
 }
 

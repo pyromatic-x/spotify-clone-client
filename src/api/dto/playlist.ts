@@ -28,6 +28,7 @@ export interface PlaylistDto {
   styling: PlaylistStyling;
   cover: string;
   type: keyof typeof PlaylistTypesEnum;
+  description?: string;
   accent: string;
   tracks?: Array<{
     _id: string;
@@ -38,6 +39,8 @@ export interface PlaylistDto {
   forYou: boolean;
 
   createdAt: string;
+
+  _collection: 'album' | 'playlist' | 'artist';
 }
 
 export interface PlaylistPageDto {

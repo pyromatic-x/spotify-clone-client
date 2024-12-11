@@ -6,7 +6,7 @@ const LibraryItemMinified = (item: LibraryItemDto) => {
     <StyledLibraryItem>
       <LibraryItemCover
         alt={item.name}
-        src={item.cover}
+        src={item.cover + '?w=100&h=100&fit=contain'}
         variant={item._collection === 'artist' ? 'circle' : 'rounded'}
       />
     </StyledLibraryItem>

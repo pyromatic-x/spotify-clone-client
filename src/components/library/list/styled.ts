@@ -29,6 +29,8 @@ export const LibraryListConrainer = styled(Box)(() => ({
 export const StyledLibraryList = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'gridSize' && prop !== 'viewType',
 })<{ gridSize?: number; width: keyof typeof LibraryUIConfig }>(({ gridSize, width }) => ({
+  padding: '0 8px',
+
   ...(gridSize && width !== 'min'
     ? {
         display: 'grid',
@@ -37,7 +39,6 @@ export const StyledLibraryList = styled(Box, {
     : {
         display: 'flex',
         flexDirection: 'column',
-        padding: '0 8px',
         height: '100%',
       }),
 }));
