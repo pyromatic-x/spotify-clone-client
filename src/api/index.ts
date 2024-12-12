@@ -3,8 +3,8 @@ import { LibraryDto } from './dto/library';
 import { AuthUserDto, AuthUserPayload } from './dto/auth';
 import { PersonalDto } from './dto/personal';
 import { AlbumPageDataDto } from './dto/album';
-import { ArtistPageDataDto } from './dto/artist';
-import { FollowPayload } from './dto/follow';
+import { ArtistBioDto, ArtistPageDataDto } from './dto/artist';
+import { FollowPayload, IsFollowingDto } from './dto/follow';
 import { PlaylistPageDto } from './dto/playlist';
 import { SearchDto } from './dto/search';
 import { UserPageDto } from './dto/user';
@@ -59,6 +59,11 @@ class Api_Service extends HttpClient {
     page: (id: string) =>
       this.request<ArtistPageDataDto>({
         path: `/artist/${id}`,
+        method: 'GET',
+      }),
+    bio: (id: string) =>
+      this.request<ArtistBioDto>({
+        path: `/artist/${id}/bio`,
         method: 'GET',
       }),
   };
@@ -125,6 +130,11 @@ class Api_Service extends HttpClient {
         path: '/unfollow',
         method: 'DELETE',
         body: JSON.stringify(data),
+      }),
+    isFollowing: (id: string) =>
+      this.request<IsFollowingDto>({
+        path: `/isFollowing/${id}`,
+        method: 'GET',
       }),
   };
 }

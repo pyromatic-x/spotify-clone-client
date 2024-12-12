@@ -9,20 +9,30 @@ import { LibraryDto } from '../../api/dto/library';
 export const reset = createEvent();
 
 // #region items
+const getLibraryItems = async () => (await API.library.get()).data;
+
+export const refreshLibrary = createEvent();
+
 export const $libraryItems = createStore<LibraryDto | null>(null);
 export const $libraryItemsDefault = createStore<LibraryDto | null>(null);
 export const $libraryItemsError = createStore<string | null>(null);
 
-export const getLibraryItemsFx = createEffect<unknown, LibraryDto, Error>(async () => {
-  const { data } = await API.library.get();
-  return data;
+export const refreshLibraryFx = createEffect<unknown, LibraryDto, Error>(getLibraryItems);
+export const getLibraryItemsFx = createEffect<unknown, LibraryDto, Error>(getLibraryItems);
+
+sample({
+  clock: refreshLibrary,
+  target: refreshLibraryFx,
+});
+sample({
+  clock: refreshLibraryFx.doneData,
+  target: [$libraryItems, $libraryItemsDefault],
 });
 
 sample({
   clock: loginFx.doneData,
   target: getLibraryItemsFx,
 });
-
 sample({
   clock: getLibraryItemsFx.doneData,
   target: [$libraryItems, $libraryItemsDefault],

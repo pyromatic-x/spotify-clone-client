@@ -10,8 +10,8 @@ export const AppContainer = styled(Box)(({ theme }) => ({
   `,
   gridTemplateColumns: 'auto 1fr',
   gridTemplateRows: 'auto 1fr auto',
-  gap: '10px',
-  padding: '8px',
+  gap: '8px',
+  padding: '0 8px',
   height: '100vh',
 
   [theme.breakpoints.down('sm')]: {

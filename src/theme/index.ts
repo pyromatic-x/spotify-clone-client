@@ -269,6 +269,70 @@ export default createTheme(
           },
         },
       },
+      MuiTabs: {
+        styleOverrides: {
+          root: {
+            '& .MuiTabs-indicator': {
+              visibility: 'none',
+              opacity: '0',
+              display: 'none',
+            },
+          },
+        },
+      },
+      MuiTab: {
+        defaultProps: {
+          disableRipple: true,
+        },
+        styleOverrides: {
+          root: {
+            position: 'relative',
+            fontSize: '0.8rem',
+            width: 'max-content',
+            minWidth: 'auto',
+            minHeight: 'auto',
+            padding: '14px 12px',
+            fontWeight: '600',
+            transition: '0.1s ease',
+            lineHeight: 1,
+            '&:hover': {
+              backgroundColor: global.palette.hover.main,
+            },
+            '&:active': {
+              backgroundColor: global.palette.common.black,
+            },
+            '&.Mui-selected::after': {
+              content: "''",
+              position: 'absolute',
+              bottom: '8px',
+              left: '12px',
+              width: 'calc(100% - 24px)',
+              height: '2px',
+              backgroundColor: global.palette.primary.main,
+            },
+          },
+        },
+      },
+      MuiButton: {
+        variants: [
+          {
+            props: { variant: 'outlined', color: 'secondary' },
+            style: {
+              backgroundColor: 'transparent',
+              color: global.palette.common.white,
+              borderRadius: '16px',
+              transition: 'none',
+              padding: '2px 14px',
+
+              ':hover': {
+                transform: 'scale(1.02)',
+                backgroundColor: 'transparent',
+                borderColor: global.palette.common.white,
+              },
+            },
+          },
+        ],
+      },
     },
   },
   global,

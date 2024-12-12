@@ -1,19 +1,13 @@
 import { Box, styled } from '@mui/material';
 
-export const FeaturedContainer = styled(Box)(({ theme }) => ({
+export const FeaturedContainer = styled(Box)(() => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
   gap: '12px',
-
-  [theme.breakpoints.down('md')]: {
-    gridTemplateColumns: 'repeat(2, 1fr)',
-  },
 }));
 
 export const FeaturedCard = styled(Box)(({ theme }) => ({
   position: 'relative',
   display: 'flex',
-  height: '80px',
   width: '100%',
   borderRadius: '4px',
   alignItems: 'center',
@@ -29,17 +23,11 @@ export const FeaturedCard = styled(Box)(({ theme }) => ({
     },
   },
 
-  '& p': {
-    fontSize: '1rem',
-  },
-
   '.playbutton': {
     opacity: 0,
   },
 
-  [theme.breakpoints.down('md')]: {
-    height: '50px',
-
+  [theme.breakpoints.down('lg')]: {
     '& p': {
       fontSize: '0.85rem',
     },

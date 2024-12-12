@@ -26,3 +26,26 @@ export interface ArtistPageDataDto {
   tracks: Array<TrackDto>;
   albums: Array<AlbumDto>;
 }
+
+export interface ArtistBioDto {
+  _id: string;
+  about?: {
+    bio: string;
+    image?: string;
+    by: string;
+  };
+  stats: {
+    followers: string;
+    listeners: {
+      monthly: string;
+      world: Array<{
+        city: string;
+        value: string;
+      }>;
+    };
+  };
+  links?: Array<{
+    service: 'Twitter' | 'Facebook' | 'Instagram';
+    link: string;
+  }>;
+}

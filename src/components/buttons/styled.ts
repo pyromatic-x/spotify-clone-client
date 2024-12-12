@@ -10,12 +10,28 @@ export const StyledPlayButton = styled(ButtonBase, {
   color: theme.palette.common.black,
 
   '& svg': {
-    fontSize: '1.7rem',
+    fontSize: size ? size / 2 + 'px' : '1.7rem',
   },
 
   '&:hover': {
     transform: 'scale(1.05)',
     backgroundColor: '#3BE377',
+  },
+}));
+
+export const StyledSimplePlayButton = styled(ButtonBase)(({ theme }) => ({
+  borderRadius: '50%',
+  // height: size ? `${size}px` : '48px',
+  // width: size ? `${size}px` : '48px',
+  backgroundColor: 'transparent',
+  color: theme.palette.common.white,
+
+  '& svg': {
+    fontSize: '1.8rem',
+  },
+
+  '&:hover': {
+    transform: 'scale(1.05)',
   },
 }));
 

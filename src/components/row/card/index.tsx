@@ -7,9 +7,11 @@ import { TItemCommonFields } from '../types';
 import { useUnit } from 'effector-react';
 import { $queue } from '../../audiobar/effect';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
+import { $mainWidth } from '../../main/effect';
 
 const RowCard = ({ cover, _id, _collection, name, description, author }: TItemCommonFields) => {
   const queue = useUnit($queue);
+  const width = useUnit($mainWidth);
   const { playing } = useGlobalAudioPlayer();
 
   return (
@@ -21,7 +23,11 @@ const RowCard = ({ cover, _id, _collection, name, description, author }: TItemCo
           sx={{ borderRadius: _collection === 'artist' ? '50%' : '6px' }}
         />
         <PlayButtonWrapper className="playbutton-container">
-          <PlayButton _id={_id} type={_collection} />
+          <PlayButton
+            source={{ _id, type: _collection }}
+            size={width < 900 ? 36 : 48}
+            title={name + ' by ' + author?.name}
+          />
         </PlayButtonWrapper>
       </Box>
       <Typography fontSize="0.95rem" truncate={2} mt={0.5}>

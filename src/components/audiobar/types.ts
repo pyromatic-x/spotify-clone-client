@@ -1,4 +1,4 @@
-import { PlayDto } from '../../api/dto/play';
+import { PlayDto, PlayDtoPayload } from '../../api/dto/play';
 
 export enum RepeatVariants {
   'DISABLED' = 'Enable repeat',
@@ -13,3 +13,5 @@ export type TQueue = PlayDto & {
   shuffled: boolean;
   repeat: keyof typeof RepeatVariants;
 };
+
+export type TChangeQueue = PlayDtoPayload & { index?: number };

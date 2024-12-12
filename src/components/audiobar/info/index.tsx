@@ -9,7 +9,7 @@ const AudiobarInfo = () => {
   const current = queue?.tracks.find((t, i) => i === queue?.current);
 
   return (
-    <Grid container gap={1}>
+    <Grid container gap={1} wrap="nowrap">
       {!queue ? <Box width="60px" height="60px" /> : <Cover src={current?.album.cover + '?w=120&h=120'} />}
       <Grid container flexDirection="column" justifyContent="center" width="max-content">
         <Link fontSize="0.95rem" fontWeight="bold" truncate={1} maxWidth="20vw">

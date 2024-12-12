@@ -5,6 +5,7 @@ import { $filter } from '../../../effect';
 import { LibraryItemCover, PinIcon, StyledLibraryItem } from '../styled';
 import { LibraryCategories } from '../../../types';
 import { capitalizeFirstLetter } from '../../../../../utils/strings';
+import { TItemProps } from '../types';
 
 const Meta = ({ item, category }: { item: LibraryItemDto; category: LibraryCategories | null }) => {
   const { name, tracksCount, author, _collection, pin } = item;
@@ -39,7 +40,7 @@ const Meta = ({ item, category }: { item: LibraryItemDto; category: LibraryCateg
   );
 };
 
-const LibraryItemGrid = (item: LibraryItemDto) => {
+const LibraryItemGrid = ({ onOpen, ...item }: TItemProps) => {
   const { category, view } = useUnit($filter);
 
   const cover = item.cover + '?w=400&h=400&fit=contain';
@@ -49,7 +50,7 @@ const LibraryItemGrid = (item: LibraryItemDto) => {
       placement="right"
       title={view?.gridSize && view?.gridSize < 30 ? <Meta item={item} category={category} /> : null}
     >
-      <StyledLibraryItem>
+      <StyledLibraryItem onClick={onOpen}>
         {view.gridSize && view.gridSize < 30 ? (
           <LibraryItemCover
             alt={item.name}

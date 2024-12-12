@@ -1,18 +1,22 @@
 import { Box, Grid } from '@mui/material';
 import HomeOverlay from './overlay';
 import { useEffect } from 'react';
-import { $homeCompilations, getHomeCompilations } from './effect';
+import { $homeCompilations, getHomeCompilations, resetHomeCompilations } from './effect';
 import HomeFeatured from './featured';
 import Row from '../../components/row';
 import { useUnit } from 'effector-react';
 import { $USER } from '../../components/auth/effect';
 
-const Home = () => {
+const HomePage = () => {
   const user = useUnit($USER);
   const compilations = useUnit($homeCompilations);
 
   useEffect(() => {
     getHomeCompilations();
+
+    document.title = 'Spotify Clone';
+
+    return resetHomeCompilations;
   }, []);
 
   return (
@@ -37,4 +41,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

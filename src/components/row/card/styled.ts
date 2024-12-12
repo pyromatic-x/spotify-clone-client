@@ -20,7 +20,7 @@ export const StyledCard = styled(Box, {
 
   '& .playbutton-container': {
     right: '8px',
-    bottom: '8px',
+    bottom: '12px',
     height: 'unset !important',
     transition: 'opacity 0.4s ease, transform 0.4s ease',
     transform: 'translateY(12px)',

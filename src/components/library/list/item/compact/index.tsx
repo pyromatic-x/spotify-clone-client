@@ -6,6 +6,7 @@ import { PinIcon, StyledLibraryItem } from '../styled';
 import DateColumn from '../DateColumn';
 import { LibraryCategories } from '../../../types';
 import { capitalizeFirstLetter } from '../../../../../utils/strings';
+import { TItemProps } from '../types';
 
 const Description = ({
   category,
@@ -24,13 +25,16 @@ const Description = ({
   return <Typography color="secondary">{text}</Typography>;
 };
 
-const LibraryItemCompact = (item: LibraryItemDto) => {
+const LibraryItemCompact = ({ onOpen, ...item }: TItemProps) => {
   const { width } = useUnit($UI);
   const { category } = useUnit($filter);
   const { pin, name, _collection, author } = item;
 
   return (
-    <StyledLibraryItem gridTemplateColumns={width.name !== 'default' ? '60% 1fr 1fr' : '1fr'}>
+    <StyledLibraryItem
+      gridTemplateColumns={width.name !== 'default' ? '60% 1fr 1fr' : '1fr'}
+      onClick={onOpen}
+    >
       <Grid container alignItems="center">
         {pin && (
           <>

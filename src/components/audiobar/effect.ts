@@ -1,19 +1,19 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 
-import { PlayDtoPayload } from '../../api/dto/play';
 import { TrackDto } from '../../api/dto/track';
 import { API } from '../../api';
-import { RepeatVariants, TQueue } from './types';
+import { RepeatVariants, TChangeQueue, TQueue } from './types';
 
 // #region queue
 export const $queue = createStore<TQueue | null>(null);
 const $initialTracks = createStore<TQueue['tracks'] | null>(null);
 
 export const init = createEvent();
-export const changeQueue = createEvent<PlayDtoPayload>();
+export const changeQueue = createEvent<TChangeQueue>();
 export const addToQueue = createEvent<TrackDto>();
 export const removeFromQueue = createEvent<string>();
 
+export const changeTrack = createEvent<number>();
 export const next = createEvent();
 export const prev = createEvent();
 
@@ -32,9 +32,11 @@ const initFx = createEffect<unknown, TQueue, unknown>(async () => {
   } as TQueue;
 });
 
-const changeQueueFx = createEffect<{ dto: PlayDtoPayload; queue: TQueue | null }, TQueue, unknown>(
+const changeQueueFx = createEffect<{ dto: TChangeQueue; queue: TQueue | null }, TQueue, unknown>(
   async ({ dto, queue }) => {
-    const { data } = await API.play.get(dto);
+    const { _id, type, index } = dto;
+
+    const { data } = await API.play.get({ _id, type });
 
     const shuffled = queue?.shuffled || false;
     const repeat = queue?.repeat || 'DISABLED';
@@ -44,7 +46,7 @@ const changeQueueFx = createEffect<{ dto: PlayDtoPayload; queue: TQueue | null }
       shuffled,
       repeat,
       initialTracks: data.tracks,
-      current: 0,
+      current: index ?? 0,
     } as TQueue;
   },
 );
@@ -85,6 +87,21 @@ sample({
 //   },
 //   target: init, // TODO: load random playlist
 // });
+
+sample({
+  clock: changeTrack,
+  source: $queue,
+  fn: (queue, index) => {
+    if (!queue) return queue;
+
+    const { tracks } = queue;
+
+    if (index > tracks.length) return queue;
+
+    return { ...queue, current: index };
+  },
+  target: $queue,
+});
 
 sample({
   clock: next,

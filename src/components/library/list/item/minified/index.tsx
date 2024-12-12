@@ -1,9 +1,9 @@
-import { LibraryItemDto } from '../../../../../api/dto/library';
 import { LibraryItemCover, StyledLibraryItem } from '../styled';
+import { TItemProps } from '../types';
 
-const LibraryItemMinified = (item: LibraryItemDto) => {
+const LibraryItemMinified = ({ onOpen, ...item }: TItemProps) => {
   return (
-    <StyledLibraryItem>
+    <StyledLibraryItem onClick={onOpen}>
       <LibraryItemCover
         alt={item.name}
         src={item.cover + '?w=100&h=100&fit=contain'}

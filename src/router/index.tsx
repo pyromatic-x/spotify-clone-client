@@ -1,12 +1,13 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Error from '../pages/Error';
-import { ROUTES } from './constants';
 import App from '../App';
+import Home from '../pages/home/Home';
+import PlaylistPage from '../pages/playlist';
 
 export default createBrowserRouter(
   createRoutesFromElements(
     <Route
-      path={ROUTES[0].PATH}
+      path="/"
       element={<App />}
       errorElement={
         <App>
@@ -14,9 +15,8 @@ export default createBrowserRouter(
         </App>
       }
     >
-      {ROUTES.map((route) => (
-        <Route path={route.PATH} element={route.ELEMENT} key={route.KEY} />
-      ))}
+      <Route path="/" element={<Home />} />
+      <Route path="/playlist/:id" element={<PlaylistPage />} />
     </Route>,
   ),
 );

@@ -3,9 +3,13 @@ import { PropsWithChildren, useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { MainContainerWrapper } from './styled';
 import { changeMainWidth } from './effect';
+import { useUnit } from 'effector-react';
+import { $rightSectionComponent } from '../rightSection/effect';
 
 const MainContainer = ({ children }: PropsWithChildren) => {
   const ref = useRef(null);
+
+  const rightSection = useUnit($rightSectionComponent);
 
   useEffect(() => {
     const observer = new ResizeObserver((entries) => {
@@ -26,7 +30,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   }, []);
 
   return (
-    <MainContainerWrapper ref={ref}>
+    <MainContainerWrapper ref={ref} style={{ gridColumn: !rightSection ? '2 / 4' : '' }}>
       {children ?? (
         <Box maxWidth="1920px" margin="0 auto">
           <Outlet />

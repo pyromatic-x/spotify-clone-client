@@ -16,7 +16,7 @@ const Library = () => {
   };
 
   return (
-    <LibraryContainer resizedWidth={width.value} mr="8px">
+    <LibraryContainer resizedWidth={width.value}>
       <LibraryHeader />
       <LibraryListConrainer onScroll={handleScroll}>
         {width.name === 'default' && (

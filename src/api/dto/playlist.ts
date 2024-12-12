@@ -44,7 +44,7 @@ export interface PlaylistDto {
 }
 
 export interface PlaylistPageDto {
-  meta: Omit<PlaylistDto, 'createdAt' | 'tracks' | 'accent'> & {
+  meta: Omit<PlaylistDto, 'createdAt' | 'tracks'> & {
     tracksCount: number;
     duration: number;
   };

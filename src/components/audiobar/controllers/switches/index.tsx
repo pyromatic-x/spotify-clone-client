@@ -32,13 +32,17 @@ const PlayPause = ({ disabled }: { disabled: boolean }) => {
 const AudiobarSwitches = () => {
   const queue = useUnit($queue);
 
-  const { getPosition, seek } = useGlobalAudioPlayer();
+  const { getPosition, seek, playing, play } = useGlobalAudioPlayer();
 
   const onPrev = () => {
     const position = getPosition();
     position > 3 ? seek(0) : prev();
   };
-  const onNext = () => next();
+  const onNext = () => {
+    next();
+
+    if (!playing) play();
+  };
 
   return (
     <Grid container alignItems="center" justifyContent="center" wrap="nowrap" gap={1.7}>
