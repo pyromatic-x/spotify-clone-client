@@ -9,8 +9,14 @@ export const $socket = createStore<ReturnType<typeof io> | null>(null);
 sample({
   clock: connectToSocket,
   fn: () => {
-    const socket = io(`${process.env.REACT_APP_WS_URL}`);
-    console.info(`connection to ${process.env.REACT_APP_WS_URL} established`);
+    const socket = io(`${process.env.REACT_APP_WS_URL}`, {
+      secure: true,
+      reconnection: true,
+      rejectUnauthorized: false,
+    });
+
+    socket.io.on('open', () => console.info(`connection to ${process.env.REACT_APP_WS_URL} established`));
+
     return socket;
   },
   target: $socket,
@@ -25,10 +31,3 @@ sample({
   },
   target: $socket,
 });
-
-// $socket.watch((socket) => {
-//   if (socket) {
-//     socket.on('followed', (data) => followedEvent(data));
-//     socket.on('unfollowed', (data) => unfollowedEvent(data));
-//   }
-// });
