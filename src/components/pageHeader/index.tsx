@@ -1,20 +1,19 @@
 import { Grid, Link, Typography } from '@mui/material';
 import { HeaderBackdrop, Header, HeaderAuthorAvatar, HeaderContent, HeaderCover, HeaderName } from './styled';
 import { useUnit } from 'effector-react';
-import { $playlist } from './effect';
 import { $mainWidth } from '../../components/main/effect';
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
+import { TPageHeaderMetaProps } from './types';
 
-const PageHeader = () => {
+const PageHeader = ({ name, accent, cover, author, tracksCount }: TPageHeaderMetaProps) => {
   const coverRef = useRef(null);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [nameFontSize, setNameFontSize] = useState(96);
 
-  const playlist = useUnit($playlist);
   const containerWidth = useUnit($mainWidth);
 
-  const nameLength = playlist?.meta?.name?.length || 16;
+  const nameLength = name.length || 16;
 
   const isContainerNarrow = containerWidth < 600;
 
@@ -28,7 +27,7 @@ const PageHeader = () => {
 
     if (nameLength > 24) size -= nameLength / 2.5;
 
-    setNameFontSize(size);
+    if (nameFontSize !== size) setNameFontSize(size);
   }, [containerWidth]);
 
   const handleImageLoad = () => {
@@ -37,7 +36,7 @@ const PageHeader = () => {
 
   return (
     <>
-      <HeaderBackdrop accent={playlist?.meta?.accent} height={isContainerNarrow ? '190px' : '340px'} />
+      <HeaderBackdrop accent={accent} height={isContainerNarrow ? '190px' : '340px'} />
       <Header
         pb={isContainerNarrow ? '30px' : '40px'}
         pt={isContainerNarrow ? '30px' : '80px'}
@@ -45,20 +44,20 @@ const PageHeader = () => {
       >
         <HeaderCover
           ref={coverRef}
-          src={playlist?.meta?.cover + '?w=460&h=460'}
+          src={cover + '?w=460&h=460'}
           onLoad={handleImageLoad}
           size={isContainerNarrow ? '130px' : '230px'}
         />
         <HeaderContent>
           <Typography fontSize="0.85rem">Playlist</Typography>
           <HeaderName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
-            {playlist?.meta.name}
+            {name}
           </HeaderName>
           <Grid container alignItems="center">
-            <HeaderAuthorAvatar src={playlist?.meta.author.avatar + '?w=48&h=48'} />
-            <Link fontSize="0.85rem">{playlist?.meta?.author?.name}</Link>
+            <HeaderAuthorAvatar src={author.avatar + '?w=48&h=48'} />
+            <Link fontSize="0.85rem">{author?.name}</Link>
             <Typography color="secondary" fontSize="0.85rem">
-              &nbsp;{`🞄 ${playlist?.meta.tracksCount} songs`}
+              &nbsp;{`🞄 ${tracksCount} songs`}
             </Typography>
           </Grid>
         </HeaderContent>
@@ -67,4 +66,4 @@ const PageHeader = () => {
   );
 };
 
-export default PageHeader;
+export default memo(PageHeader);

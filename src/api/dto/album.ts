@@ -21,7 +21,7 @@ export interface AlbumDto {
   _collection: 'album' | 'playlist' | 'artist';
 }
 
-export interface AlbumPageDataDto {
+export interface AlbumPageDto {
   meta: Omit<AlbumDto, 'createdAt'> & {
     tracksCount: number;
     duration: number;

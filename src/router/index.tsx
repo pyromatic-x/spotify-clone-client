@@ -3,6 +3,7 @@ import Error from '../pages/Error';
 import App from '../App';
 import Home from '../pages/home/Home';
 import PlaylistPage from '../pages/playlist';
+import AlbumPage from '../pages/album';
 
 export default createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +18,7 @@ export default createBrowserRouter(
     >
       <Route path="/" element={<Home />} />
       <Route path="/playlist/:id" element={<PlaylistPage />} />
+      <Route path="/album/:id" element={<AlbumPage />} />
     </Route>,
   ),
 );

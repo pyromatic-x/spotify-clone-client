@@ -61,10 +61,9 @@ export const HeaderContent = styled(Box)(() => ({
   transition: '0.2s ease',
 }));
 
-export const HeaderName = styled(Typography)(({ fontSize }) => ({
+export const HeaderName = styled(Typography)(() => ({
   fontWeight: 'bold',
   lineHeight: '1.3',
-  fontSize: typeof fontSize === 'string' ? fontSize : '6rem',
   transition: '0.2s ease',
 }));
 

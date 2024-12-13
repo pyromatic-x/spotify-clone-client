@@ -1,5 +1,5 @@
 import { Box, Grid, IconButton, InputAdornment, Tooltip } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   HomeOutlined as HomeOutlinedIcon,
@@ -19,6 +19,7 @@ const HeaderSearch = () => {
   const [search, setSearch] = useState('');
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSearchIconClick = () => {
     if (inputRef.current) inputRef.current.focus();
@@ -31,7 +32,7 @@ const HeaderSearch = () => {
   return (
     <Grid container alignItems="center" justifyContent="center" width="100%" wrap="nowrap" gap={1}>
       <Tooltip title="Home">
-        <StyledHeaderButton>
+        <StyledHeaderButton onClick={() => navigate('/')}>
           {location.pathname === '/' ? <HomeFilledIcon /> : <HomeOutlinedIcon color="secondary" />}
         </StyledHeaderButton>
       </Tooltip>

@@ -1,21 +1,23 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { $playlist, $playlistError, getPlaylistPageData, resetPlaylistPageData } from './effect';
 import { useUnit } from 'effector-react';
 import Error from '../Error';
 import { Box, Typography } from '@mui/material';
+import { $album, $albumError } from './effect';
+import { getAlbumPageData } from './effect';
+import { resetAlbumPageData } from './effect';
 import PageHeader from '../../components/pageHeader';
 
-const PlaylistPage = () => {
+const AlbumPage = () => {
   const { id } = useParams();
 
-  const playlist = useUnit($playlist);
-  const error = useUnit($playlistError);
+  const album = useUnit($album);
+  const error = useUnit($albumError);
 
   useEffect(() => {
-    if (id) getPlaylistPageData(id);
+    if (id) getAlbumPageData(id);
 
-    return resetPlaylistPageData;
+    return resetAlbumPageData;
   }, [id]);
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const PlaylistPage = () => {
 
   return (
     <>
-      {playlist?.meta && <PageHeader {...playlist.meta} />}
+      {album?.meta && <PageHeader {...album.meta} />}
       <Box position="relative" zIndex={1}>
         <Typography>tracks and stuff</Typography>
       </Box>
@@ -34,4 +36,4 @@ const PlaylistPage = () => {
   );
 };
 
-export default PlaylistPage;
+export default AlbumPage;

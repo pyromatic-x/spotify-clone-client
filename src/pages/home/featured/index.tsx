@@ -3,17 +3,17 @@ import { FeaturedCard, FeaturedCardCover, FeaturedContainer } from './styled';
 import { $homeCompilations } from '../effect';
 import { Typography } from '@mui/material';
 import { changeHomeOverlayColor } from '../overlay/effect';
-import { generateColors } from '../../../utils/color';
 import { useMemo } from 'react';
 import PlayButton from '../../../components/buttons/PlayButton';
 import { PlayButtonWrapper } from '../../../components/buttons/styled';
 import { $mainWidth } from '../../../components/main/effect';
+import { generateFeaturedColors } from '../../../utils/color';
 
 const HomeFeatured = () => {
   const compilations = useUnit($homeCompilations);
   const width = useUnit($mainWidth);
 
-  const colors = useMemo(() => generateColors(), []);
+  const colors = useMemo(() => generateFeaturedColors(), []);
 
   const breakpoint = width < 900;
 

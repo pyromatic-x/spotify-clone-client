@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { LibraryDto } from './dto/library';
 import { AuthUserDto, AuthUserPayload } from './dto/auth';
 import { PersonalDto } from './dto/personal';
-import { AlbumPageDataDto } from './dto/album';
+import { AlbumPageDto } from './dto/album';
 import { ArtistBioDto, ArtistPageDataDto } from './dto/artist';
 import { FollowPayload, IsFollowingDto } from './dto/follow';
 import { PlaylistPageDto } from './dto/playlist';
@@ -50,7 +50,7 @@ class Api_Service extends HttpClient {
 
   albums = {
     page: (id: string) =>
-      this.request<AlbumPageDataDto>({
+      this.request<AlbumPageDto>({
         path: `/album/${id}`,
         method: 'GET',
       }),
