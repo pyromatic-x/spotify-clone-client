@@ -9,6 +9,7 @@ export const $socket = createStore<ReturnType<typeof io> | null>(null);
 sample({
   clock: connectToSocket,
   fn: () => {
+    // const socket = io(`ws://localhost:80`);
     const socket = io(`${process.env.REACT_APP_WS_URL}`, {
       secure: true,
       reconnection: true,
@@ -16,6 +17,14 @@ sample({
     });
 
     socket.io.on('open', () => console.info(`connection to ${process.env.REACT_APP_WS_URL} established`));
+    socket.io.on('error', (err) =>
+      console.error(`connection to ${process.env.REACT_APP_WS_URL} failed: `, err),
+    );
+
+    socket.on('*', (eventName, ...args) => {
+      console.log(`Event: ${eventName}`);
+      console.log(args);
+    });
 
     return socket;
   },
