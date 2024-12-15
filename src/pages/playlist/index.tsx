@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { $playlist, $playlistError, getPlaylistPageData, resetPlaylistPageData } from './effect';
 import { useUnit } from 'effector-react';
 import Error from '../Error';
-import { Box, Typography } from '@mui/material';
-import PageHeader from '../../components/pageHeader';
+
+import UnitPage from '../../components/unitPage';
 
 const PlaylistPage = () => {
   const { id } = useParams();
@@ -24,14 +24,7 @@ const PlaylistPage = () => {
 
   if (error) return <Error />;
 
-  return (
-    <>
-      {playlist?.meta && <PageHeader {...playlist.meta} />}
-      <Box position="relative" zIndex={1}>
-        <Typography>tracks and stuff</Typography>
-      </Box>
-    </>
-  );
+  return playlist && <UnitPage unit={playlist} type="playlist" />;
 };
 
 export default PlaylistPage;

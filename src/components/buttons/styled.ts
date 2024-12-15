@@ -19,15 +19,15 @@ export const StyledPlayButton = styled(ButtonBase, {
   },
 }));
 
-export const StyledSimplePlayButton = styled(ButtonBase)(({ theme }) => ({
+export const StyledSimplePlayButton = styled(ButtonBase, {
+  shouldForwardProp: (prop) => prop !== 'size',
+})<{ size?: number }>(({ theme, size }) => ({
   borderRadius: '50%',
-  // height: size ? `${size}px` : '48px',
-  // width: size ? `${size}px` : '48px',
   backgroundColor: 'transparent',
   color: theme.palette.common.white,
 
   '& svg': {
-    fontSize: '1.8rem',
+    fontSize: size ? size / 2 + 'px' : '1.8rem',
   },
 
   '&:hover': {
@@ -40,4 +40,5 @@ export const PlayButtonWrapper = styled(Box)(() => ({
   height: '100%',
   display: 'flex',
   alignItems: 'center',
+  zIndex: 1,
 }));

@@ -1,10 +1,16 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { LibraryDto } from './dto/library';
+import {
+  LibraryAddPayload,
+  LibraryCheckPayload,
+  LibraryCheckResponse,
+  LibraryDto,
+  LibraryRemovePayload,
+  LibraryRemoveResponse,
+} from './dto/library';
 import { AuthUserDto, AuthUserPayload } from './dto/auth';
 import { PersonalDto } from './dto/personal';
 import { AlbumPageDto } from './dto/album';
 import { ArtistBioDto, ArtistPageDataDto } from './dto/artist';
-import { FollowPayload, IsFollowingDto } from './dto/follow';
 import { PlaylistPageDto } from './dto/playlist';
 import { SearchDto } from './dto/search';
 import { UserPageDto } from './dto/user';
@@ -45,6 +51,11 @@ class Api_Service extends HttpClient {
         path: '/auth/login',
         method: 'POST',
         body: data,
+      }),
+    verify: () =>
+      this.request<AuthUserDto>({
+        path: '/auth/verify',
+        method: 'GET',
       }),
   };
 
@@ -88,6 +99,23 @@ class Api_Service extends HttpClient {
         path: '/library',
         method: 'GET',
       }),
+    check: (target: LibraryCheckPayload) =>
+      this.request<LibraryCheckResponse>({
+        path: `/library/check/${target}`,
+        method: 'GET',
+      }),
+    add: ({ target, type }: LibraryAddPayload) =>
+      this.request<LibraryCheckResponse>({
+        path: `/library/add`,
+        method: 'POST',
+        body: { target, type },
+      }),
+    remove: ({ target, type }: LibraryRemovePayload) =>
+      this.request<LibraryRemoveResponse>({
+        path: `/library/remove`,
+        method: 'POST',
+        body: { target, type },
+      }),
   };
   personal = {
     get: () =>
@@ -114,26 +142,6 @@ class Api_Service extends HttpClient {
     liked: () =>
       this.request<PlayDto>({
         path: `/play/liked`,
-        method: 'GET',
-      }),
-  };
-
-  follow = {
-    follow: (data: FollowPayload) =>
-      this.request({
-        path: '/follow',
-        method: 'POST',
-        body: JSON.stringify(data),
-      }),
-    unfollow: (data: FollowPayload) =>
-      this.request({
-        path: '/unfollow',
-        method: 'DELETE',
-        body: JSON.stringify(data),
-      }),
-    isFollowing: (id: string) =>
-      this.request<IsFollowingDto>({
-        path: `/isFollowing/${id}`,
         method: 'GET',
       }),
   };

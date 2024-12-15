@@ -8,10 +8,13 @@ import PlayButton from '../../../components/buttons/PlayButton';
 import { PlayButtonWrapper } from '../../../components/buttons/styled';
 import { $mainWidth } from '../../../components/main/effect';
 import { generateFeaturedColors } from '../../../utils/color';
+import { useNavigate } from 'react-router-dom';
 
 const HomeFeatured = () => {
   const compilations = useUnit($homeCompilations);
   const width = useUnit($mainWidth);
+
+  const navigate = useNavigate();
 
   const colors = useMemo(() => generateFeaturedColors(), []);
 
@@ -32,6 +35,7 @@ const HomeFeatured = () => {
           key={f._id}
           onMouseEnter={() => handleOnMouseEnter(colors[i])}
           onMouseLeave={handleOnMouseLeave}
+          onClick={() => navigate(`/${f._collection}/${f._id}`)}
           height={breakpoint ? '50px' : '80px'}
         >
           <FeaturedCardCover src={(f.cover || f.avatar) + '?w=160&h=160'} sx={{ aspectRatio: 1 }} />

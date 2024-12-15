@@ -8,14 +8,20 @@ import { useUnit } from 'effector-react';
 import { $queue } from '../../audiobar/effect';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
 import { $mainWidth } from '../../main/effect';
+import { useNavigate } from 'react-router-dom';
 
 const RowCard = ({ cover, _id, _collection, name, description, author }: TItemCommonFields) => {
   const queue = useUnit($queue);
   const width = useUnit($mainWidth);
   const { playing } = useGlobalAudioPlayer();
 
+  const navigate = useNavigate();
+
   return (
-    <StyledCard showPlayButton={queue?.target === _id && playing}>
+    <StyledCard
+      showPlayButton={queue?.target === _id && playing}
+      onClick={() => navigate(`/${_collection}/${_id}`)}
+    >
       <Box position="relative" sx={{ aspectRatio: 1, width: '100%' }}>
         <Box
           component="img"

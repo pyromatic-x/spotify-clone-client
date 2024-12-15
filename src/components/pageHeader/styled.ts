@@ -10,10 +10,10 @@ export const HeaderBackdrop = styled(Box, {
   display: 'flex',
   height: height as string,
   width: '100%',
-  transition: '0.2s ease',
+  // transition: '0.2s ease',
 
   ...(accent && {
-    background: `linear-gradient(0deg, ${tinycolor(accent).darken(25)} 0%, ${accent} 100%)`,
+    background: `linear-gradient(0deg, ${tinycolor(accent).darken(5)} 0%, ${accent} 100%)`,
   }),
 
   ':after': {
@@ -25,15 +25,16 @@ export const HeaderBackdrop = styled(Box, {
     bottom: '-220px',
 
     ...(accent && {
-      background: `linear-gradient(180deg, ${tinycolor(accent).darken(28)} 0%, ${theme.palette.background.main} 100%)`,
+      background: `linear-gradient(180deg, ${tinycolor(accent).darken(15)} 0%,  ${theme.palette.background.main} 100%)`,
     }),
   },
 }));
 export const Header = styled(Box)(() => ({
   display: 'flex',
   position: 'relative',
+  alignItems: 'flex-end',
   zIndex: 1,
-  transition: '0.2s ease',
+  // transition: '0.2s ease',
 }));
 
 export const HeaderCover = styled('img', {
@@ -41,11 +42,12 @@ export const HeaderCover = styled('img', {
 })<{ size: string }>(({ theme, size }) => ({
   width: size,
   minHeight: size,
+  maxHeight: size,
   aspectRatio: '1',
   borderRadius: '6px',
   cursor: 'pointer',
   boxShadow: theme.shadows[10],
-  transition: '0.2s ease',
+  // transition: '0.2s ease',
   marginRight: '22px',
 
   ':hover': {
@@ -58,13 +60,13 @@ export const HeaderContent = styled(Box)(() => ({
   flexDirection: 'column',
   justifyContent: 'flex-end',
   width: '100%',
-  transition: '0.2s ease',
+  // transition: '0.2s ease',
 }));
 
 export const HeaderName = styled(Typography)(() => ({
   fontWeight: 'bold',
   lineHeight: '1.3',
-  transition: '0.2s ease',
+  // transition: '0.2s ease',
 }));
 
 export const HeaderAuthorAvatar = styled('img')(() => ({

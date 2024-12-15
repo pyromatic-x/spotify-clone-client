@@ -8,6 +8,8 @@ const AudiobarInfo = () => {
 
   const current = queue?.tracks.find((t, i) => i === queue?.current);
 
+  if (!queue) return <Box width="100%" />;
+
   return (
     <Grid container gap={1} wrap="nowrap">
       {!queue ? <Box width="60px" height="60px" /> : <Cover src={current?.album.cover + '?w=120&h=120'} />}

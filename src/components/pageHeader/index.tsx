@@ -2,19 +2,26 @@ import { Grid, Link, Typography } from '@mui/material';
 import { HeaderBackdrop, Header, HeaderAuthorAvatar, HeaderContent, HeaderCover, HeaderName } from './styled';
 import { useUnit } from 'effector-react';
 import { $mainWidth } from '../../components/main/effect';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { TPageHeaderMetaProps } from './types';
+import tinycolor from 'tinycolor2';
+import { getAccentFromImage } from '../../utils/color';
+
+const darkenAccent = (accent?: string) => {
+  if (!accent) return undefined;
+  return tinycolor(accent).setAlpha(0.9).darken(25).toString();
+};
 
 const PageHeader = ({ name, accent, cover, author, tracksCount }: TPageHeaderMetaProps) => {
   const coverRef = useRef(null);
 
-  const [isLoaded, setIsLoaded] = useState(false);
   const [nameFontSize, setNameFontSize] = useState(96);
+
+  const [_accent, setAccent] = useState(darkenAccent(accent));
 
   const containerWidth = useUnit($mainWidth);
 
   const nameLength = name.length || 16;
-
   const isContainerNarrow = containerWidth < 600;
 
   useEffect(() => {
@@ -23,30 +30,27 @@ const PageHeader = ({ name, accent, cover, author, tracksCount }: TPageHeaderMet
     if (containerWidth <= 600) size = 26;
     else if (containerWidth <= 700) size = 34;
     else if (containerWidth <= 900) size = 48;
-    else if (containerWidth <= 1200) size = 66;
+    else if (containerWidth <= 1300) size = 66;
 
     if (nameLength > 24) size -= nameLength / 2.5;
 
     if (nameFontSize !== size) setNameFontSize(size);
   }, [containerWidth]);
 
-  const handleImageLoad = () => {
-    setIsLoaded(true);
+  const onCoverLoad = (event: SyntheticEvent<HTMLImageElement>) => {
+    const color = getAccentFromImage(event.currentTarget);
+    if (color && !_accent) setAccent(color);
   };
 
   return (
     <>
-      <HeaderBackdrop accent={accent} height={isContainerNarrow ? '190px' : '340px'} />
-      <Header
-        pb={isContainerNarrow ? '30px' : '40px'}
-        pt={isContainerNarrow ? '30px' : '80px'}
-        sx={{ opacity: isLoaded ? 1 : 0 }}
-      >
+      <HeaderBackdrop accent={_accent} height={isContainerNarrow ? '190px' : '340px'} />
+      <Header pb={isContainerNarrow ? '30px' : '40px'} pt={isContainerNarrow ? '30px' : '80px'}>
         <HeaderCover
           ref={coverRef}
           src={cover + '?w=460&h=460'}
-          onLoad={handleImageLoad}
           size={isContainerNarrow ? '130px' : '230px'}
+          onLoadCapture={onCoverLoad}
         />
         <HeaderContent>
           <Typography fontSize="0.85rem">Playlist</Typography>

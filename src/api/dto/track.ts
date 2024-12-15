@@ -13,6 +13,8 @@ export interface TrackDto {
     cover: string;
   };
 
+  albumOrder: number;
+
   explicit: boolean;
   isAddedToLibrary: boolean;
 

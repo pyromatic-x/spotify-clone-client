@@ -3,6 +3,7 @@ import { Box, styled } from '@mui/material';
 export const StyledCard = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'showPlayButton',
 })<{ showPlayButton: boolean }>(({ theme, showPlayButton }) => ({
+  position: 'relative',
   borderRadius: '6px',
   padding: '12px',
   cursor: 'pointer',

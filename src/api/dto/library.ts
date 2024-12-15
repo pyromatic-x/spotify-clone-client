@@ -13,3 +13,14 @@ export type LibraryItemDto = {
 };
 
 export type LibraryDto = Array<LibraryItemDto>;
+
+export type LibraryCheckPayload = string;
+export type LibraryCheckResponse = boolean;
+
+export type LibraryAddPayload = {
+  type: 'album' | 'playlist' | 'artist';
+  target: string;
+};
+export type LibraryRemovePayload = LibraryAddPayload;
+export type LibraryAddResponse = string;
+export type LibraryRemoveResponse = string;

@@ -22,7 +22,7 @@ const PlayPause = ({ disabled }: { disabled: boolean }) => {
     <Tooltip title={tooltip}>
       <span>
         <IconButton onClick={() => togglePlayPause()} variant="scalable" disabled={disabled}>
-          <Icon sx={{ fontSize: '2.5rem', fill: 'white' }} />
+          <Icon sx={{ fontSize: '2.5rem', fill: disabled ? 'secondary' : 'white' }} />
         </IconButton>
       </span>
     </Tooltip>

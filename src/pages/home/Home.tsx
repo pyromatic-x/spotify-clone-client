@@ -5,7 +5,7 @@ import { $homeCompilations, getHomeCompilations, resetHomeCompilations } from '.
 import HomeFeatured from './featured';
 import Row from '../../components/row';
 import { useUnit } from 'effector-react';
-import { $USER } from '../../components/auth/effect';
+import { $USER } from '../../auth/effect';
 
 const HomePage = () => {
   const user = useUnit($USER);

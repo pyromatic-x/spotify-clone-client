@@ -1,19 +1,36 @@
 import { Grid } from '@mui/material';
 import { LibraryContainer } from './styled';
 import { useUnit } from 'effector-react';
-import { $UI, toggleShadow } from './effect';
+import { $UI, getLibrary, refreshLibrary, toggleShadow } from './effect';
 import LibraryHeader from './header';
 import LibrarySearch from './search';
 import LibrarySortAndView from './sortAndView';
 import LibraryList from './list';
 import { LibraryListConrainer } from './list/styled';
+import { $socket } from '../../auth/effect';
+import { useEffect } from 'react';
 
 const Library = () => {
   const { width } = useUnit($UI);
+  const socket = useUnit($socket);
 
   const handleScroll = (event: React.UIEvent<HTMLDivElement, UIEvent>) => {
     toggleShadow(event.currentTarget.scrollTop > 1);
   };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('library-updated', refreshLibrary);
+    }
+
+    return () => {
+      socket?.removeListener('followed');
+    };
+  }, [socket]);
+
+  useEffect(() => {
+    getLibrary();
+  }, []);
 
   return (
     <LibraryContainer resizedWidth={width.value}>

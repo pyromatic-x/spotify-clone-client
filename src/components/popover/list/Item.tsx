@@ -11,7 +11,7 @@ const PopoverItem = ({
   icons,
 }: Extract<IPopoverItem, { label: string }>) => {
   const LeftIcon = icons?.left;
-  // const RightIcon = icons?.right;
+  const RightIcon = icons?.right;
 
   return (
     <StyledPopoverItem active={!!active} disabled={!!disabled} onClick={onClick}>
@@ -21,8 +21,8 @@ const PopoverItem = ({
           {label}
         </Typography>
       </Grid>
-      {!!active && <CheckIcon sx={{ fontSize: '1.2rem' }} />}
-      {/* {LeftIcon && <LeftIcon />} */}
+      {!!active && RightIcon && <RightIcon sx={{ fontSize: '1.2rem' }} />}
+      {!!active && !RightIcon && <CheckIcon sx={{ fontSize: '1.2rem' }} />}
     </StyledPopoverItem>
   );
 };

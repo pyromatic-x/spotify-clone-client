@@ -8,9 +8,9 @@ import { useEffect } from 'react';
 import { $nowPlaying, getNowPlayingDetails, resetNowPlaying, TNowPlaying } from './effect';
 import { Card, CardImage, Cover, CardContent } from './styled';
 import { useNavigate } from 'react-router-dom';
-import { stringToNumberWithDigits } from '../../../utils/number';
+import { toNumberWithDigits } from '../../../utils/number';
 import QueueTrack from '../queue/Track';
-import FollowButton from '../../buttons/FollowButton';
+import SaveButton from '../../buttons/SaveButton';
 
 const RightSectionPlaying = ({ showHeaderShadow }: { showHeaderShadow: boolean }) => {
   const navigate = useNavigate();
@@ -77,9 +77,9 @@ const Artist = ({ artist }: { artist: TNowPlaying['artist'] }) => (
       </Typography>
       <Grid container alignItems="center" justifyContent="space-between" mb={2}>
         <Typography color="secondary">
-          {stringToNumberWithDigits(artist.stats.listeners.monthly)} monthly listeners
+          {toNumberWithDigits(artist.stats.listeners.monthly)} monthly listeners
         </Typography>
-        <FollowButton _collection="artist" target={artist._id} />
+        <SaveButton type="artist" target={artist._id} />
       </Grid>
       <Typography truncate={3} color="secondary">
         {artist.about?.bio}
@@ -99,7 +99,7 @@ const Credits = ({ artist }: { artist: TNowPlaying['artist'] }) => (
           <Typography>{artist.name}</Typography>
           <Typography color="secondary">Main Artist</Typography>
         </Box>
-        <FollowButton _collection="artist" target={artist._id} />
+        <SaveButton type="artist" target={artist._id} />
       </Grid>
     </CardContent>
   </Card>

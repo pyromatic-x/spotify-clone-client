@@ -1,5 +1,5 @@
 export function formatDuration(value?: number) {
-  if (!value) return '0:00';
+  if (!value && value !== 0) return '-:--';
 
   const minute = Math.floor(value / 60);
   const secondLeft = Math.floor(value - minute * 60);

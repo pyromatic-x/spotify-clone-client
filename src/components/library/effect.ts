@@ -3,7 +3,6 @@ import { LibraryUIConfig } from './constants';
 import { ILibraryFilter, ILibraryFilterPayload, LibrarySortings, LibraryView } from './types';
 import { API } from '../../api';
 import { sortLibraryItems } from './utils';
-import { loginFx } from '../auth/effect';
 import { LibraryDto } from '../../api/dto/library';
 
 export const reset = createEvent();
@@ -12,10 +11,11 @@ export const reset = createEvent();
 const getLibraryItems = async () => (await API.library.get()).data;
 
 export const refreshLibrary = createEvent();
+export const getLibrary = createEvent();
+const filterLibrary = createEvent<ILibraryFilterPayload>();
 
-export const $libraryItems = createStore<LibraryDto | null>(null);
-export const $libraryItemsDefault = createStore<LibraryDto | null>(null);
-export const $libraryItemsError = createStore<string | null>(null);
+export const $library = createStore<LibraryDto | null>(null);
+export const $libraryDefault = createStore<LibraryDto | null>(null);
 
 export const refreshLibraryFx = createEffect<unknown, LibraryDto, Error>(getLibraryItems);
 export const getLibraryItemsFx = createEffect<unknown, LibraryDto, Error>(getLibraryItems);
@@ -26,22 +26,18 @@ sample({
 });
 sample({
   clock: refreshLibraryFx.doneData,
-  target: [$libraryItems, $libraryItemsDefault],
+  target: [$library, $libraryDefault],
 });
 
 sample({
-  clock: loginFx.doneData,
+  clock: getLibrary,
   target: getLibraryItemsFx,
 });
 sample({
   clock: getLibraryItemsFx.doneData,
-  target: [$libraryItems, $libraryItemsDefault],
+  target: [$library, $libraryDefault],
 });
-sample({
-  clock: getLibraryItemsFx.failData,
-  fn: (e: any) => e?.message,
-  target: $libraryItemsError,
-});
+
 // #endregion items
 
 // #region UI
@@ -85,11 +81,25 @@ export const $filter = createStore<ILibraryFilter>({
 
 sample({
   clock: filter,
-  source: { $libraryItemsDefault, $filter },
-  fn: ({ $libraryItemsDefault, $filter }) => {
-    let items = [...$libraryItemsDefault!];
+  source: $filter,
+  fn: (filter, payload) => {
+    if (payload.view) {
+      return { ...filter, view: { ...filter.view, ...payload.view } };
+    }
+    return { ...filter, ...payload };
+  },
+  target: [$filter, filterLibrary],
+});
 
-    const { search, category, sort } = $filter;
+sample({
+  clock: filterLibrary,
+  source: $libraryDefault,
+  fn: (library, filter: ILibraryFilterPayload) => {
+    if (!library) return null;
+
+    let items = [...library];
+
+    const { search, category, sort } = filter;
 
     if (search) {
       const regex = new RegExp(`${search}`, 'gi');
@@ -106,10 +116,6 @@ sample({
 
     return items;
   },
-  target: $libraryItems,
+  target: $library,
 });
 // #endregion
-
-// $collapsed.watch((state) => {
-//   if (state) filter({ search: '', category: null });
-// });

@@ -49,8 +49,8 @@ const AudiobarSeeker = () => {
 
   return (
     <Grid container alignItems="center" justifyContent="center" wrap="nowrap" gap={1.5}>
-      <Typography color="secondary" fontSize="0.85rem">
-        {formatDuration(isSeekStarted ? seekingPosition : position)}
+      <Typography color="secondary" fontSize="0.85rem" whiteSpace="nowrap">
+        {formatDuration(queue ? (isSeekStarted ? seekingPosition : position) : undefined)}
       </Typography>
       <Slider
         ref={ref}

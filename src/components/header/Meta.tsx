@@ -3,7 +3,7 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 import { Notifications as NewIcon, Groups as FriendsIcon } from '@mui/icons-material/';
 import { useUnit } from 'effector-react';
-import { $USER } from '../auth/effect';
+import { $USER } from '../../auth/effect';
 import { StyledHeaderButton } from './styled';
 
 const Button = ({
