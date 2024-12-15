@@ -1,4 +1,5 @@
 import { AlbumDto } from './album';
+import { PlaylistDto } from './playlist';
 import { TrackDto } from './track';
 
 export interface ArtistDto {
@@ -9,22 +10,27 @@ export interface ArtistDto {
   _collection: 'artist';
 }
 
-export interface ArtistPageDataDto {
+export interface ArtistPageDto {
   meta: {
     _id: string;
     name: string;
     avatar: string;
     backdrop: string;
-    accent: string;
-    verified: boolean;
-    listeners: number;
-    aboutImage: number;
-    likedTracksCount?: number;
-    isFollowing: boolean;
-  };
 
+    verified: boolean;
+    inLibrary: boolean;
+
+    likedCount: number;
+  };
   tracks: Array<TrackDto>;
-  albums: Array<AlbumDto>;
+  discography: Array<AlbumDto>;
+  similar: Array<ArtistDto>;
+  discovered: Array<PlaylistDto>;
+  about: {
+    image?: string;
+    monthly: string;
+    description?: string;
+  };
 }
 
 export interface ArtistBioDto {

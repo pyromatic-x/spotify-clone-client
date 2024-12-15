@@ -1,3 +1,4 @@
+import { ArtistDto } from './artist';
 import { PlaylistDto } from './playlist';
 
 export interface UserDto {
@@ -11,6 +12,7 @@ export interface UserPageDto {
     followersCount?: number;
     followingCount?: number;
   };
+  recentlyPlayedArtists: Array<ArtistDto>;
   playlists?: Array<PlaylistDto>;
   followers?: Array<UserDto>;
   following?: Array<UserDto>;

@@ -12,7 +12,7 @@ const darkenAccent = (accent?: string) => {
   return tinycolor(accent).setAlpha(0.9).darken(25).toString();
 };
 
-const PageHeader = ({ name, accent, cover, author, tracksCount }: TPageHeaderMetaProps) => {
+const PageHeader = ({ name, accent, cover, author, tracksCount, avatar }: TPageHeaderMetaProps) => {
   const coverRef = useRef(null);
 
   const [nameFontSize, setNameFontSize] = useState(96);
@@ -48,7 +48,7 @@ const PageHeader = ({ name, accent, cover, author, tracksCount }: TPageHeaderMet
       <Header pb={isContainerNarrow ? '30px' : '40px'} pt={isContainerNarrow ? '30px' : '80px'}>
         <HeaderCover
           ref={coverRef}
-          src={cover + '?w=460&h=460'}
+          src={cover || avatar + '?w=460&h=460'}
           size={isContainerNarrow ? '130px' : '230px'}
           onLoadCapture={onCoverLoad}
         />
@@ -57,13 +57,15 @@ const PageHeader = ({ name, accent, cover, author, tracksCount }: TPageHeaderMet
           <HeaderName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
             {name}
           </HeaderName>
-          <Grid container alignItems="center">
-            <HeaderAuthorAvatar src={author.avatar + '?w=48&h=48'} />
-            <Link fontSize="0.85rem">{author?.name}</Link>
-            <Typography color="secondary" fontSize="0.85rem">
-              &nbsp;{`🞄 ${tracksCount} songs`}
-            </Typography>
-          </Grid>
+          {author && (
+            <Grid container alignItems="center">
+              <HeaderAuthorAvatar src={author.avatar + '?w=48&h=48'} />
+              <Link fontSize="0.85rem">{author?.name}</Link>
+              <Typography color="secondary" fontSize="0.85rem">
+                &nbsp;{`🞄 ${tracksCount} songs`}
+              </Typography>
+            </Grid>
+          )}
         </HeaderContent>
       </Header>
     </>

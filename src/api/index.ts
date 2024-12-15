@@ -10,7 +10,7 @@ import {
 import { AuthUserDto, AuthUserPayload } from './dto/auth';
 import { PersonalDto } from './dto/personal';
 import { AlbumPageDto } from './dto/album';
-import { ArtistBioDto, ArtistPageDataDto } from './dto/artist';
+import { ArtistBioDto, ArtistPageDto } from './dto/artist';
 import { PlaylistPageDto } from './dto/playlist';
 import { SearchDto } from './dto/search';
 import { UserPageDto } from './dto/user';
@@ -68,7 +68,7 @@ class Api_Service extends HttpClient {
   };
   artists = {
     page: (id: string) =>
-      this.request<ArtistPageDataDto>({
+      this.request<ArtistPageDto>({
         path: `/artist/${id}`,
         method: 'GET',
       }),

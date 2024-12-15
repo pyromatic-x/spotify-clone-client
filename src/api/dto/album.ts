@@ -22,12 +22,12 @@ export interface AlbumDto {
 }
 
 export interface AlbumPageDto {
-  meta: Omit<AlbumDto, 'createdAt'> & {
+  meta: AlbumDto & {
     tracksCount: number;
     duration: number;
   };
 
   tracks: Array<TrackDto>;
 
-  moreByAuthor?: Array<AlbumDto>;
+  more?: Array<AlbumDto>;
 }
