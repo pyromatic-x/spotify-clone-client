@@ -331,6 +331,23 @@ export default createTheme(
               },
             },
           },
+          {
+            props: { variant: 'text' },
+            style: {
+              color: global.palette.secondary.main,
+              fontWeight: 'bold',
+
+              ':hover': {
+                transform: 'scale(1.02)',
+                color: global.palette.common.white,
+                backgroundColor: 'transparent',
+              },
+
+              '& .MuiTouchRipple-root': {
+                display: 'none',
+              },
+            },
+          },
         ],
       },
     },

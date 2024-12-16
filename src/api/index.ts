@@ -11,7 +11,7 @@ import { AuthUserDto, AuthUserPayload } from './dto/auth';
 import { PersonalDto } from './dto/personal';
 import { AlbumPageDto } from './dto/album';
 import { ArtistBioDto, ArtistPageDto } from './dto/artist';
-import { PlaylistPageDto } from './dto/playlist';
+import { HandleTrackInPlaylistPaylodDto, PlaylistMinifiedByTrackDto, PlaylistPageDto } from './dto/playlist';
 import { SearchDto } from './dto/search';
 import { UserPageDto } from './dto/user';
 import { PlayDto, PlayDtoPayload } from './dto/play';
@@ -84,6 +84,17 @@ class Api_Service extends HttpClient {
         path: `/playlist/${id}`,
         method: 'GET',
       }),
+    own: (trackId: string) =>
+      this.request<Array<PlaylistMinifiedByTrackDto>>({
+        path: `/playlists/own-by-track/${trackId}`,
+        method: 'GET',
+      }),
+    handleTrack: (payload: HandleTrackInPlaylistPaylodDto) =>
+      this.request<PlaylistPageDto>({
+        path: `/playlists/handle-track`,
+        method: 'POST',
+        body: payload,
+      }),
   };
   users = {
     page: (id: string) =>
@@ -122,6 +133,15 @@ class Api_Service extends HttpClient {
       this.request<PersonalDto>({
         path: '/personal',
         method: 'GET',
+      }),
+  };
+
+  tracks = {
+    like: (payload: { id: string }) =>
+      this.request<SearchDto>({
+        path: `/track/like`,
+        method: 'POST',
+        body: payload,
       }),
   };
 

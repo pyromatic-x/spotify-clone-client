@@ -2,6 +2,7 @@ import { Box, Grid, Link } from '@mui/material';
 import { Cover } from './styled';
 import { useUnit } from 'effector-react';
 import { $queue } from '../effect';
+import SaveTrackButton from '../../buttons/save/SaveTrackButton';
 
 const AudiobarInfo = () => {
   const queue = useUnit($queue);
@@ -11,7 +12,7 @@ const AudiobarInfo = () => {
   if (!queue) return <Box width="100%" />;
 
   return (
-    <Grid container gap={1} wrap="nowrap">
+    <Grid container gap={1} wrap="nowrap" alignItems="center">
       {!queue ? <Box width="60px" height="60px" /> : <Cover src={current?.album.cover + '?w=120&h=120'} />}
       <Grid container flexDirection="column" justifyContent="center" width="max-content">
         <Link fontSize="0.95rem" fontWeight="bold" truncate={1} maxWidth="20vw">
@@ -21,6 +22,7 @@ const AudiobarInfo = () => {
           {current?.author?.name}
         </Link>
       </Grid>
+      {current?._id && <SaveTrackButton id={current?._id} added={current.isAddedToLibrary} />}
     </Grid>
   );
 };

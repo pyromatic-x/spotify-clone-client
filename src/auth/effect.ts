@@ -47,7 +47,7 @@ const prodOptions = {
 };
 
 sample({
-  clock: loginFx.doneData,
+  clock: [loginFx.doneData, verifyFx.doneData],
   source: $USER,
   fn: (user) => {
     const url = `${process.env.REACT_APP_WS_URL}`;

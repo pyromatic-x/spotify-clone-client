@@ -6,14 +6,21 @@ import { $socket } from '../../auth/effect';
 import { LibraryAddPayload } from '../../api/dto/library';
 import { LibraryUpdateEventResponse } from '../../api/events';
 
-const SaveButton = (props: LibraryAddPayload) => {
+type TProps = {
+  source: LibraryAddPayload;
+  variant: 'save' | 'follow';
+};
+
+const SaveButton = ({ source, variant }: TProps) => {
+  const { target, type } = source;
+
   const socket = useUnit($socket);
 
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const checkIsSaved = async () => {
-      const { data } = await API.library.check(props.target);
+      const { data } = await API.library.check(target);
       setIsSaved(data);
     };
 
@@ -21,8 +28,8 @@ const SaveButton = (props: LibraryAddPayload) => {
   }, []);
 
   useEffect(() => {
-    const handleEvent = ({ target, status }: LibraryUpdateEventResponse) => {
-      if (target === props.target) setIsSaved(status === 'added');
+    const handleEvent = (data: LibraryUpdateEventResponse) => {
+      if (data.target === target) setIsSaved(data.status === 'added');
     };
 
     if (socket) {
@@ -35,14 +42,16 @@ const SaveButton = (props: LibraryAddPayload) => {
   }, [socket]);
 
   const handleOnClick = () => {
-    API.library[isSaved ? 'remove' : 'add'](props);
+    API.library[isSaved ? 'remove' : 'add']({ target, type });
     setIsSaved(!isSaved);
   };
 
-  return (
+  return variant === 'follow' ? (
     <Button variant="outlined" color="secondary" onClick={handleOnClick} disableRipple>
       {isSaved ? 'Unfollow' : 'Follow'}
     </Button>
+  ) : (
+    <>TODO</>
   );
 };
 export default SaveButton;

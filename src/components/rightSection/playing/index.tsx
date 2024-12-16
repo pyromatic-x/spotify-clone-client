@@ -10,7 +10,7 @@ import { Card, CardImage, Cover, CardContent } from './styled';
 import { useNavigate } from 'react-router-dom';
 import { toNumberWithDigits } from '../../../utils/number';
 import QueueTrack from '../queue/Track';
-import SaveButton from '../../buttons/SaveButton';
+import SaveButton from '../../buttons/FollowButton';
 
 const RightSectionPlaying = ({ showHeaderShadow }: { showHeaderShadow: boolean }) => {
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ const Artist = ({ artist }: { artist: TNowPlaying['artist'] }) => (
         <Typography color="secondary">
           {toNumberWithDigits(artist.stats.listeners.monthly)} monthly listeners
         </Typography>
-        <SaveButton type="artist" target={artist._id} />
+        <SaveButton source={{ type: 'artist', target: artist._id }} variant="follow" />
       </Grid>
       <Typography truncate={3} color="secondary">
         {artist.about?.bio}
@@ -99,7 +99,7 @@ const Credits = ({ artist }: { artist: TNowPlaying['artist'] }) => (
           <Typography>{artist.name}</Typography>
           <Typography color="secondary">Main Artist</Typography>
         </Box>
-        <SaveButton type="artist" target={artist._id} />
+        <SaveButton source={{ type: 'artist', target: artist._id }} variant="follow" />
       </Grid>
     </CardContent>
   </Card>

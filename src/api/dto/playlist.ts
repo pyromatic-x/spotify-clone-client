@@ -18,7 +18,10 @@ export interface PlaylistMinifiedDto {
   type: string;
   accent: string;
   _collection: 'album';
-  styling?: PlaylistStyling;
+}
+
+export interface PlaylistMinifiedByTrackDto extends PlaylistMinifiedDto {
+  trackInPlaylist: boolean;
 }
 
 export interface PlaylistDto {
@@ -49,4 +52,9 @@ export interface PlaylistPageDto {
     duration: number;
   };
   tracks: Array<TrackDto>;
+}
+
+export interface HandleTrackInPlaylistPaylodDto {
+  trackId: string;
+  playlists: Array<{ id: string; status: 'add' | 'remove' }>;
 }
