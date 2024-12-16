@@ -99,7 +99,7 @@ class Api_Service extends HttpClient {
   users = {
     page: (id: string) =>
       this.request<UserPageDto>({
-        path: `/users/${id}`,
+        path: `/user/${id}`,
         method: 'GET',
       }),
   };

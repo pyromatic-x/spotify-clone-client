@@ -14,6 +14,7 @@ export const HeaderBackdrop = styled(Box, {
 
   ...(accent && {
     background: `linear-gradient(0deg, ${tinycolor(accent).darken(5)} 0%, ${accent} 100%)`,
+    opacity: 0.85,
   }),
 
   ':after': {
@@ -25,7 +26,7 @@ export const HeaderBackdrop = styled(Box, {
     bottom: '-220px',
 
     ...(accent && {
-      background: `linear-gradient(180deg, ${tinycolor(accent).darken(15)} 0%,  ${theme.palette.background.main} 100%)`,
+      background: `linear-gradient(180deg, ${tinycolor(accent).darken(20)} 0%,  ${theme.palette.background.main} 100%)`,
     }),
   },
 }));

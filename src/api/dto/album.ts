@@ -17,7 +17,7 @@ export interface AlbumDto {
   type: 'single' | 'EP' | 'album';
   accent: string;
   cover: string;
-  createdAt: string;
+  releasedAt: string;
   _collection: 'album' | 'playlist' | 'artist';
 }
 

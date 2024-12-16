@@ -1,15 +1,15 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 import { API } from '../../api';
 import { reset } from 'patronum';
-import { ArtistPageDataDto } from '../../api/dto/artist';
+import { ArtistPageDto } from '../../api/dto/artist';
 
 export const resetArtistPage = createEvent();
 export const getArtistPage = createEvent<string>();
 
-export const $artist = createStore<ArtistPageDataDto | null>(null);
+export const $artist = createStore<ArtistPageDto | null>(null);
 export const $artistError = createStore<boolean>(false);
 
-export const getArtistPageFx = createEffect<string, ArtistPageDataDto, unknown>(async (id) => {
+export const getArtistPageFx = createEffect<string, ArtistPageDto, unknown>(async (id) => {
   const { data } = await API.artists.page(id);
   return data;
 });

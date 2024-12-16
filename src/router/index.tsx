@@ -5,6 +5,7 @@ import Home from '../pages/home/Home';
 import PlaylistPage from '../pages/playlist';
 import AlbumPage from '../pages/album';
 import ArtistPage from '../pages/artist';
+import UserPage from '../pages/user';
 
 export default createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +22,7 @@ export default createBrowserRouter(
       <Route path="/playlist/:id" element={<PlaylistPage />} />
       <Route path="/album/:id" element={<AlbumPage />} />
       <Route path="/artist/:id" element={<ArtistPage />} />
-      {/* <Route path="/user/:id" element={<AlbumPage />} /> */}
+      <Route path="/user/:id" element={<UserPage />} />
     </Route>,
   ),
 );

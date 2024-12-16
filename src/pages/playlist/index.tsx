@@ -5,6 +5,7 @@ import { useUnit } from 'effector-react';
 import Error from '../Error';
 
 import UnitPage from '../../components/unitPage';
+import TracksTable from '../../components/unitPage/components/tracks';
 
 const PlaylistPage = () => {
   const { id } = useParams();
@@ -24,7 +25,13 @@ const PlaylistPage = () => {
 
   if (error) return <Error />;
 
-  return playlist && <UnitPage unit={playlist} type="playlist" />;
+  return (
+    playlist && (
+      <UnitPage meta={playlist.meta} type="playlist">
+        <TracksTable tracks={playlist.tracks} source={{ type: 'playlist', _id: playlist.meta._id }} />
+      </UnitPage>
+    )
+  );
 };
 
 export default PlaylistPage;

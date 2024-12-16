@@ -17,9 +17,8 @@ type TProps = {
 const TracksTable = ({ tracks, source }: TProps) => {
   return (
     <>
-      {source.type !== 'artist' && source.type !== 'user' && (
-        <TracksTableControls source={source as PlayDtoPayload} />
-      )}
+      {source.type === 'playlist' ||
+        (source.type === 'album' && <TracksTableControls source={source as PlayDtoPayload} />)}
       <StyledTracksTable>
         {source.type !== 'artist' && source.type !== 'user' && <TracksTableHead type={source.type} />}
         {source.type !== 'user' && <TracksTableBody tracks={tracks} source={source as PlayDtoPayload} />}

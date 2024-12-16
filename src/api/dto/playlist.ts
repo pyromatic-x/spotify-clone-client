@@ -1,8 +1,6 @@
 import { AuthorDto } from '.';
 import { TrackDto } from './track';
 
-type PlaylistStyling = 'lines' | 'wave';
-
 export enum PlaylistTypesEnum {
   'public' = 'public',
   'private' = 'private',
@@ -28,7 +26,6 @@ export interface PlaylistDto {
   _id: string;
   name: string;
   author: AuthorDto;
-  styling: PlaylistStyling;
   cover: string;
   type: keyof typeof PlaylistTypesEnum;
   description?: string;
@@ -37,11 +34,11 @@ export interface PlaylistDto {
     _id: string;
     addedAt: string;
   }>;
-  artists?: Array<{ _id: string; name: string }>;
+  // artists?: Array<{ _id: string; name: string }>; // REMOVE FROM BACKEND
 
-  forYou: boolean;
+  forYou: boolean; // WHY ???
 
-  createdAt: string;
+  createdAt?: string;
 
   _collection: 'album' | 'playlist' | 'artist';
 }

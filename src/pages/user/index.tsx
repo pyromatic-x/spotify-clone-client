@@ -1,20 +1,21 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { $user, $userError, getUserPageData, resetUserPageData } from './effect';
 import { useUnit } from 'effector-react';
 import Error from '../Error';
-import { $album, $albumError } from './effect';
-import { getAlbumPageData } from './effect';
-import { resetAlbumPageData } from './effect';
+
 import UnitPage from '../../components/unitPage';
 
-const AlbumPage = () => {
+const UserPage = () => {
   const { id } = useParams();
-  const album = useUnit($album);
-  const error = useUnit($albumError);
+
+  const user = useUnit($user);
+  const error = useUnit($userError);
 
   useEffect(() => {
-    if (id) getAlbumPageData(id);
-    return resetAlbumPageData;
+    if (id) getUserPageData(id);
+
+    return resetUserPageData;
   }, [id]);
 
   useEffect(() => {
@@ -24,12 +25,12 @@ const AlbumPage = () => {
   if (error) return <Error />;
 
   return (
-    album && (
-      <UnitPage meta={album.meta} type="album">
-        ALBUM CHILDRENS!!!!
+    user && (
+      <UnitPage meta={user.meta} type="user">
+        PLAYLIST CHILDRENS!!!!
       </UnitPage>
     )
   );
 };
 
-export default AlbumPage;
+export default UserPage;

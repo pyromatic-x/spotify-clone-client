@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { $artist, $artistError, getArtistPage, resetArtistPage } from './effect';
 import { useUnit } from 'effector-react';
 import Error from '../Error';
-
 import UnitPage from '../../components/unitPage';
 
 const ArtistPage = () => {
@@ -24,7 +23,13 @@ const ArtistPage = () => {
 
   if (error) return <Error />;
 
-  // return artist && <UnitPage unit={artist} type="artist" />;
+  return (
+    artist && (
+      <UnitPage meta={artist.meta} type="artist">
+        ARTIST CHILDRENS!!!!
+      </UnitPage>
+    )
+  );
 };
 
 export default ArtistPage;
