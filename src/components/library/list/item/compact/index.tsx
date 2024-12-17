@@ -7,6 +7,9 @@ import DateColumn from '../DateColumn';
 import { LibraryCategories } from '../../../types';
 import { capitalizeFirstLetter } from '../../../../../utils/strings';
 import { TItemProps } from '../types';
+import { $queue } from '../../../../audiobar/effect';
+import { VolumeUpOutlined as PlayingIcon } from '@mui/icons-material';
+import { useGlobalAudioPlayer } from 'react-use-audio-player';
 
 const Description = ({
   category,
@@ -28,22 +31,30 @@ const Description = ({
 const LibraryItemCompact = ({ onOpen, ...item }: TItemProps) => {
   const { width } = useUnit($UI);
   const { category } = useUnit($filter);
-  const { pin, name, _collection, author } = item;
+  const queue = useUnit($queue);
+  const { playing, isLoading } = useGlobalAudioPlayer();
+
+  const { pin, name, _collection, author, _id } = item;
+
+  const showPlayingIcon = queue?.target === _id && (playing || isLoading);
 
   return (
     <StyledLibraryItem
       gridTemplateColumns={width.name !== 'default' ? '60% 1fr 1fr' : '1fr'}
       onClick={onOpen}
     >
-      <Grid container alignItems="center">
-        {pin && (
-          <>
-            <PinIcon />
-            &nbsp;
-          </>
-        )}
-        <Typography color={pin ? 'primary' : 'white'}>{name}&nbsp;</Typography>
-        <Description category={category} collection={_collection} author={author!} />
+      <Grid container alignItems="center" justifyContent="space-between" pr="12px">
+        <Grid container alignItems="center" width="max-content">
+          {pin && (
+            <>
+              <PinIcon />
+              &nbsp;
+            </>
+          )}
+          <Typography color={queue?.target === _id ? 'primary' : 'white'}>{name}&nbsp;</Typography>
+          <Description category={category} collection={_collection} author={author!} />
+        </Grid>
+        {showPlayingIcon && <PlayingIcon sx={{ color: 'primary.main', fontSize: '1.2rem' }} />}
       </Grid>
       {width.name === 'max' && (
         <>

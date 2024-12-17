@@ -13,10 +13,24 @@ export const StyledLibraryItem = styled(Box, {
   '&:hover': {
     backgroundColor: selected ? theme.palette.hover.library : theme.palette.hover.track,
     cursor: 'pointer',
+
+    '& .playbutton': {
+      bottom: '16px',
+      opacity: 1,
+    },
   },
 
   '& p': {
     fontSize: '0.85rem',
+  },
+
+  '& .playbutton': {
+    position: 'absolute',
+    right: '10px',
+    bottom: '0px',
+    opacity: 0,
+    transition: '0.4s ease',
+    zIndex: 10,
   },
 }));
 
@@ -43,4 +57,15 @@ export const PinIcon = styled(PushPinIcon)(({ theme }) => ({
   width: '18px',
 
   fill: theme.palette.primary.main,
+}));
+
+export const LibraryItemPlayWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'show',
+})<{ show: boolean }>(({ show }) => ({
+  ...(show && {
+    '& .playbutton': {
+      opacity: 1,
+      bottom: '16px',
+    },
+  }),
 }));

@@ -30,10 +30,10 @@ const PlayButton = ({ size, source, title, simple }: TProps) => {
     event.stopPropagation();
 
     if (queue?.target === _id) {
-      if (index === queue?.current) {
-        togglePlayPause();
-      } else if (!!index) {
+      if (!!index) {
         changeTrack(index);
+      } else {
+        togglePlayPause();
       }
     } else changeQueue({ _id, type, index });
   };
