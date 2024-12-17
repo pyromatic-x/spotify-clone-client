@@ -11,9 +11,10 @@ import { PlaylistUpdateEventResponse } from '../../../api/events';
 type TProps = {
   id: string;
   added: boolean;
+  showWhenSaved?: boolean;
 };
 
-const SaveTrackButton = ({ id, added }: TProps) => {
+const SaveTrackButton = ({ id, added, showWhenSaved }: TProps) => {
   const socket = useUnit($socket);
 
   const [isSaved, setIsSaved] = useState(added);
@@ -52,7 +53,14 @@ const SaveTrackButton = ({ id, added }: TProps) => {
     <>
       <ClickAwayListener onClickAway={handleOnClickAway}>
         <Tooltip title={`Add to ${isSaved ? 'playlist' : 'Liked Songs'}`}>
-          <IconButton variant="scalable" disableRipple onClick={handleOnClick} ref={anchor}>
+          <IconButton
+            variant="transparent"
+            disableRipple
+            onClick={handleOnClick}
+            ref={anchor}
+            className={`save-track-button`}
+            sx={{ ...(showWhenSaved && isSaved && { opacity: '1 !important' }) }}
+          >
             <Icon color={isSaved ? 'primary' : 'secondary'} sx={{ fontSize: '1.35rem' }} />
           </IconButton>
         </Tooltip>

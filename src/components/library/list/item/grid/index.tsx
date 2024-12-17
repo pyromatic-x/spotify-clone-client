@@ -8,7 +8,6 @@ import { capitalizeFirstLetter } from '../../../../../utils/strings';
 import { TItemProps } from '../types';
 import { $queue } from '../../../../audiobar/effect';
 import PlayButton from '../../../../buttons/PlayButton';
-import { useGlobalAudioPlayer } from 'react-use-audio-player';
 
 const Meta = ({ item, category }: { item: LibraryItemDto; category: LibraryCategories | null }) => {
   const queue = useUnit($queue);
@@ -50,10 +49,8 @@ const Meta = ({ item, category }: { item: LibraryItemDto; category: LibraryCateg
   );
 };
 
-const LibraryItemGrid = ({ onOpen, ...item }: TItemProps) => {
+const LibraryItemGrid = ({ onOpen, active, showPlayingIcon, ...item }: TItemProps) => {
   const { category, view } = useUnit($filter);
-  const queue = useUnit($queue);
-  const { playing, isLoading } = useGlobalAudioPlayer();
 
   const cover = item.cover + '?w=400&h=400&fit=contain';
 
@@ -62,7 +59,7 @@ const LibraryItemGrid = ({ onOpen, ...item }: TItemProps) => {
       placement="right"
       title={view?.gridSize && view?.gridSize < 30 ? <Meta item={item} category={category} /> : null}
     >
-      <StyledLibraryItem onClick={onOpen}>
+      <StyledLibraryItem onClick={onOpen} active={active}>
         {view.gridSize && view.gridSize < 30 ? (
           <LibraryItemCover
             alt={item.name}
@@ -79,7 +76,7 @@ const LibraryItemGrid = ({ onOpen, ...item }: TItemProps) => {
                 variant={item._collection === 'artist' ? 'circle' : 'rounded'}
                 fullwidth
               />
-              <LibraryItemPlayWrapper show={queue?.target === item._id && (playing || isLoading)}>
+              <LibraryItemPlayWrapper show={showPlayingIcon}>
                 <PlayButton title={item.name} source={{ type: item._collection, _id: item._id }} />
               </LibraryItemPlayWrapper>
             </Box>

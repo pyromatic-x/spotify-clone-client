@@ -48,7 +48,7 @@ const SaveButton = ({ source, variant }: TProps) => {
 
   return variant === 'follow' ? (
     <Button variant="outlined" color="secondary" onClick={handleOnClick} disableRipple>
-      {isSaved ? 'Unfollow' : 'Follow'}
+      {isSaved ? 'Following' : 'Follow'}
     </Button>
   ) : (
     <>TODO</>

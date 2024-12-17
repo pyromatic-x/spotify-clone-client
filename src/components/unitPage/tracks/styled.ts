@@ -44,6 +44,10 @@ export const StyledTracksTable = styled(Table)(({ theme }) => ({
       '& .tracks-table-index': {
         width: '20px',
       },
+
+      '& .save-track-button': {
+        opacity: 0,
+      },
     },
 
     '& .MuiTableRow-root:hover': {
@@ -67,6 +71,10 @@ export const StyledTracksTable = styled(Table)(({ theme }) => ({
 
       '& a': {
         color: theme.palette.common.white,
+      },
+
+      '& .save-track-button': {
+        opacity: 1,
       },
     },
 

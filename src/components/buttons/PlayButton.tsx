@@ -24,14 +24,16 @@ const PlayButton = ({ size, source, title, simple }: TProps) => {
   const { _id, type, index } = source;
 
   const isPlaying =
-    queue?.target === _id && (playing || isLoading) && (!!index ? queue.current === index : true);
+    queue?.target === _id && (playing || isLoading) && (index !== undefined ? queue.current === index : true);
 
   const handleOnClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
     if (queue?.target === _id) {
-      if (!!index) {
-        changeTrack(index);
+      if (index !== undefined) {
+        if (queue.current === index) {
+          togglePlayPause();
+        } else changeTrack(index);
       } else {
         togglePlayPause();
       }

@@ -6,15 +6,13 @@ import LibraryItemMeta from './Meta';
 import DateColumn from '../DateColumn';
 import { TItemProps } from '../types';
 
-const LibraryItemList = ({ onOpen, ...item }: TItemProps) => {
+const LibraryItemList = ({ onOpen, active, showPlayingIcon, ...item }: TItemProps) => {
   const { width } = useUnit($UI);
-
-  const selected = false;
 
   return (
     <StyledLibraryItem
       onClick={onOpen}
-      selected={selected}
+      active={active}
       gridTemplateColumns={width.name !== 'default' ? '60% 1fr 1fr' : '1fr'}
     >
       <Grid container gap="12px" wrap="nowrap">
@@ -23,7 +21,7 @@ const LibraryItemList = ({ onOpen, ...item }: TItemProps) => {
           src={item.cover + '?w=100&h=100&fit=contain'}
           variant={item._collection === 'artist' ? 'circle' : 'rounded'}
         />
-        <LibraryItemMeta item={item} />
+        <LibraryItemMeta item={item} showPlayingIcon={showPlayingIcon} />
       </Grid>
       {width.name === 'max' && (
         <>

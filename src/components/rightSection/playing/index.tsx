@@ -10,7 +10,7 @@ import { Card, CardImage, Cover, CardContent } from './styled';
 import { useNavigate } from 'react-router-dom';
 import { toNumberWithDigits } from '../../../utils/number';
 import QueueTrack from '../queue/Track';
-import SaveButton from '../../buttons/FollowButton';
+import SaveButton from '../../buttons/SaveButton';
 
 const RightSectionPlaying = ({ showHeaderShadow }: { showHeaderShadow: boolean }) => {
   const navigate = useNavigate();

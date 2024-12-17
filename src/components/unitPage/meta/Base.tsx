@@ -1,21 +1,17 @@
 import { Grid, Link, Typography } from '@mui/material';
-import { HeaderBackdrop, Header, HeaderAuthorAvatar, HeaderContent, HeaderCover, HeaderName } from './styled';
+import { MetaBackground, Meta, MetaAuthorAvatar, MetaContent, MetaCover, MetaName } from './styled';
 import { useUnit } from 'effector-react';
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
-import tinycolor from 'tinycolor2';
 import { getAccentFromImage } from '../../../utils/color';
 import { $mainWidth } from '../../main/effect';
 import { PlaylistPageDto } from '../../../api/dto/playlist';
 import { AlbumPageDto } from '../../../api/dto/album';
 import { UserPageDto } from '../../../api/dto/user';
-import { UnitHeaderProps } from '../types';
+import { UnitPageProps } from './types';
+import { Link as RouterLink } from 'react-router-dom';
+import { darkenAccent } from './utils';
 
-const darkenAccent = (accent?: string) => {
-  if (!accent) return undefined;
-  return tinycolor(accent).setAlpha(0.9).darken(20).toString();
-};
-
-const UnitHeaderCover = ({ type, meta }: UnitHeaderProps) => {
+const UnitMetaBase = ({ type, meta }: UnitPageProps) => {
   const coverRef = useRef(null);
 
   const [nameFontSize, setNameFontSize] = useState(96);
@@ -41,15 +37,16 @@ const UnitHeaderCover = ({ type, meta }: UnitHeaderProps) => {
   }, [containerWidth]);
 
   const onCoverLoad = (event: SyntheticEvent<HTMLImageElement>) => {
+    if (_accent) return;
     const color = getAccentFromImage(event.currentTarget);
     if (color && !_accent) setAccent(color);
   };
 
   return (
     <>
-      <HeaderBackdrop accent={_accent} height={isContainerNarrow ? '190px' : '340px'} />
-      <Header pb={isContainerNarrow ? '30px' : '40px'} pt={isContainerNarrow ? '30px' : '80px'}>
-        <HeaderCover
+      <MetaBackground accent={_accent} height={isContainerNarrow ? '190px' : '340px'} />
+      <Meta pb={isContainerNarrow ? '30px' : '40px'} pt={isContainerNarrow ? '30px' : '80px'}>
+        <MetaCover
           ref={coverRef}
           src={meta?.cover || meta?.avatar + '?w=460&h=460'}
           size={isContainerNarrow ? '130px' : '230px'}
@@ -60,7 +57,7 @@ const UnitHeaderCover = ({ type, meta }: UnitHeaderProps) => {
         )}
         {type === 'album' && <AlbumContent {...(meta as AlbumPageDto['meta'])} nameFontSize={nameFontSize} />}
         {type === 'user' && <UserContent {...(meta as UserPageDto['meta'])} nameFontSize={nameFontSize} />}
-      </Header>
+      </Meta>
     </>
   );
 };
@@ -72,19 +69,22 @@ const PlaylistContent = ({
   nameFontSize,
 }: { nameFontSize: number } & PlaylistPageDto['meta']) => {
   return (
-    <HeaderContent>
+    <MetaContent>
       <Typography fontSize="0.85rem">Playlist</Typography>
-      <HeaderName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
+      <MetaName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
         {name}
-      </HeaderName>
+      </MetaName>
+
       <Grid container alignItems="center">
-        <HeaderAuthorAvatar src={author.avatar + '?w=48&h=48'} />
-        <Link fontSize="0.85rem">{author?.name}</Link>
+        <MetaAuthorAvatar src={author.avatar + '?w=48&h=48'} />
+        <Link component={RouterLink} to={`/artist/${author._id}`} fontSize="0.85rem">
+          {author?.name}
+        </Link>
         <Typography color="secondary" fontSize="0.85rem">
           &nbsp;{`🞄 ${tracksCount} songs`}
         </Typography>
       </Grid>
-    </HeaderContent>
+    </MetaContent>
   );
 };
 const AlbumContent = ({
@@ -95,29 +95,32 @@ const AlbumContent = ({
   releasedAt,
 }: { nameFontSize: number } & AlbumPageDto['meta']) => {
   return (
-    <HeaderContent>
+    <MetaContent>
       <Typography fontSize="0.85rem">Album</Typography>
-      <HeaderName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
+
+      <MetaName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
         {name}
-      </HeaderName>
+      </MetaName>
       <Grid container alignItems="center">
-        <HeaderAuthorAvatar src={author.avatar + '?w=48&h=48'} />
-        <Link fontSize="0.85rem">{author?.name}</Link>
+        <MetaAuthorAvatar src={author.avatar + '?w=48&h=48'} />
+        <Link component={RouterLink} to={`/artist/${author._id}`} fontSize="0.85rem">
+          {author?.name}
+        </Link>
         <Typography color="secondary" fontSize="0.85rem">
           &nbsp;{`🞄 ${new Date(releasedAt).getFullYear()} 🞄 ${tracksCount} songs`}
         </Typography>
       </Grid>
-    </HeaderContent>
+    </MetaContent>
   );
 };
 
 const UserContent = ({ username, nameFontSize }: { nameFontSize: number } & UserPageDto['meta']) => {
   return (
-    <HeaderContent>
+    <MetaContent>
       <Typography fontSize="0.85rem">Profile</Typography>
-      <HeaderName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
+      <MetaName truncate={3} maxWidth="100%" fontSize={nameFontSize + 'px'}>
         {username}
-      </HeaderName>
+      </MetaName>
       <Grid container alignItems="center">
         {/* <HeaderAuthorAvatar src={avatar + '?w=48&h=48'} />
         <Link fontSize="0.85rem">{author?.name}</Link>
@@ -125,8 +128,8 @@ const UserContent = ({ username, nameFontSize }: { nameFontSize: number } & User
           &nbsp;{`🞄 ${new Date(createdAt).getFullYear()} songs 🞄 ${tracksCount} songs`}
         </Typography> */}
       </Grid>
-    </HeaderContent>
+    </MetaContent>
   );
 };
 
-export default UnitHeaderCover;
+export default UnitMetaBase;

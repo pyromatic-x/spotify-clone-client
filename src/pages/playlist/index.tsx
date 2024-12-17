@@ -5,7 +5,8 @@ import { useUnit } from 'effector-react';
 import Error from '../Error';
 
 import UnitPage from '../../components/unitPage';
-import TracksTable from '../../components/unitPage/components/tracks';
+import TracksTable from '../../components/unitPage/tracks';
+import { CollectionEnums } from '../../api/dto';
 
 const PlaylistPage = () => {
   const { id } = useParams();
@@ -25,10 +26,12 @@ const PlaylistPage = () => {
 
   if (error) return <Error />;
 
+  const source = { type: 'playlist' as Extract<keyof typeof CollectionEnums, 'playlist'>, _id: id! };
+
   return (
     playlist && (
-      <UnitPage meta={playlist.meta} type="playlist">
-        <TracksTable tracks={playlist.tracks} source={{ type: 'playlist', _id: playlist.meta._id }} />
+      <UnitPage meta={playlist.meta} type={source.type}>
+        <TracksTable source={source} tracks={playlist.tracks} />
       </UnitPage>
     )
   );

@@ -22,7 +22,7 @@ const AudiobarInfo = () => {
           {current?.author?.name}
         </Link>
       </Grid>
-      {current?._id && <SaveTrackButton id={current?._id} added={current.isAddedToLibrary} />}
+      {current?._id && <SaveTrackButton id={current?._id} added={current.inLibrary} />}
     </Grid>
   );
 };

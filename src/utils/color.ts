@@ -71,7 +71,7 @@ export const getAccentFromImage = (image: HTMLImageElement) => {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
 
-  if (!context) throw new Error('Canvas context not supported');
+  if (!context || !image.complete) return undefined;
 
   canvas.width = image.width;
   canvas.height = image.height;

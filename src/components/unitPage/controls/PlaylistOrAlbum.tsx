@@ -1,22 +1,23 @@
 import { Grid, IconButton, Tooltip } from '@mui/material';
-
+import PlayButton from '../../buttons/PlayButton';
 import {
-  ArrowCircleDown as DownloadIcon,
   Shuffle as ShuffleIcon,
+  ArrowCircleDown as DownloadIcon,
   MoreHoriz as OptionsIcon,
-} from '@mui/icons-material/';
-import PlayButton from '../../../../buttons/PlayButton';
-import { PlayDtoPayload } from '../../../../../api/dto/play';
+} from '@mui/icons-material';
+import { CollectionEnums } from '../../../api/dto';
 
-type TProps = {
-  source: PlayDtoPayload;
+type UnitPagePlaylistAlbumControlsProps = {
+  _id: string;
+  type: Extract<keyof typeof CollectionEnums, 'playlist' | 'album'>;
 };
 
-const TracksTableControls = ({ source }: TProps) => {
+const UnitPagePlaylistAlbumControls = ({ _id, type }: UnitPagePlaylistAlbumControlsProps) => {
   const iconSx = { fontSize: '2.3rem' };
+  const source = { type, _id };
 
   return (
-    <Grid container alignItems="center" justifyContent="space-between" mb="30px">
+    <Grid container alignItems="center" justifyContent="space-between" my="30px">
       <Grid container alignItems="center" justifyContent="space-between" width="max-content" gap="28px">
         <PlayButton title="" source={source} size={58} />
         <Tooltip title="Shuffle">
@@ -39,4 +40,4 @@ const TracksTableControls = ({ source }: TProps) => {
   );
 };
 
-export default TracksTableControls;
+export default UnitPagePlaylistAlbumControls;

@@ -44,9 +44,17 @@ export interface PlaylistDto {
 }
 
 export interface PlaylistPageDto {
-  meta: Omit<PlaylistDto, 'createdAt' | 'tracks' | 'accent'> & {
+  meta: {
+    _id: string;
+    name: string;
+    author: AuthorDto;
+    cover: string;
+    type: keyof typeof PlaylistTypesEnum;
+    accent?: string;
+    createdAt?: string;
     tracksCount: number;
     duration: number;
+    inLibrary: boolean;
   };
   tracks: Array<TrackDto>;
 }

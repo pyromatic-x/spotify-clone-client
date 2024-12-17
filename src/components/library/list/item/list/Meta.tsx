@@ -6,15 +6,12 @@ import { PinIcon } from '../styled';
 import { LibraryItemDto } from '../../../../../api/dto/library';
 import { $queue } from '../../../../audiobar/effect';
 import { VolumeUpOutlined as PlayingIcon } from '@mui/icons-material';
-import { useGlobalAudioPlayer } from 'react-use-audio-player';
 
-const LibraryItemMeta = ({ item }: { item: LibraryItemDto }) => {
+const LibraryItemMeta = ({ item, showPlayingIcon }: { item: LibraryItemDto; showPlayingIcon: boolean }) => {
   const { _collection, name, author, tracksCount, pin } = item;
 
   const { category } = useUnit($filter);
   const queue = useUnit($queue);
-
-  const { playing, isLoading } = useGlobalAudioPlayer();
 
   let description: string | undefined = capitalizeFirstLetter(_collection);
   if (author) description += ` 🞄 ${author}`;
@@ -40,9 +37,7 @@ const LibraryItemMeta = ({ item }: { item: LibraryItemDto }) => {
           </Typography>
         )}
       </Grid>
-      {queue?.target === item._id && (playing || isLoading) && (
-        <PlayingIcon sx={{ color: 'primary.main', fontSize: '1.2rem' }} />
-      )}
+      {showPlayingIcon && <PlayingIcon sx={{ color: 'primary.main', fontSize: '1.2rem' }} />}
     </Grid>
   );
 };

@@ -1,4 +1,4 @@
-import { IsoDateString } from '.';
+import { CollectionEnums, IsoDateString } from '.';
 
 export type LibraryItemDto = {
   _id: string;
@@ -18,7 +18,7 @@ export type LibraryCheckPayload = string;
 export type LibraryCheckResponse = boolean;
 
 export type LibraryAddPayload = {
-  type: 'album' | 'playlist' | 'artist';
+  type: keyof typeof CollectionEnums;
   target: string;
 };
 export type LibraryRemovePayload = LibraryAddPayload;

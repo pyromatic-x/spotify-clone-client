@@ -6,7 +6,7 @@ import {
 } from '@mui/icons-material';
 import { Grid, IconButton, Slider, Tooltip } from '@mui/material';
 import { useUnit } from 'effector-react';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
 import { $muted, $volume, changeVolume, mute as muteEvent } from '../effect';
 
@@ -22,6 +22,10 @@ const AudiobarMetaVolume = () => {
   else if (volume > 0.66) Icon = Volume100;
   else if (volume > 0.33) Icon = Volume66;
   else if (volume > 0) Icon = Volume33;
+
+  useEffect(() => {
+    setVolume(volume);
+  }, [volume]);
 
   const handleOnChange = (event: any) => {
     const val = event.target.value as number;

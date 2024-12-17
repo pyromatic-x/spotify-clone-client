@@ -9,7 +9,6 @@ import { capitalizeFirstLetter } from '../../../../../utils/strings';
 import { TItemProps } from '../types';
 import { $queue } from '../../../../audiobar/effect';
 import { VolumeUpOutlined as PlayingIcon } from '@mui/icons-material';
-import { useGlobalAudioPlayer } from 'react-use-audio-player';
 
 const Description = ({
   category,
@@ -28,20 +27,18 @@ const Description = ({
   return <Typography color="secondary">{text}</Typography>;
 };
 
-const LibraryItemCompact = ({ onOpen, ...item }: TItemProps) => {
+const LibraryItemCompact = ({ onOpen, active, showPlayingIcon, ...item }: TItemProps) => {
   const { width } = useUnit($UI);
   const { category } = useUnit($filter);
   const queue = useUnit($queue);
-  const { playing, isLoading } = useGlobalAudioPlayer();
 
   const { pin, name, _collection, author, _id } = item;
-
-  const showPlayingIcon = queue?.target === _id && (playing || isLoading);
 
   return (
     <StyledLibraryItem
       gridTemplateColumns={width.name !== 'default' ? '60% 1fr 1fr' : '1fr'}
       onClick={onOpen}
+      active={active}
     >
       <Grid container alignItems="center" justifyContent="space-between" pr="12px">
         <Grid container alignItems="center" width="max-content">

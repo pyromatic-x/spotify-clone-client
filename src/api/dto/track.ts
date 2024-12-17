@@ -16,7 +16,7 @@ export interface TrackDto {
   albumOrder: number;
 
   explicit: boolean;
-  isAddedToLibrary: boolean;
+  inLibrary: boolean;
 
   plays: number;
   duration: number;

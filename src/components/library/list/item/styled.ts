@@ -2,16 +2,16 @@ import { Box, styled } from '@mui/material';
 import PushPinIcon from '@mui/icons-material/PushPin';
 
 export const StyledLibraryItem = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'selected',
-})<{ selected?: boolean }>(({ theme, selected }) => ({
+  shouldForwardProp: (prop) => prop !== 'active',
+})<{ active?: boolean }>(({ theme, active }) => ({
   display: 'grid',
   padding: '6px',
   borderRadius: '6px',
 
-  backgroundColor: selected ? theme.palette.hover.track : 'transparent',
+  backgroundColor: active ? theme.palette.hover.track : 'transparent',
 
   '&:hover': {
-    backgroundColor: selected ? theme.palette.hover.library : theme.palette.hover.track,
+    backgroundColor: active ? theme.palette.hover.library : theme.palette.hover.track,
     cursor: 'pointer',
 
     '& .playbutton': {

@@ -1,9 +1,9 @@
 import { LibraryItemCover, StyledLibraryItem } from '../styled';
 import { TItemProps } from '../types';
 
-const LibraryItemMinified = ({ onOpen, ...item }: TItemProps) => {
+const LibraryItemMinified = ({ onOpen, active, ...item }: TItemProps) => {
   return (
-    <StyledLibraryItem onClick={onOpen}>
+    <StyledLibraryItem onClick={onOpen} active={active}>
       <LibraryItemCover
         alt={item.name}
         src={item.cover + '?w=100&h=100&fit=contain'}
