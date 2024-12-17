@@ -3,7 +3,7 @@ import RowCard from './card';
 import { RowItemsContainer } from './card/styled';
 import { TItemCommonFields } from './types';
 import { useUnit } from 'effector-react';
-import { $mainWidth } from '../main/effect';
+import { $mainContainer } from '../main/effect';
 import { getItemsCount } from './utils';
 import { useEffect, useState } from 'react';
 
@@ -14,7 +14,7 @@ type TProps = {
 };
 
 const Row = ({ title, showAll, items }: TProps) => {
-  const width = useUnit($mainWidth);
+  const { width } = useUnit($mainContainer);
 
   const [count, setCount] = useState(getItemsCount(width));
 

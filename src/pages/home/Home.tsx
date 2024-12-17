@@ -6,6 +6,7 @@ import HomeFeatured from './featured';
 import Row from '../../components/row';
 import { useUnit } from 'effector-react';
 import { $USER } from '../../auth/effect';
+import { dropMainAccent } from '../../components/main/effect';
 
 const HomePage = () => {
   const user = useUnit($USER);
@@ -16,7 +17,10 @@ const HomePage = () => {
 
     document.title = 'Spotify Clone';
 
-    return resetHomeCompilations;
+    return () => {
+      resetHomeCompilations();
+      dropMainAccent();
+    };
   }, []);
 
   return (

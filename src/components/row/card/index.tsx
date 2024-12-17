@@ -7,12 +7,12 @@ import { TItemCommonFields } from '../types';
 import { useUnit } from 'effector-react';
 import { $queue } from '../../audiobar/effect';
 import { useGlobalAudioPlayer } from 'react-use-audio-player';
-import { $mainWidth } from '../../main/effect';
+import { $mainContainer } from '../../main/effect';
 import { useNavigate } from 'react-router-dom';
 
 const RowCard = ({ cover, _id, _collection, name, description, author }: TItemCommonFields) => {
   const queue = useUnit($queue);
-  const width = useUnit($mainWidth);
+  const { width } = useUnit($mainContainer);
   const { playing } = useGlobalAudioPlayer();
 
   const navigate = useNavigate();

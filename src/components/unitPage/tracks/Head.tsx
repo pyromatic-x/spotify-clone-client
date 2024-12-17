@@ -27,7 +27,7 @@ const TracksTableHead = ({ type }: { type: TracksTableProps['source']['type'] })
         <TableCell align="left" />
         <TableCell align="left">
           <Tooltip title="Duration">
-            <DurationIcon color="secondary" />
+            <DurationIcon color="secondary" sx={{ position: 'relative', top: '3px' }} />
           </Tooltip>
         </TableCell>
       </TableRow>

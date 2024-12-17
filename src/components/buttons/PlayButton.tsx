@@ -8,7 +8,7 @@ import { useGlobalAudioPlayer } from 'react-use-audio-player';
 import { Tooltip } from '@mui/material';
 
 type TProps = {
-  title: string;
+  title?: string;
   source: {
     index?: number;
   } & PlayDtoPayload;

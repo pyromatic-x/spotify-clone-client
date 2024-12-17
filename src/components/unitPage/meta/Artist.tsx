@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MetaBackdropContainer, MetaName } from './styled';
-import { $mainWidth } from '../../main/effect';
+import { $mainContainer, changeMainAccent } from '../../main/effect';
 import { useUnit } from 'effector-react';
 import { getAccentFromImage } from '../../../utils/color';
 import { ArtistPageDto } from '../../../api/dto/artist';
@@ -10,31 +10,30 @@ import { Verified as VerifiedIcon } from '@mui/icons-material/';
 
 export const UnitMetaArtist = ({ name, backdrop, verified }: ArtistPageDto['meta']) => {
   const [nameFontSize, setNameFontSize] = useState(96);
-  const [_accent, setAccent] = useState<string | undefined>(undefined);
 
-  const containerWidth = useUnit($mainWidth);
+  const { width, accent } = useUnit($mainContainer);
 
   const nameLength = name?.length || 16;
 
   useEffect(() => {
     let size = 102;
 
-    if (containerWidth <= 600) size = 40;
-    else if (containerWidth <= 700) size = 50;
-    else if (containerWidth <= 900) size = 60;
-    else if (containerWidth <= 1300) size = 80;
+    if (width <= 600) size = 40;
+    else if (width <= 700) size = 50;
+    else if (width <= 900) size = 60;
+    else if (width <= 1300) size = 80;
 
     if (nameLength > 24) size -= nameLength / 1.5;
 
     if (nameFontSize !== size) setNameFontSize(size);
-  }, [containerWidth]);
+  }, [width]);
 
   useEffect(() => {
     if (backdrop) {
       const img = new Image();
       img.onload = () => {
         const accentColor = getAccentFromImage(img);
-        if (accentColor && !_accent) setAccent(accentColor);
+        if (accentColor) changeMainAccent(accentColor);
       };
       img.src = backdrop + '?w=200&h=200';
 
@@ -51,7 +50,7 @@ export const UnitMetaArtist = ({ name, backdrop, verified }: ArtistPageDto['meta
         maxHeight="560px"
         height="100%"
         sx={{ backgroundImage: `url(${backdrop + '?h=1120&q=90'})` }}
-        accent={_accent}
+        accent={accent}
       />
       <Grid
         height="560px"

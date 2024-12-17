@@ -3,7 +3,7 @@ import { MetaBackground, Meta, MetaAuthorAvatar, MetaContent, MetaCover, MetaNam
 import { useUnit } from 'effector-react';
 import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { getAccentFromImage } from '../../../utils/color';
-import { $mainWidth } from '../../main/effect';
+import { $mainContainer, changeMainAccent } from '../../main/effect';
 import { PlaylistPageDto } from '../../../api/dto/playlist';
 import { AlbumPageDto } from '../../../api/dto/album';
 import { UserPageDto } from '../../../api/dto/user';
@@ -15,36 +15,39 @@ const UnitMetaBase = ({ type, meta }: UnitPageProps) => {
   const coverRef = useRef(null);
 
   const [nameFontSize, setNameFontSize] = useState(96);
-  const [_accent, setAccent] = useState(darkenAccent(meta?.accent));
 
-  const containerWidth = useUnit($mainWidth);
+  const { width, accent } = useUnit($mainContainer);
 
   const nameLength = meta?.name?.length || meta?.username?.length || 16;
-  const isContainerNarrow = containerWidth < 600;
+  const isContainerNarrow = width < 600;
 
   useEffect(() => {
     let size = 92;
 
-    if (containerWidth <= 600) size = 36;
-    else if (containerWidth <= 700) size = 42;
-    else if (containerWidth <= 900) size = 52;
-    else if (containerWidth <= 1300) size = 62;
-    else if (containerWidth <= 1500) size = 78;
+    if (width <= 600) size = 36;
+    else if (width <= 700) size = 42;
+    else if (width <= 900) size = 52;
+    else if (width <= 1300) size = 62;
+    else if (width <= 1500) size = 78;
 
     if (nameLength > 24) size -= nameLength / 2.5;
 
     if (nameFontSize !== size) setNameFontSize(size);
-  }, [containerWidth]);
+  }, [width]);
+
+  useEffect(() => {
+    if (meta.accent) changeMainAccent(darkenAccent(meta.accent));
+  }, [meta.accent]);
 
   const onCoverLoad = (event: SyntheticEvent<HTMLImageElement>) => {
-    if (_accent) return;
+    if (accent) return;
     const color = getAccentFromImage(event.currentTarget);
-    if (color && !_accent) setAccent(color);
+    if (color && !accent) changeMainAccent(color);
   };
 
   return (
     <>
-      <MetaBackground accent={_accent} height={isContainerNarrow ? '190px' : '340px'} />
+      <MetaBackground accent={accent} height={isContainerNarrow ? '190px' : '340px'} />
       <Meta pb={isContainerNarrow ? '30px' : '40px'} pt={isContainerNarrow ? '30px' : '80px'}>
         <MetaCover
           ref={coverRef}

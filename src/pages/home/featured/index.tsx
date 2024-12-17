@@ -6,13 +6,13 @@ import { changeHomeOverlayColor } from '../overlay/effect';
 import { useMemo } from 'react';
 import PlayButton from '../../../components/buttons/PlayButton';
 import { PlayButtonWrapper } from '../../../components/buttons/styled';
-import { $mainWidth } from '../../../components/main/effect';
+import { $mainContainer } from '../../../components/main/effect';
 import { generateFeaturedColors } from '../../../utils/color';
 import { useNavigate } from 'react-router-dom';
 
 const HomeFeatured = () => {
   const compilations = useUnit($homeCompilations);
-  const width = useUnit($mainWidth);
+  const { width } = useUnit($mainContainer);
 
   const navigate = useNavigate();
 

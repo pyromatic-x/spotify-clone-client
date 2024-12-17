@@ -5,8 +5,6 @@ export const StyledTracksTable = styled(Table)(({ theme }) => ({
     padding: '2px 16px',
     color: theme.palette.secondary.main,
     fontSize: '1rem',
-    position: 'sticky',
-    top: '0',
 
     '&:first-of-type': {
       width: '20px',
