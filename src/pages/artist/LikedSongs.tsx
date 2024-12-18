@@ -1,5 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { ArtistPageDto } from '../../api/dto/artist';
+import { LikedSongsIconContainer, LikedSongsImageContainer } from './styled';
+import { Favorite as HeartIcon } from '@mui/icons-material/';
 
 const ArtistPageLikedSongs = ({ likedCount, avatar, name }: ArtistPageDto['meta']) => {
   return (
@@ -9,7 +11,12 @@ const ArtistPageLikedSongs = ({ likedCount, avatar, name }: ArtistPageDto['meta'
           Liked Songs
         </Typography>
         <Grid container alignItems="center" flexWrap="nowrap">
-          <Box src={avatar + '?w=100&=100'} component="img" borderRadius="50%" />
+          <LikedSongsImageContainer>
+            <Box src={avatar + '?w=100&=100'} component="img" borderRadius="50%" />
+            <LikedSongsIconContainer>
+              <HeartIcon />
+            </LikedSongsIconContainer>
+          </LikedSongsImageContainer>
           <Box ml={2}>
             <Typography fontWeight="bold" noWrap>
               You've liked {likedCount} song{likedCount > 1 && 's'}
