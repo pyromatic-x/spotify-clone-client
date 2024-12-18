@@ -19,12 +19,12 @@ type TProps = {
 
 const PlayButton = ({ size, source, title, simple }: TProps) => {
   const queue = useUnit($queue);
-  const { playing, togglePlayPause, isLoading } = useGlobalAudioPlayer();
+  const { playing, togglePlayPause } = useGlobalAudioPlayer();
 
   const { _id, type, index } = source;
 
   const isPlaying =
-    queue?.target === _id && (playing || isLoading) && (index !== undefined ? queue.current === index : true);
+    queue?.target === _id && playing && (index !== undefined ? queue.current === index : true);
 
   const handleOnClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();

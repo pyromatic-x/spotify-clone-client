@@ -1,7 +1,7 @@
 import { Grid, Link, Typography } from '@mui/material';
 import { MetaBackground, Meta, MetaAuthorAvatar, MetaContent, MetaCover, MetaName } from './styled';
 import { useUnit } from 'effector-react';
-import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { SyntheticEvent, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getAccentFromImage } from '../../../utils/color';
 import { $mainContainer, changeMainAccent } from '../../main/effect';
 import { PlaylistPageDto } from '../../../api/dto/playlist';
@@ -10,6 +10,7 @@ import { UserPageDto } from '../../../api/dto/user';
 import { UnitPageProps } from './types';
 import { Link as RouterLink } from 'react-router-dom';
 import { darkenAccent } from './utils';
+import { secondsToTime } from '../../../utils/time';
 
 const UnitMetaBase = ({ type, meta }: UnitPageProps) => {
   const coverRef = useRef(null);
@@ -21,7 +22,7 @@ const UnitMetaBase = ({ type, meta }: UnitPageProps) => {
   const nameLength = meta?.name?.length || meta?.username?.length || 16;
   const isContainerNarrow = width < 600;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let size = 92;
 
     if (width <= 600) size = 36;
@@ -42,7 +43,7 @@ const UnitMetaBase = ({ type, meta }: UnitPageProps) => {
   const onCoverLoad = (event: SyntheticEvent<HTMLImageElement>) => {
     if (accent) return;
     const color = getAccentFromImage(event.currentTarget);
-    if (color && !accent) changeMainAccent(color);
+    if (color && !accent) changeMainAccent(darkenAccent(color));
   };
 
   return (
@@ -70,6 +71,9 @@ const PlaylistContent = ({
   author,
   tracksCount,
   nameFontSize,
+  description,
+  type,
+  duration,
 }: { nameFontSize: number } & PlaylistPageDto['meta']) => {
   return (
     <MetaContent>
@@ -78,14 +82,25 @@ const PlaylistContent = ({
         {name}
       </MetaName>
 
+      {description && (
+        <Typography color="secondary.dark" fontSize="0.8rem" fontWeight="bold" mb={0.5}>
+          {description}
+        </Typography>
+      )}
+
       <Grid container alignItems="center">
         <MetaAuthorAvatar src={author.avatar + '?w=48&h=48'} />
         <Link component={RouterLink} to={`/artist/${author._id}`} fontSize="0.85rem">
           {author?.name}
         </Link>
-        <Typography color="secondary" fontSize="0.85rem">
+        <Typography color="secondary.dark" fontSize="0.85rem">
           &nbsp;{`🞄 ${tracksCount} songs`}
         </Typography>
+        {(type === 'public' || type === 'private') && (
+          <Typography color="secondary.dark" fontSize="0.85rem">
+            , {secondsToTime(duration)}
+          </Typography>
+        )}
       </Grid>
     </MetaContent>
   );
@@ -96,6 +111,7 @@ const AlbumContent = ({
   tracksCount,
   nameFontSize,
   releasedAt,
+  duration,
 }: { nameFontSize: number } & AlbumPageDto['meta']) => {
   return (
     <MetaContent>
@@ -109,8 +125,11 @@ const AlbumContent = ({
         <Link component={RouterLink} to={`/artist/${author._id}`} fontSize="0.85rem">
           {author?.name}
         </Link>
-        <Typography color="secondary" fontSize="0.85rem">
+        <Typography color="secondary.dark" fontSize="0.85rem">
           &nbsp;{`🞄 ${new Date(releasedAt).getFullYear()} 🞄 ${tracksCount} songs`}
+        </Typography>
+        <Typography color="secondary.dark" fontSize="0.85rem">
+          , {secondsToTime(duration)}
         </Typography>
       </Grid>
     </MetaContent>

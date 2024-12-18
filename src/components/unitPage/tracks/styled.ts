@@ -1,33 +1,6 @@
-import { Box, styled, Table } from '@mui/material';
+import { Box, styled, Table, TableHead } from '@mui/material';
 
 export const StyledTracksTable = styled(Table)(({ theme }) => ({
-  '& .MuiTableCell-head': {
-    padding: '2px 16px',
-    color: theme.palette.secondary.main,
-    fontSize: '1rem',
-
-    '&:first-of-type': {
-      width: '20px',
-      padding: '2px 2px 2px 16px',
-    },
-
-    '& p': {
-      fontSize: '0.85rem',
-    },
-
-    '&:not(&:first-of-type) p': {
-      width: 'max-content',
-
-      '&:hover': {
-        color: theme.palette.common.white,
-      },
-    },
-
-    '& svg': {
-      fontSize: '1.3rem',
-    },
-  },
-
   '& .MuiTableBody-root': {
     position: 'relative',
     top: '14px',
@@ -97,6 +70,54 @@ export const StyledTracksTable = styled(Table)(({ theme }) => ({
       '& a': {
         color: theme.palette.secondary.main,
       },
+    },
+  },
+}));
+
+export const StyledTracksTableHead = styled(TableHead, {
+  shouldForwardProp: (prop) => prop !== 'sticky',
+})<{ sticky: boolean }>(({ theme, sticky }) => ({
+  '& .MuiTableCell-head': {
+    padding: '2px 16px',
+    color: theme.palette.secondary.main,
+    fontSize: '1rem',
+    position: 'sticky',
+    top: '55px',
+    zIndex: 1,
+
+    ...(sticky && {
+      background: theme.palette.hover.main,
+
+      ':after': {
+        content: "''",
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        width: '100%',
+        height: '1px',
+        backgroundColor: theme.palette.hover.chip,
+      },
+    }),
+
+    '&:first-of-type': {
+      width: '20px',
+      padding: '2px 2px 2px 16px',
+    },
+
+    '& p': {
+      fontSize: '0.85rem',
+    },
+
+    '&:not(&:first-of-type) p': {
+      width: 'max-content',
+
+      '&:hover': {
+        color: theme.palette.common.white,
+      },
+    },
+
+    '& svg': {
+      fontSize: '1.3rem',
     },
   },
 }));

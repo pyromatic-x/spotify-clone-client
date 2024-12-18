@@ -13,8 +13,10 @@ import { ExplicitIcon } from './styled';
 import { TracksTableProps } from './types';
 import PlayingAnimation from './PlayingAnimation';
 import SaveTrackButton from '../../buttons/save/SaveTrackButton';
+import { $mainContainer } from '../../main/effect';
 
 const TracksTableBody = ({ tracks, source }: TracksTableProps) => {
+  const { width } = useUnit($mainContainer);
   const queue = useUnit($queue);
   const current = queue ? queue.tracks[queue.current]._id : null;
 
@@ -43,15 +45,19 @@ const TracksTableBody = ({ tracks, source }: TracksTableProps) => {
           <TitleCell playing={track._id === current} type={source.type} {...track} />
           {source.type === 'playlist' ? (
             <>
-              <TableCell align="left">
-                <Link component={RouterLink} to={`/album/${track.album._id}`}>
-                  {track.album.name}
-                </Link>
-              </TableCell>
-              <TableCell align="left">{dayjs(track.addedAt).format('MMM DD, YYYY')}</TableCell>
+              {width > 720 && (
+                <TableCell align="left">
+                  <Link component={RouterLink} to={`/album/${track.album._id}`}>
+                    {track.album.name}
+                  </Link>
+                </TableCell>
+              )}
+              {width > 950 && (
+                <TableCell align="left">{dayjs(track.addedAt).format('MMM DD, YYYY')}</TableCell>
+              )}
             </>
           ) : (
-            <TableCell align="left">{toNumberWithDigits(track.plays)}</TableCell>
+            width > 720 && <TableCell align="left">{toNumberWithDigits(track.plays)}</TableCell>
           )}
           <TableCell align="right">
             <SaveTrackButton

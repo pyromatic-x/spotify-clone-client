@@ -55,6 +55,7 @@ export interface PlaylistPageDto {
     tracksCount: number;
     duration: number;
     inLibrary: boolean;
+    description?: string;
   };
   tracks: Array<TrackDto>;
 }

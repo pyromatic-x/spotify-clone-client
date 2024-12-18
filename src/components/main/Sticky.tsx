@@ -2,15 +2,9 @@ import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { $mainContainer } from './effect';
 import { useUnit } from 'effector-react';
-import {
-  MainStickyContainer,
-  MainStickyContainerTable,
-  MainStickyContainerTableWrapper,
-  MainStickyContainerTitle,
-} from './styled';
+import { MainStickyContainer, MainStickyContainerTitle } from './styled';
 import tinycolor from 'tinycolor2';
 import PlayButton from '../buttons/PlayButton';
-import TracksTableHead from '../unitPage/tracks/Head';
 
 const MainSticky = () => {
   const { width, scroll, accent, sticky } = useUnit($mainContainer);
@@ -20,7 +14,8 @@ const MainSticky = () => {
 
   useEffect(() => {
     if (sticky?.ref.current) {
-      setPosition(sticky.ref.current.getBoundingClientRect().top);
+      const position = sticky.ref.current.getBoundingClientRect().top;
+      if (position > 0) setPosition(position);
     }
 
     if (!sticky) setShow(false);
@@ -58,13 +53,6 @@ const MainSticky = () => {
           {name}
         </Typography>
       </MainStickyContainerTitle>
-      {(type === 'playlist' || type === 'album') && (
-        <MainStickyContainerTableWrapper>
-          <MainStickyContainerTable>
-            <TracksTableHead type={type} />
-          </MainStickyContainerTable>
-        </MainStickyContainerTableWrapper>
-      )}
     </MainStickyContainer>
   );
 };

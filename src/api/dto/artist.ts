@@ -27,7 +27,7 @@ export interface ArtistPageDto {
   similar: Array<ArtistDto>;
   discovered: Array<PlaylistDto>;
   about: {
-    image?: string;
+    image: string;
     monthly: string;
     description?: string;
   };

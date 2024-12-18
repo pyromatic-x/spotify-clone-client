@@ -37,6 +37,7 @@ const global = createTheme({
     secondary: {
       main: '#b0b0b0',
       light: '#7c7c7c',
+      dark: '#C1C1C1',
     },
   },
   shape: {

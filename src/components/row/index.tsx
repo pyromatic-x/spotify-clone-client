@@ -25,7 +25,7 @@ const Row = ({ title, showAll, items }: TProps) => {
   return (
     <Box width="100%">
       <Grid container justifyContent="space-between" width="100%" alignItems="center">
-        <Typography fontWeight="bold" fontSize="1.35rem">
+        <Typography fontWeight="bold" fontSize="1.6rem" mb={1}>
           {title}
         </Typography>
         {!!showAll && (
