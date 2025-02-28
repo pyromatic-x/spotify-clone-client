@@ -50,19 +50,19 @@ sample({
   clock: [loginFx.doneData, verifyFx.doneData],
   source: $USER,
   fn: (user) => {
-    const url = `${process.env.REACT_APP_WS_URL}`;
+    const url = `${import.meta.env.VITE_WS_URL}`;
 
     const socket = io(url, {
       extraHeaders: {
         'X-User-Id': user!._id,
       },
-      ...(process.env.NODE_ENV === 'production' && prodOptions),
+      ...(import.meta.env.PROD && prodOptions),
     });
 
     socket.io.on('open', () => console.info(`connection to ${url} established`));
     socket.io.on('error', (err) => console.error(`connection to ${url} failed: `, err));
 
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.DEV) {
       socket.onAny((eventName, payload) => {
         console.log(`event from socket: ${eventName}. Payload: `, payload);
       });
